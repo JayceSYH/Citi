@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <nju.financecity_android.controller.widget.PersonEditTitlt
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        ></nju.financecity_android.controller.widget.PersonEditTitlt>
+
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+
+            android:layout_marginTop="1dp"
+            android:background="@color/white" android:padding="5dp">
+
+        <TextView
+
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="用户名:"
+                android:textColor="@color/propertyValue"
+                android:textSize="12sp"
+                android:id="@+id/textView47"
+                android:layout_alignParentTop="true" android:layout_toRightOf="@+id/imageView11"
+                android:layout_toEndOf="@+id/imageView11" android:layout_marginLeft="12dp"/>
+
+        <EditText
+                android:id="@+id/nameid"
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入用户名"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:layout_alignParentBottom="true" android:layout_alignLeft="@+id/textView47"
+                android:layout_alignStart="@+id/textView47"/>
+        <ImageView android:layout_width="30dp" android:layout_height="30dp" android:id="@+id/imageView11"
+                   android:src="@mipmap/my_line"
+                   android:layout_centerVertical="true" android:layout_alignParentLeft="true"
+                   android:layout_alignParentStart="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+
+            android:layout_marginTop="1dp"
+            android:background="@color/white" android:padding="5dp">
+
+        <TextView
+
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="手机:"
+                android:textColor="@color/propertyValue"
+                android:textSize="12sp"
+                android:id="@+id/textView50" android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/imageView6" android:layout_toEndOf="@+id/imageView6"
+                android:layout_marginLeft="12dp"/>
+
+        <EditText
+                android:id="@+id/mobile"
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入手机号"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:layout_alignParentBottom="true" android:layout_alignLeft="@+id/textView50"
+                android:layout_alignStart="@+id/textView50"/>
+        <ImageView android:layout_width="30dp" android:layout_height="30dp" android:id="@+id/imageView6"
+                   android:src="@drawable/mobile_icon" android:layout_centerVertical="true"
+                   android:layout_alignParentLeft="true" android:layout_alignParentStart="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+
+            android:layout_marginTop="1dp"
+            android:background="@color/white" android:padding="5dp">
+
+        <TextView
+
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="生日:"
+                android:textColor="@color/propertyValue"
+                android:textSize="12sp"
+                android:id="@+id/textView48"
+                android:layout_alignParentTop="true" android:layout_toRightOf="@+id/imageView7"
+                android:layout_toEndOf="@+id/imageView7" android:layout_marginLeft="12dp"/>
+
+        <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:background="#ffffff"
+                android:hint="选择出生日期"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:id="@+id/SetBir"
+                android:layout_alignParentBottom="true" android:layout_alignLeft="@+id/textView48"
+                android:layout_alignStart="@+id/textView48"/>
+        <ImageView android:layout_width="30dp" android:layout_height="30dp" android:id="@+id/imageView7"
+                   android:src="@drawable/birthday_icon" android:layout_centerVertical="true"
+                   android:layout_alignParentLeft="true" android:layout_alignParentStart="true"/>
+
+        <!--<TextView-->
+            <!--android:id="@+id/birthday"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="25dip"-->
+            <!--android:gravity="right"-->
+            <!--android:text="1996.6.9"-->
+            <!--android:textColor="#000000"-->
+            <!--android:textSize="20sp" />-->
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+
+            android:layout_marginTop="1dp"
+            android:background="@color/white" android:padding="5dp">
+
+        <TextView
+
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="城市/农村:"
+                android:textColor="@color/propertyValue"
+                android:textSize="12sp"
+                android:id="@+id/textView45"
+                android:layout_alignParentTop="true" android:layout_toRightOf="@+id/imageView8"
+                android:layout_toEndOf="@+id/imageView8" android:layout_marginLeft="12dp"/>
+
+        <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/city_spinner"
+                android:layout_weight="1"
+                android:layout_alignParentBottom="true" android:layout_alignLeft="@+id/textView45"
+                android:layout_alignStart="@+id/textView45" android:layout_below="@+id/textView45"/>
+        <ImageView android:layout_width="30dp" android:layout_height="30dp" android:id="@+id/imageView8"
+                   android:src="@drawable/urban_icon" android:layout_centerVertical="true"
+                   android:layout_alignParentLeft="true" android:layout_alignParentStart="true"/>
+
+        <!--<TextView-->
+            <!--android:id="@+id/city_country"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="25dip"-->
+            <!--android:text="城市"-->
+            <!--android:textColor="#000000"-->
+            <!--android:textSize="20sp" />-->
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+
+            android:layout_marginTop="1dp"
+            android:background="@color/white" android:padding="5dp">
+
+        <TextView
+
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="每月收入:"
+                android:textColor="@color/propertyValue"
+                android:textSize="12sp"
+                android:id="@+id/textView49"
+                android:layout_alignParentTop="true" android:layout_toRightOf="@+id/imageView9"
+                android:layout_toEndOf="@+id/imageView9" android:layout_marginLeft="12dp"/>
+
+        <EditText
+                android:id="@+id/get_in"
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入收入"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:layout_alignParentBottom="true" android:layout_alignLeft="@+id/textView49"
+                android:layout_alignStart="@+id/textView49"/>
+        <ImageView android:layout_width="30dp" android:layout_height="30dp" android:id="@+id/imageView9"
+                   android:src="@drawable/income_icon" android:layout_centerVertical="true"
+                   android:layout_alignParentLeft="true" android:layout_alignParentStart="true"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="60dp"
+
+            android:layout_marginTop="1dp"
+            android:background="@color/white" android:padding="5dp">
+
+        <TextView
+
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:text="每月支出:"
+                android:textColor="@color/propertyValue"
+                android:textSize="12sp"
+                android:id="@+id/textView46"
+                android:layout_alignParentTop="true" android:layout_toRightOf="@+id/imageView10"
+                android:layout_toEndOf="@+id/imageView10" android:layout_marginLeft="12dp"/>
+
+        <EditText
+                android:id="@+id/get_out"
+                android:background="@null"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入支出"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:layout_alignParentBottom="true" android:layout_alignLeft="@+id/textView46"
+                android:layout_alignStart="@+id/textView46"/>
+        <ImageView android:layout_width="30dp" android:layout_height="30dp" android:id="@+id/imageView10"
+                   android:src="@drawable/outcome_icon" android:layout_centerVertical="true"
+                   android:layout_alignParentLeft="true" android:layout_alignParentStart="true"/>
+    </RelativeLayout>
+</LinearLayout>

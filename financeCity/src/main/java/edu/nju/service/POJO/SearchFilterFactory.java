@@ -11,8 +11,11 @@ import edu.nju.service.ExceptionsAndError.InvalidParametersException;
 import edu.nju.service.SearchService.ProductFilter;
 import org.python.antlr.ast.Str;
 
+import java.math.BigDecimal;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,22 +24,23 @@ import java.util.Map;
  */
 public class SearchFilterFactory {
     static public ProductFilter createFilter(String type, Map map) throws InvalidParametersException {
-        if (type.equals("bond")) {
-            return createBondFilter(map);
+        System.out.println(type+" createFilter");
+        try {
+            if (type.equals("Bond")) {
+                return createBondFilter(map);
+            } else if (type.equals("Bank")) {
+                return createBankFilter(map);
+            } else if (ProductCategoryManager.belongTo(type, ProductCategoryManager.categoryFund)) {
+                return createFundFilter(map);
+            } else if (type.equals("Insurance")) {
+                return createInsurance(map);
+            } else if (type.equals("all")) {
+                return createAllFilter(map);
+            } else {
+                throw new InvalidParametersException("createFilter(" + type + ")");
+            }
         }
-        else if (type.equals("bank")) {
-            return createBankFilter(map);
-        }
-        else if (type.equals("fund")) {
-            return createFundFilter(map);
-        }
-        else if (type.equals("insurance")) {
-            return createInsurance(map);
-        }
-        else if (type.equals("all")) {
-            return createAllFilter(map);
-        }
-        else {
+        catch (Exception e) {
             throw new InvalidParametersException("createFilter(" + type + ")");
         }
     }
@@ -51,6 +55,10 @@ public class SearchFilterFactory {
 
         try {
             Map option = (Map)map.get("options");
+            if (option == null) {
+                option = new HashMap();
+            }
+
             List<String> list = (List<String>)option.get("yearly_income_rate");
             init_arrary(list, year_rate);
 
@@ -79,30 +87,38 @@ public class SearchFilterFactory {
             @Override
             public boolean isChosen(Object product) {
                 if (product instanceof ProductBank) {
-                    ProductBank productBank = (ProductBank)product;
-                    return  (productBank.getExpectedRate().doubleValue() > year_rate[0] && productBank.getExpectedRate().doubleValue() < year_rate[1] &&
-                            productBank.getLength() > expiration[0] && productBank.getLength() < expiration[1] &&
+                    ProductBank productBank = (ProductBank)(product);
+                    double exp_rate = getValue(productBank.getExpectedRate());
+                    double length  = getValue(productBank.getLength()) / 30;
+
+                    return  (((exp_rate >= year_rate[0] && exp_rate <= year_rate[1])) &&
+                            length > expiration[0] && length < expiration[1] &&
                             (is_closed_ended == null || ProductCategoryManager.ifClosedBankProduct(productBank) == is_closed_ended));
                 }
                 else if (product instanceof ProductBond) {
-                    //TODO:if close
-                    ProductBond productBond = (ProductBond)product;
-                    return  (productBond.getAdjustYearlyRate().doubleValue() >= year_rate[0] && productBond.getAdjustYearlyRate().doubleValue() <= year_rate[1] &&
-                            productBond.getLength() >= expiration[0] && productBond.getLength() <= expiration[1] &&
-                            (is_closed_ended == null || false));
+                    ProductBond productBond = (ProductBond)(product);
+                    double yearRate = getValue(productBond.getCoupon());
+                    int length = getValue(productBond.getLength()) / 30;
+
+                    return  (yearRate >= year_rate[0] && yearRate <= year_rate[1] &&
+                            length >= expiration[0] && length <= expiration[1]);
                 }
                 else if (product instanceof ProductInsurance) {
-                    //TODO:if close
-                    ProductInsurance productInsurance = (ProductInsurance)product;
-                    return  (productInsurance.getExpectedRate().doubleValue() >= year_rate[0] && productInsurance.getExpectedRate().doubleValue() <= year_rate[1] &&
-                            productInsurance.getLength() >= expiration[0] && productInsurance.getLength() <= expiration[1] &&
-                            (is_closed_ended == null || false));
+                    ProductInsurance productInsurance = (ProductInsurance)(product);
+                    double yearRate = getValue(productInsurance.getExpectedRate());
+                    int length = getValue(productInsurance.getWarrantyPeriod());
+
+                    return  (yearRate >= year_rate[0] && yearRate <= year_rate[1] &&
+                            length >= expiration[0] && length <= expiration[1]);
                 }
                 else if (product instanceof ProductFund) {
-                    ProductFund productFund = (ProductFund)product;
-                    return  (productFund.getYearlyRtnRate().doubleValue() >= year_rate[0] && productFund.getYearlyRtnRate().doubleValue() <= year_rate[1] &&
-                            productFund.getLength() >= expiration[0] && productFund.getLength() <= expiration[1] &&
-                            (is_closed_ended == null || (productFund.getOperationMode() == 1) == is_closed_ended));
+                    ProductFund productFund = (ProductFund)(product);
+                    double yearRate = getValue(productFund.getYearlyRtnRate());
+                    int length = getValue(productFund.getLength());
+
+                    return  (yearRate >= year_rate[0] && yearRate <= year_rate[1] &&
+                            length >= expiration[0] && length <= expiration[1] &&
+                            (is_closed_ended == null || productFund.getOperationMode() == null || (productFund.getOperationMode() == 1) == is_closed_ended));
                 }
                 else {
                     return false;
@@ -130,11 +146,15 @@ public class SearchFilterFactory {
     static private ProductFilter createBondFilter(Map map) throws InvalidParametersException {
         double[] year_rate = new double[2];
         int[] expiration = new int[2];
-        Timestamp expiration_date;
+        Date expiration_date;
         Byte state;
 
         try {
             Map option = (Map)map.get("options");
+            if (option == null) {
+                option = new HashMap();
+            }
+
             List<String> list = (List<String>)option.get("yearly_income_rate");
             init_arrary(list, year_rate);
 
@@ -142,11 +162,11 @@ public class SearchFilterFactory {
             init_arrary(list, expiration);
 
             String expiration_date_s = (String)option.get("expiration_date");
-            if (expiration_date_s == null) {
+            if (expiration_date_s == null || expiration_date_s.equals("")) {
                 expiration_date = null;
             }
             else {
-                expiration_date = Timestamp.valueOf(expiration_date_s);
+                expiration_date = Date.valueOf(expiration_date_s);
             }
 
             String state_s = (String)option.get("state");
@@ -165,18 +185,23 @@ public class SearchFilterFactory {
         ProductFilter productFilter = new ProductFilter() {
             double[] year_rate = new double[2];
             int[] expiration = new int[2];
-            Timestamp expiration_date;
+            Date expiration_date;
             Byte state;
 
             @Override
             public boolean isChosen(Object product) {
-                ProductBond productBond = (ProductBond)product;
+                if (!(product instanceof ProductBond)) {
+                    return false;
+                }
 
-                //TODO:judge date
-                return (productBond.getAdjustYearlyRate().doubleValue() >= year_rate[0] && productBond.getAdjustYearlyRate().doubleValue() <=  year_rate[1] &&
-                productBond.getLength() >= expiration[0] && productBond.getLength() <= expiration[1] &&
-                        (expiration_date == null || expiration_date.after(productBond.getMaturityDate())) &&
-                        (state == null || state.equals(productBond.getState())));
+                ProductBond productBond = (ProductBond)(product);
+                int length = getValue(productBond.getLength()) / 30;
+                double yearRate = getValue(productBond.getAdjustYearlyRate());
+
+                return (yearRate >= year_rate[0] && yearRate <=  year_rate[1] &&
+                length >= expiration[0] && length <= expiration[1] &&
+                        (expiration_date == null || productBond.getMaturityDate() == null || expiration_date.after(productBond.getMaturityDate())) &&
+                        (state == null || productBond.getState() == null || state.equals(productBond.getState())));
             }
 
             @Override
@@ -187,7 +212,7 @@ public class SearchFilterFactory {
                 return list;
             }
 
-            private ProductFilter setParam(double[] year_rate, int[] expiration, Timestamp expiration_date, Byte state) {
+            private ProductFilter setParam(double[] year_rate, int[] expiration, Date expiration_date, Byte state) {
                 this.year_rate = year_rate;
                 this.expiration = expiration;
                 this.expiration_date = expiration_date;
@@ -207,11 +232,15 @@ public class SearchFilterFactory {
         Byte state;
         int[] net_value = new int[2];
         Boolean is_close_ended;
-        Byte sort_type = 0;
+        Byte sort_type;
         int[] expiration = new int[2];
 
         try {
             Map option = (Map)map.get("options");
+            if (option == null) {
+                option = new HashMap();
+            }
+
             List<String> list = (List<String>)option.get("expiration");
             init_arrary(list, expiration);
 
@@ -219,6 +248,9 @@ public class SearchFilterFactory {
             init_arrary(list, net_value);
 
             institution_manage = (String)option.get("institution_manage");
+            if (institution_manage != null && institution_manage.equals("")) {
+                institution_manage = null;
+            }
 
             String type_s = (String)option.get("type");
             if (type_s == null) {
@@ -268,13 +300,19 @@ public class SearchFilterFactory {
 
             @Override
             public boolean isChosen(Object product) {
-                ProductFund productFund = (ProductFund)product;
-                return (institution_manage == null || institution_manage.equals(productFund.getInstitutionManage()) &&
-                        (type == null || type.equals(productFund.getCategory())) &&
-                        (state == null || state.equals(productFund.getState())) &&
-                        (net_value[0] <= productFund.getNav().doubleValue() && net_value[1] >= productFund.getNav().doubleValue()) &&
+                if (!(product instanceof ProductFund)) {
+                    return false;
+                }
+
+                ProductFund productFund = (ProductFund)(product);
+                double netValue = getValue(productFund.getNav());
+                int length = getValue(productFund.getLength());
+                return (institution_manage == null || productFund.getInstitutionManage() == null || institution_manage.equals(productFund.getInstitutionManage()) &&
+                        (type == null || productFund.getCategory() == null || type.equals(productFund.getCategory())) &&
+                        (state == null || productFund.getState() == null || state.equals(productFund.getState())) &&
+                        (net_value[0] <= netValue && net_value[1] >= netValue) &&
                         (is_close_ended == null || is_close_ended.equals(productFund.getOperationMode() == 1)) &&
-                        (expiration[0] <= productFund.getLength() && expiration[1] >= productFund.getLength()));
+                        (expiration[0] <= length && expiration[1] >= length));
             }
 
             @Override
@@ -314,6 +352,10 @@ public class SearchFilterFactory {
 
         try {
             Map option = (Map)map.get("options");
+            if (option == null) {
+                option = new HashMap();
+            }
+
             List<String> list = (List<String>)option.get("yearly_income_rate");
             init_arrary(list, year_rate);
 
@@ -332,6 +374,9 @@ public class SearchFilterFactory {
             }
 
             institution_manage = (String)option.get("institution_manage");
+            if (institution_manage != null && institution_manage.equals("")) {
+                institution_manage = null;
+            }
 
             String income_t = (String)option.get("income_type");
             if (income_t == null) {
@@ -356,13 +401,20 @@ public class SearchFilterFactory {
 
             @Override
             public boolean isChosen(Object product) {
-                ProductBank productBank = (ProductBank)product;
+                if (!(product instanceof ProductBank)) {
+                    return false;
+                }
 
-                return (productBank.getExpectedRate().doubleValue() >= year_rate[0] && productBank.getExpectedRate().doubleValue() <= year_rate[1] &&
-                productBank.getLength() >= expiration[0] && productBank.getLength() <= expiration[1] &&
-                productBank.getPurchaseThreshold() >= init_amount[0] && productBank.getPurchaseThreshold() <= init_amount[1] &&
-                        (institution_manage == null || institution_manage.equals(productBank.getInstitutionManage())) &&
-                        (income_type == null || income_type.equals(productBank.getIncomeType())) &&
+                ProductBank productBank = (ProductBank)(product);
+                double exp_rate = getValue(productBank.getExpectedRate());
+                int length = getValue(productBank.getLength()) / 30;
+                int threshold = getValue(productBank.getPurchaseThreshold());
+
+                return (exp_rate >= year_rate[0] && exp_rate <= year_rate[1] &&
+                length >= expiration[0] && length <= expiration[1] &&
+                threshold >= init_amount[0] && threshold <= init_amount[1] &&
+                        (institution_manage == null || productBank.getInstitutionManage() == null || institution_manage.equals(productBank.getInstitutionManage())) &&
+                        (income_type == null || productBank.getIncomeType() == null || income_type.equals(productBank.getIncomeType())) &&
                         (is_close_ended == null || is_close_ended.equals(ProductCategoryManager.ifClosedBankProduct(productBank))));
             }
 
@@ -394,10 +446,13 @@ public class SearchFilterFactory {
         int[] year_length = new int[2];
         double[] income_rate = new double[2];
         String distributor;
-        Integer price;
+        int[] price = new int[2];
 
         try {
             Map option = (Map)map.get("options");
+            if (option == null) {
+                option = new HashMap();
+            }
             List<String> list = (List<String>)option.get("length_of_years");
             init_arrary(list, year_length);
 
@@ -405,14 +460,12 @@ public class SearchFilterFactory {
             init_arrary(list, income_rate);
 
             distributor = (String)option.get("distributor");
+            if (distributor != null && distributor.equals("")) {
+                distributor = null;
+            }
 
-            String price_s = (String)option.get("price");
-            if (price_s == null) {
-                price = null;
-            }
-            else {
-                price = Integer.valueOf(price_s);
-            }
+            list = (List<String>)option.get("price");
+            init_arrary(list, price);
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -423,16 +476,26 @@ public class SearchFilterFactory {
             int[] year_length = new int[2];
             double[] income_rate = new double[2];
             String distributor;
-            Integer price;
+            int[] price;
 
             @Override
             public boolean isChosen(Object product) {
-                ProductInsurance productInsurance = (ProductInsurance)product;
+                if (!(product instanceof ProductInsurance)) {
+                    return false;
+                }
 
-                return (productInsurance.getLength() >= year_length[0] && productInsurance.getLength() <= year_length[1] &&
-                productInsurance.getYearRate().doubleValue() >= income_rate[0] && productInsurance.getYearRate().doubleValue() <= income_rate[1] &&
-                        (distributor == null || distributor.equals(productInsurance.getInstitutionManage())) &&
-                        (price == null || price.equals(productInsurance.getDenomination())));
+                ProductInsurance productInsurance = (ProductInsurance)product;
+                int length = getValue(productInsurance.getWarrantyPeriod());
+                double yearRate = getValue(productInsurance.getYearRate());
+                double denomination = (double)getValue(productInsurance.getDenomination()) / 10000;
+                String institution = productInsurance.getInstitutionManage();
+
+                return (length >= year_length[0] && length <= year_length[1] &&
+                        yearRate >= income_rate[0] && yearRate <= income_rate[1] &&
+                        (distributor == null ||institution == null || distributor.equals(institution)) &&
+                        (price == null ||
+                                (price[0] <= denomination
+                                && price[1] >= denomination)));
             }
 
             @Override
@@ -443,7 +506,7 @@ public class SearchFilterFactory {
                 return list;
             }
 
-            private ProductFilter setParam(int[] year_length, double[] income_rate, String distributor, Integer price) {
+            private ProductFilter setParam(int[] year_length, double[] income_rate, String distributor, int[] price) {
                 this.year_length = year_length;
                 this.income_rate = income_rate;
                 this.distributor = distributor;
@@ -475,6 +538,24 @@ public class SearchFilterFactory {
         else {
             array[0] = Integer.valueOf(list.get(0));
             array[1] = Integer.valueOf(list.get(1));
+        }
+    }
+
+    static private double getValue(BigDecimal bigDecimal) {
+        if (bigDecimal == null) {
+            return 0;
+        }
+        else {
+            return bigDecimal.doubleValue();
+        }
+    }
+
+    static private int getValue(Integer integer) {
+        if (integer == null) {
+            return 0;
+        }
+        else {
+            return integer;
         }
     }
 }

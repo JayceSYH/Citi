@@ -5,13 +5,13 @@ import java.math.BigDecimal;
 import java.sql.Date;
 
 /**
- * Created by Sun YuHao on 2016/9/3.
+ * Created by Sun YuHao on 2016/9/16.
  */
 @Entity
 @Table(name = "product_bond", schema = "citi", catalog = "")
 public class ProductBond {
     private int id;
-    private String title;
+    private String name;
     private String institutionIssue;
     private String productCode;
     private String abbrName;
@@ -19,29 +19,27 @@ public class ProductBond {
     private Date offIssueDate;
     private Date firstAccrDate;
     private Integer length;
-    private Integer releaseAmount;
+    private BigDecimal releaseAmount;
     private Date publishDate;
     private String exchange;
     private Byte creditGrade;
     private String institutionUnderwriter;
     private Byte type;
-    private BigDecimal denomination;
+    private BigDecimal par;
     private BigDecimal issuePrice;
-    private BigDecimal currenctValue;
     private Byte releaseObject;
     private Byte couponType;
     private Byte couponFreq;
     private Date maturityDate;
     private Date listDate;
-    private Integer paymentPrice;
     private String objectApplyBuy;
     private Byte riskGrade;
     private String releaseWay;
     private String objectOriented;
     private Byte taxState;
     private BigDecimal coupon;
-    private Integer advanceRedeemDate;
-    private Integer advanceRedeemInterestDate;
+    private Date firstRedeemDate;
+    private Date firstRedeemAccrDate;
     private Byte state;
     private BigDecimal adjustYearlyRate;
 
@@ -56,13 +54,13 @@ public class ProductBond {
     }
 
     @Basic
-    @Column(name = "title")
-    public String getTitle() {
-        return title;
+    @Column(name = "name")
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Basic
@@ -137,11 +135,11 @@ public class ProductBond {
 
     @Basic
     @Column(name = "release_amount")
-    public Integer getReleaseAmount() {
+    public BigDecimal getReleaseAmount() {
         return releaseAmount;
     }
 
-    public void setReleaseAmount(Integer releaseAmount) {
+    public void setReleaseAmount(BigDecimal releaseAmount) {
         this.releaseAmount = releaseAmount;
     }
 
@@ -196,13 +194,13 @@ public class ProductBond {
     }
 
     @Basic
-    @Column(name = "denomination")
-    public BigDecimal getDenomination() {
-        return denomination;
+    @Column(name = "par")
+    public BigDecimal getPar() {
+        return par;
     }
 
-    public void setDenomination(BigDecimal denomination) {
-        this.denomination = denomination;
+    public void setPar(BigDecimal par) {
+        this.par = par;
     }
 
     @Basic
@@ -213,16 +211,6 @@ public class ProductBond {
 
     public void setIssuePrice(BigDecimal issuePrice) {
         this.issuePrice = issuePrice;
-    }
-
-    @Basic
-    @Column(name = "currenct_value")
-    public BigDecimal getCurrenctValue() {
-        return currenctValue;
-    }
-
-    public void setCurrenctValue(BigDecimal currenctValue) {
-        this.currenctValue = currenctValue;
     }
 
     @Basic
@@ -273,16 +261,6 @@ public class ProductBond {
 
     public void setListDate(Date listDate) {
         this.listDate = listDate;
-    }
-
-    @Basic
-    @Column(name = "payment_price")
-    public Integer getPaymentPrice() {
-        return paymentPrice;
-    }
-
-    public void setPaymentPrice(Integer paymentPrice) {
-        this.paymentPrice = paymentPrice;
     }
 
     @Basic
@@ -346,23 +324,23 @@ public class ProductBond {
     }
 
     @Basic
-    @Column(name = "advance_redeem_date")
-    public Integer getAdvanceRedeemDate() {
-        return advanceRedeemDate;
+    @Column(name = "first_redeem_date")
+    public Date getFirstRedeemDate() {
+        return firstRedeemDate;
     }
 
-    public void setAdvanceRedeemDate(Integer advanceRedeemDate) {
-        this.advanceRedeemDate = advanceRedeemDate;
+    public void setFirstRedeemDate(Date firstRedeemDate) {
+        this.firstRedeemDate = firstRedeemDate;
     }
 
     @Basic
-    @Column(name = "advance_redeem_interest_date")
-    public Integer getAdvanceRedeemInterestDate() {
-        return advanceRedeemInterestDate;
+    @Column(name = "first_redeem_accr_date")
+    public Date getFirstRedeemAccrDate() {
+        return firstRedeemAccrDate;
     }
 
-    public void setAdvanceRedeemInterestDate(Integer advanceRedeemInterestDate) {
-        this.advanceRedeemInterestDate = advanceRedeemInterestDate;
+    public void setFirstRedeemAccrDate(Date firstRedeemAccrDate) {
+        this.firstRedeemAccrDate = firstRedeemAccrDate;
     }
 
     @Basic
@@ -393,7 +371,7 @@ public class ProductBond {
         ProductBond that = (ProductBond) o;
 
         if (id != that.id) return false;
-        if (title != null ? !title.equals(that.title) : that.title != null) return false;
+        if (name != null ? !name.equals(that.name) : that.name != null) return false;
         if (institutionIssue != null ? !institutionIssue.equals(that.institutionIssue) : that.institutionIssue != null)
             return false;
         if (productCode != null ? !productCode.equals(that.productCode) : that.productCode != null) return false;
@@ -411,17 +389,14 @@ public class ProductBond {
         if (institutionUnderwriter != null ? !institutionUnderwriter.equals(that.institutionUnderwriter) : that.institutionUnderwriter != null)
             return false;
         if (type != null ? !type.equals(that.type) : that.type != null) return false;
-        if (denomination != null ? !denomination.equals(that.denomination) : that.denomination != null) return false;
+        if (par != null ? !par.equals(that.par) : that.par != null) return false;
         if (issuePrice != null ? !issuePrice.equals(that.issuePrice) : that.issuePrice != null) return false;
-        if (currenctValue != null ? !currenctValue.equals(that.currenctValue) : that.currenctValue != null)
-            return false;
         if (releaseObject != null ? !releaseObject.equals(that.releaseObject) : that.releaseObject != null)
             return false;
         if (couponType != null ? !couponType.equals(that.couponType) : that.couponType != null) return false;
         if (couponFreq != null ? !couponFreq.equals(that.couponFreq) : that.couponFreq != null) return false;
         if (maturityDate != null ? !maturityDate.equals(that.maturityDate) : that.maturityDate != null) return false;
         if (listDate != null ? !listDate.equals(that.listDate) : that.listDate != null) return false;
-        if (paymentPrice != null ? !paymentPrice.equals(that.paymentPrice) : that.paymentPrice != null) return false;
         if (objectApplyBuy != null ? !objectApplyBuy.equals(that.objectApplyBuy) : that.objectApplyBuy != null)
             return false;
         if (riskGrade != null ? !riskGrade.equals(that.riskGrade) : that.riskGrade != null) return false;
@@ -430,9 +405,9 @@ public class ProductBond {
             return false;
         if (taxState != null ? !taxState.equals(that.taxState) : that.taxState != null) return false;
         if (coupon != null ? !coupon.equals(that.coupon) : that.coupon != null) return false;
-        if (advanceRedeemDate != null ? !advanceRedeemDate.equals(that.advanceRedeemDate) : that.advanceRedeemDate != null)
+        if (firstRedeemDate != null ? !firstRedeemDate.equals(that.firstRedeemDate) : that.firstRedeemDate != null)
             return false;
-        if (advanceRedeemInterestDate != null ? !advanceRedeemInterestDate.equals(that.advanceRedeemInterestDate) : that.advanceRedeemInterestDate != null)
+        if (firstRedeemAccrDate != null ? !firstRedeemAccrDate.equals(that.firstRedeemAccrDate) : that.firstRedeemAccrDate != null)
             return false;
         if (state != null ? !state.equals(that.state) : that.state != null) return false;
         if (adjustYearlyRate != null ? !adjustYearlyRate.equals(that.adjustYearlyRate) : that.adjustYearlyRate != null)
@@ -444,7 +419,7 @@ public class ProductBond {
     @Override
     public int hashCode() {
         int result = id;
-        result = 31 * result + (title != null ? title.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (institutionIssue != null ? institutionIssue.hashCode() : 0);
         result = 31 * result + (productCode != null ? productCode.hashCode() : 0);
         result = 31 * result + (abbrName != null ? abbrName.hashCode() : 0);
@@ -458,23 +433,21 @@ public class ProductBond {
         result = 31 * result + (creditGrade != null ? creditGrade.hashCode() : 0);
         result = 31 * result + (institutionUnderwriter != null ? institutionUnderwriter.hashCode() : 0);
         result = 31 * result + (type != null ? type.hashCode() : 0);
-        result = 31 * result + (denomination != null ? denomination.hashCode() : 0);
+        result = 31 * result + (par != null ? par.hashCode() : 0);
         result = 31 * result + (issuePrice != null ? issuePrice.hashCode() : 0);
-        result = 31 * result + (currenctValue != null ? currenctValue.hashCode() : 0);
         result = 31 * result + (releaseObject != null ? releaseObject.hashCode() : 0);
         result = 31 * result + (couponType != null ? couponType.hashCode() : 0);
         result = 31 * result + (couponFreq != null ? couponFreq.hashCode() : 0);
         result = 31 * result + (maturityDate != null ? maturityDate.hashCode() : 0);
         result = 31 * result + (listDate != null ? listDate.hashCode() : 0);
-        result = 31 * result + (paymentPrice != null ? paymentPrice.hashCode() : 0);
         result = 31 * result + (objectApplyBuy != null ? objectApplyBuy.hashCode() : 0);
         result = 31 * result + (riskGrade != null ? riskGrade.hashCode() : 0);
         result = 31 * result + (releaseWay != null ? releaseWay.hashCode() : 0);
         result = 31 * result + (objectOriented != null ? objectOriented.hashCode() : 0);
         result = 31 * result + (taxState != null ? taxState.hashCode() : 0);
         result = 31 * result + (coupon != null ? coupon.hashCode() : 0);
-        result = 31 * result + (advanceRedeemDate != null ? advanceRedeemDate.hashCode() : 0);
-        result = 31 * result + (advanceRedeemInterestDate != null ? advanceRedeemInterestDate.hashCode() : 0);
+        result = 31 * result + (firstRedeemDate != null ? firstRedeemDate.hashCode() : 0);
+        result = 31 * result + (firstRedeemAccrDate != null ? firstRedeemAccrDate.hashCode() : 0);
         result = 31 * result + (state != null ? state.hashCode() : 0);
         result = 31 * result + (adjustYearlyRate != null ? adjustYearlyRate.hashCode() : 0);
         return result;

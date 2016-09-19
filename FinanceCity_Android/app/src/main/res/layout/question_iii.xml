@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txtSum"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="38dp"
+        android:layout_marginRight="38dp"
+        android:layout_marginTop="20dp"
+        android:layout_toLeftOf="@+id/textView25"
+        android:layout_toStartOf="@+id/textView25"
+        android:background="@drawable/unselected_label"
+        android:gravity="center"
+        android:text="1"
+        android:textColor="#ffffff"
+        android:textIsSelectable="false"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView25"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignTop="@+id/txtSum"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/unselected_label"
+        android:gravity="center"
+        android:text="2"
+        android:textColor="#ffffff"
+        android:textIsSelectable="false"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView26"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignTop="@+id/textView25"
+        android:layout_marginLeft="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_toEndOf="@+id/textView25"
+        android:layout_toRightOf="@+id/textView25"
+        android:background="@drawable/selected_label"
+        android:gravity="center"
+        android:text="3"
+        android:textColor="#ffffff"
+        android:textIsSelectable="false"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/textView27"
+        android:layout_width="10dp"
+        android:layout_height="25dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/txtSum"
+        android:layout_marginTop="20dp"
+        android:background="@color/validBlue"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/validBlue" />
+
+    <TextView
+        android:id="@+id/textView28"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/textView27"
+        android:layout_toEndOf="@+id/textView27"
+        android:layout_toRightOf="@+id/textView27"
+        android:gravity="center"
+        android:paddingLeft="12dp"
+        android:text="投资偏好"
+        android:textColor="@color/validBlue"
+        android:textSize="20sp" />
+
+    <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="12dp"
+            android:text="投资偏好选择："
+            android:textColor="@color/WordBlack"
+            android:textSize="18sp"
+            android:layout_marginTop="12dp" android:layout_below="@+id/textView28"
+            android:layout_toRightOf="@+id/textView27" android:layout_toEndOf="@+id/textView27"/>
+
+    <Button
+        android:id="@+id/btContinue"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:text="提交"
+        android:textColor="@color/WordBlack"
+        android:textSize="16sp" />
+
+    <Button
+        android:id="@+id/btCancel"
+        android:layout_width="150dp"
+        android:layout_height="45dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="16dp"
+        android:text="返回"
+        android:textColor="@color/WordBlack"
+        android:textSize="16sp" />
+    <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="银行理财产品"
+            android:id="@+id/rbBank"
+            android:textSize="18sp" android:textColor="@color/WordBlack" android:layout_below="@+id/textView3"
+            android:layout_alignLeft="@+id/textView3" android:layout_alignStart="@+id/textView3"
+            android:layout_marginLeft="8dp" android:layout_marginTop="8dp" android:checked="true"/>
+    <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="基金产品"
+                 android:id="@+id/rbFund" android:textSize="18sp" android:textColor="@color/WordBlack"
+                 android:layout_below="@+id/rbBank" android:layout_alignLeft="@+id/rbBank"
+                 android:layout_alignStart="@+id/rbBank" android:checked="false"/>
+    <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="债券产品"
+                 android:id="@+id/rbBond" android:textSize="18sp" android:textColor="@color/WordBlack"
+                 android:layout_below="@+id/rbFund" android:layout_alignLeft="@+id/rbFund"
+                 android:layout_alignStart="@+id/rbFund" android:checked="false"/>
+    <RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="保险产品"
+                 android:id="@+id/rbInsurance" android:textSize="18sp" android:textColor="@color/WordBlack"
+                 android:layout_below="@+id/rbBond" android:layout_alignLeft="@+id/rbBond"
+                 android:layout_alignStart="@+id/rbBond" android:checked="false"/>
+    <TextView android:layout_width="10dp" android:layout_height="25dp"
+              android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/textView59"
+              android:background="@color/darkGrey" android:textColor="@color/validBlue"
+              android:layout_alignTop="@+id/textView3" android:layout_alignParentLeft="true"
+              android:layout_alignParentStart="true" android:layout_alignBottom="@+id/textView3"/>
+
+
+</RelativeLayout>

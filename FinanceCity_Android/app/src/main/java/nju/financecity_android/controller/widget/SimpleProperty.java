@@ -78,49 +78,6 @@ public class SimpleProperty extends LinearLayout {
         setValue(value);
     }
 
-    public static class PropertyListAdapter extends BaseAdapter {
-
-        public PropertyListAdapter(Context context, List<PropertyVO> mData) {
-            this.mData = mData;
-            mInflater = LayoutInflater.from(context);
-        }
-
-        @Override
-        public int getCount() {
-            return mData.size();
-        }
-
-        @Override
-        public Object getItem(int position) {
-            return mData.get(position);
-        }
-
-        @Override
-        public long getItemId(int position) {
-            return 0;
-        }
-
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            View view = (convertView == null) ? mInflater.inflate(R.layout.simple_property, null) : convertView;
-            PropertyVO property = mData.get(position);
-            TextView txtProperty = (TextView) view.findViewById(R.id.txtPropertyName);
-            TextView txtValue = (TextView) view.findViewById(R.id.txtValue);
-            txtProperty.setText(property.propertyName);
-            txtValue.setText((property.value == null) ? "" : String.valueOf(property.value));
-            if (property.pcolor != 0) {
-                txtProperty.setTextColor(view.getResources().getColor(property.pcolor));
-            }
-            if (property.vcolor != 0) {
-                txtValue.setTextColor(view.getResources().getColor(property.vcolor));
-            }
-            return view;
-        }
-
-        private List<PropertyVO> mData;
-        private LayoutInflater mInflater;
-    }
-
     @Override
     protected void onFinishInflate() {
         super.onFinishInflate();

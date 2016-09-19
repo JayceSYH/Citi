@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:nju="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/product_search_filter_bond_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <nju.financecity_android.controller.widget.Bar
+        android:id="@+id/year"
+        nju:bar_name="年利率"
+        nju:bar_start="0"
+        nju:bar_end="10"
+        nju:bar_interval="0.0001"
+        nju:bar_unit="%"
+        nju:putin1_text="0"
+        nju:putin2_text="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <nju.financecity_android.controller.widget.Bar
+        android:id="@+id/limit"
+        nju:bar_name="期限"
+        nju:bar_start="0"
+        nju:bar_end="1800"
+        nju:bar_interval="1"
+        nju:bar_unit="天"
+        nju:putin1_text="0"
+        nju:putin2_text="1800"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/year"/>
+    <TextView
+        android:id="@+id/ddl_name"
+        android:text="到期年份"
+        android:textColor="@color/WordBlack"
+        android:textSize="18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/limit"
+        android:gravity="center_vertical"/>
+
+    <Spinner
+        android:id="@+id/ddl_spinner"
+        android:textSize="18dp"
+        android:textColor="@color/WordBlack"
+        android:spinnerMode="dropdown"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@id/ddl_name"
+        android:layout_below="@id/limit"
+        android:layout_marginLeft="5dp"
+        android:layout_alignParentRight="true"/>
+
+    <TextView
+        android:id="@+id/state_name"
+        android:text="状态"
+        android:textColor="@color/WordBlack"
+        android:textSize="18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/ddl_name"
+        android:gravity="center_vertical"/>
+
+    <Spinner
+        android:id="@+id/state_spinner"
+        android:textSize="18dp"
+        android:textColor="@color/WordBlack"
+        android:spinnerMode="dropdown"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@id/state_name"
+        android:layout_below="@id/ddl_name"
+        android:layout_marginLeft="5dp"
+        android:layout_alignParentRight="true"/>
+</merge>

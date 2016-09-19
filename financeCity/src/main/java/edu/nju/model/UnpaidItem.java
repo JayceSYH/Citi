@@ -5,19 +5,19 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 /**
- * Created by Sun YuHao on 2016/8/31.
+ * Created by Sun YuHao on 2016/9/12.
  */
 @Entity
 @Table(name = "unpaid_item", schema = "citi", catalog = "")
 public class UnpaidItem {
     private int id;
     private int productId;
-    private String unit;
-    private int amount;
     private BigDecimal tradingVolume;
     private String checkCode;
     private Timestamp expirationTime;
     private int userId;
+    private Integer amount;
+    private String unit;
 
     @Id
     @Column(name = "id")
@@ -37,26 +37,6 @@ public class UnpaidItem {
 
     public void setProductId(int productId) {
         this.productId = productId;
-    }
-
-    @Basic
-    @Column(name = "unit")
-    public String getUnit() {
-        return unit;
-    }
-
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
-
-    @Basic
-    @Column(name = "amount")
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
     }
 
     @Basic
@@ -99,6 +79,26 @@ public class UnpaidItem {
         this.userId = userId;
     }
 
+    @Basic
+    @Column(name = "amount")
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
+
+    @Basic
+    @Column(name = "unit")
+    public String getUnit() {
+        return unit;
+    }
+
+    public void setUnit(String unit) {
+        this.unit = unit;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -108,14 +108,14 @@ public class UnpaidItem {
 
         if (id != that.id) return false;
         if (productId != that.productId) return false;
-        if (amount != that.amount) return false;
         if (userId != that.userId) return false;
-        if (unit != null ? !unit.equals(that.unit) : that.unit != null) return false;
         if (tradingVolume != null ? !tradingVolume.equals(that.tradingVolume) : that.tradingVolume != null)
             return false;
         if (checkCode != null ? !checkCode.equals(that.checkCode) : that.checkCode != null) return false;
         if (expirationTime != null ? !expirationTime.equals(that.expirationTime) : that.expirationTime != null)
             return false;
+        if (amount != null ? !amount.equals(that.amount) : that.amount != null) return false;
+        if (unit != null ? !unit.equals(that.unit) : that.unit != null) return false;
 
         return true;
     }
@@ -124,12 +124,12 @@ public class UnpaidItem {
     public int hashCode() {
         int result = id;
         result = 31 * result + productId;
-        result = 31 * result + (unit != null ? unit.hashCode() : 0);
-        result = 31 * result + amount;
         result = 31 * result + (tradingVolume != null ? tradingVolume.hashCode() : 0);
         result = 31 * result + (checkCode != null ? checkCode.hashCode() : 0);
         result = 31 * result + (expirationTime != null ? expirationTime.hashCode() : 0);
         result = 31 * result + userId;
+        result = 31 * result + (amount != null ? amount.hashCode() : 0);
+        result = 31 * result + (unit != null ? unit.hashCode() : 0);
         return result;
     }
 }

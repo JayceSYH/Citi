@@ -1,27 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!--筛选条-->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/bar_layout"
-	android:orientation="horizontal"
 	android:layout_width="match_parent"
-	android:layout_height="match_parent">
+	android:layout_height="120dp">
 
-	<TextView
-		android:textColor="@color/grey"
-		android:textSize="24sp"
-		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:id="@+id/bar_text"/>
+		<EditText
+			android:id="@+id/bar_putin2"
+			android:textColor="@color/WordBlack"
+			android:textSize="18sp"
+			android:textColorLink="@color/darkGrey"
+			android:layout_width="100dp"
+			android:layout_height="wrap_content"
+			android:layout_alignParentRight="true"/>
+		<View
+			android:id="@+id/line"
+			android:layout_height="1dp"
+			android:background="@color/darkGrey"
+			android:layout_width="15dp"
+			android:layout_marginTop="20dp"
+			android:layout_toLeftOf="@id/bar_putin2"/>
+		<EditText
+			android:id="@+id/bar_putin1"
+			android:textColor="@color/WordBlack"
+			android:textSize="18dp"
+			android:textColorLink="@color/darkGrey"
+			android:layout_width="100dp"
+			android:layout_height="wrap_content"
+			android:layout_toLeftOf="@id/line"/>
 
-	<com.appyvet.rangebar.RangeBar
-		xmlns:custom="http://schemas.android.com/apk/res-auto"
-		android:id="@+id/bar_rangebar"
-		android:layout_width="match_parent"
-		android:layout_height="72dp"
-		custom:tickStart="0"
-		custom:tickInterval="1"
-		custom:tickEnd="100"/>
+		<TextView
+			android:id="@+id/bar_text"
+			android:text="年化收益率"
+			android:textColor="@color/WordBlack"
+			android:textSize="18dp"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_alignTop="@id/bar_putin1"
+			android:layout_alignBottom="@id/bar_putin1"
+			android:gravity="center_vertical"/>
 
-</LinearLayout>
+			<TextView
+				android:id="@+id/bar_unit"
+				android:text="%"
+				android:textColor="@color/darkGrey"
+				android:textSize="20dp"
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:layout_alignParentRight="true"
+				android:gravity="bottom"/>
+
+		<com.appyvet.rangebar.RangeBar
+			xmlns:custom="http://schemas.android.com/apk/res-auto"
+			android:id="@+id/bar_rangebar"
+			android:layout_width="match_parent"
+			android:layout_height="fill_parent"
+			custom:rangeBarColor="@color/lightBlue"
+			custom:pinColor="@color/lightBlue"
+			custom:selectorColor="@color/lightBlue"
+			custom:connectingLineColor="@color/lightBlue"
+			custom:tickColor="@color/lightBlue"
+			custom:textColor="@color/white"
+			custom:tickStart="0"
+			custom:tickInterval="0.1"
+			custom:tickEnd="100"
+			custom:pinMinFont="18dp"
+			custom:pinMaxFont="20dp"
+			android:layout_below="@id/bar_putin1"
+			android:layout_alignParentLeft="true"
+			android:layout_toLeftOf="@id/bar_unit"
+			android:layout_gravity="bottom"/>
+
+
+
+</RelativeLayout>
 

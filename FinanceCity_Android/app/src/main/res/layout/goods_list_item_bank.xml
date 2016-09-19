@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:padding="8dp" android:minHeight="61dp" android:id="@+id/mainPane">
+
+	<TextView
+			android:layout_width="45dp"
+			android:layout_height="45dp"
+			android:text="理"
+			android:id="@+id/txtSimpleType" android:background="@drawable/bank_background" android:gravity="center"
+			android:textColor="#ffffff" android:textSize="24sp"/>
+	<TextView
+			android:layout_width="200dp"
+			android:layout_height="wrap_content"
+			android:text="很长很长很长很长很长很长很长很长很长很长很长很长名字的某某某理财产品"
+			android:id="@+id/txtGoodName" android:layout_alignParentTop="true"
+			android:paddingLeft="8dp" android:textSize="16sp" android:layout_toLeftOf="@+id/btMinus"
+			android:layout_toRightOf="@+id/txtSimpleType" android:layout_toEndOf="@+id/txtSimpleType"/>
+	<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="主分类-二级分类"
+			android:id="@+id/txtCategories"
+			android:paddingLeft="8dp" android:textColor="@color/darkGrey" android:textSize="14sp"
+			android:layout_below="@id/txtGoodName" android:gravity="bottom"
+			android:layout_alignParentBottom="true" android:layout_toRightOf="@+id/txtSimpleType"
+			android:layout_toEndOf="@+id/txtSimpleType"/>
+	<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="￥500"
+			android:id="@+id/txtPrice"
+			android:textSize="16dp" android:textColor="@color/increasingRed" android:layout_alignTop="@+id/btMinus"
+			android:layout_below="@id/txtGoodName" android:gravity="bottom"
+			android:layout_toLeftOf="@+id/btMinus" android:layout_toStartOf="@+id/btMinus"
+			android:layout_marginTop="5dp" android:layout_marginRight="12dp" android:layout_marginEnd="12dp" />
+	<EditText
+			android:layout_width="50dp"
+			android:layout_height="wrap_content"
+			android:inputType="number"
+			android:ems="10"
+			android:id="@+id/txtAmount"
+			android:layout_toLeftOf="@+id/btAdd" android:layout_below="@id/txtGoodName"
+			android:layout_toStartOf="@+id/btAdd" android:singleLine="false"
+			android:layout_marginTop="5dp" android:textSize="16sp" android:text="1" android:textColor="@color/WordBlack" android:gravity="center"/>
+	<TextView
+			android:layout_width="23dp"
+			android:layout_height="23dp"
+			android:text="-"
+			android:id="@+id/btMinus"
+			android:textSize="16sp" android:gravity="center" android:layout_marginTop="5dp"
+			android:layout_toLeftOf="@+id/txtAmount" android:layout_below="@id/txtGoodName"
+			android:layout_toStartOf="@+id/txtAmount" android:autoText="false"
+			android:layout_alignBottom="@id/txtAmount" android:layout_alignTop="@id/txtAmount"
+			android:background="@color/lightGrey" android:textColor="@color/WordBlack"/>
+	<TextView android:layout_width="23dp" android:layout_height="23dp" android:text="+" android:id="@+id/btAdd"
+	          android:textSize="16sp" android:gravity="center" android:layout_marginTop="5dp"
+			  android:layout_alignParentRight="true" android:layout_below="@id/txtGoodName"
+	          android:layout_alignParentEnd="true"
+			  android:layout_alignBottom="@id/txtAmount" android:layout_alignTop="@id/txtAmount"
+	          android:background="@color/lightGrey" android:textColor="@color/WordBlack"/>
+	<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textAppearance="?android:attr/textAppearanceSmall"
+			android:text="￥1000起购"
+			android:id="@+id/txtInitialAmount"
+			android:textSize="10sp" android:layout_below="@id/txtPrice" android:gravity="bottom"
+			android:layout_alignParentBottom="true" android:layout_alignRight="@+id/txtPrice"
+			android:layout_alignEnd="@+id/txtPrice"/>
+</RelativeLayout>

@@ -6,12 +6,10 @@ import edu.nju.dao.impl.CommonDao;
 import edu.nju.model.User;
 import edu.nju.model.UserLogin;
 import edu.nju.model.UserTemperPrefer;
-import edu.nju.service.BaseService.BaseServiceAdaptor;
 import edu.nju.service.ExceptionsAndError.*;
 import edu.nju.service.POJO.RegisterInfo;
 import edu.nju.service.Sessions.FinanceCityUser;
 import edu.nju.vo.UserVO;
-import org.python.antlr.ast.Str;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
@@ -26,33 +24,32 @@ import java.util.List;
  * Created by Sun YuHao on 2016/7/25.
  */
 @Service
-public class UserServiceImpl extends BaseServiceAdaptor implements UserService {
+public class UserServiceImpl implements UserService {
     @Autowired
     private BaseDao DAO;
 
     @Override
-    public FinanceCityUser register(RegisterInfo regInfo) {
-        return null;
-    }
-
-    @Override
-    public FinanceCityUser login(String userName, String password) {
+    public FinanceCityUser login(String userName, String password) throws UserNotExistException, InvalidPasswordException {
         /** match username and password */
         List list;
         if (validMobile(userName)) {
-            list = DAO.login("FROM User user WHERE user.phone=? AND user.password=?", userName, password);
+            list = DAO.find("FROM User user WHERE user.phone='" + userName + "'");
         }
         else {
-            list = DAO.login("FROM User user WHERE user.username=? AND user.password=?", userName, password);
+            list = DAO.find("FROM User user WHERE user.username='" + userName + "'");
         }
 
         /** if login failed */
         if (list == null || list.size() == 0) {
-            return null;
+            throw new UserNotExistException(userName);
         }
         /** if succeed */
         else {
             User user = (User)list.get(0);
+            if (password == null || !password.equals(user.getPassword())) {
+                throw new InvalidPasswordException();
+            }
+
             FinanceCityUser financeCityUser = new FinanceCityUser();
             financeCityUser.setID(user.getId());
             /** online */
@@ -219,8 +216,13 @@ public class UserServiceImpl extends BaseServiceAdaptor implements UserService {
             user.setPassword(password);
             user.setUsername(username);
             DAO.save(user);
-
-            return login(mobile, password);
+            try {
+                return login(mobile, password);
+            }
+            catch (UserNotExistException u) {
+                u.printStackTrace();
+                return null;
+            }
         }
     }
 
@@ -243,14 +245,20 @@ public class UserServiceImpl extends BaseServiceAdaptor implements UserService {
     @Override
     public void setUserTemperPrefer(UserTemperPrefer userTemperPrefer, FinanceCityUser financeCityUser) throws NotLoginException {
         userTemperPrefer.setUserId(financeCityUser.getID());
-        getUserDao(financeCityUser).save(userTemperPrefer);
+        getUserDao(financeCityUser).saveOrUpdate(userTemperPrefer);
     }
 
     private boolean validPassword(String password) {
+        if (password == null) {
+            return false;
+        }
         return password.length() >= 8 && password.length() <= 30;
     }
 
     private boolean validMobile(String mobile) {
+        if (mobile == null) {
+            return false;
+        }
         return  (mobile.length() == 11 && isNumeric(mobile));
     }
 
@@ -262,5 +270,19 @@ public class UserServiceImpl extends BaseServiceAdaptor implements UserService {
         }
 
         return true;
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public UserTemperPrefer getUserTemper(FinanceCityUser financeCityUser) throws NotLoginException, NotAllConfigurationSetException {
+        List<UserTemperPrefer> userTemperPreferList = getUserDao(financeCityUser).
+                find("FROM UserTemperPrefer u WHERE u.userId=" + financeCityUser.getID() + " ORDER BY u.id DESC");
+
+        if (userTemperPreferList == null || userTemperPreferList.size() == 0) {
+            throw new NotAllConfigurationSetException();
+        }
+        else {
+            return userTemperPreferList.get(0);
+        }
     }
 }

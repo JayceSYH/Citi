@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 public class ErrorManager {
     static public final int errorNormal = 0;
     static public final int errorNotLogin = 1;
-    static public final int errorDateNotFound = 2;
+    static public final int errorDataNotFound = 2;
     static public final int errorInvalidPassword = 3;
     static public final int errorRegisterFailed = 4;
     static public final int errorNoSuchProduct = 5;
@@ -22,12 +22,18 @@ public class ErrorManager {
     static public final int errorLoginFailed = 10;
     static public final int errorInnerDataError = 11;
     static public final int errorUnhandledMethod = 12;
+    static public final int errorNoSuchInvestmentPortfolio = 13;
+    static public final int errorNoSuchOrder = 14;
+    static public final int errorPaymentFailed = 15;
+    static public final int errorUserInfoNotSet = 16;
+    static public final int errorInvalidUserPreference = 17;
+    static public final int errorNothingToRedeem = 18;
 
-    static private String[] errorDescreption;
-    static private String[] errorDescreptionCH;
+    static private String[] errorDescription;
+    static private String[] errorDescriptionCH;
 
     static {
-        errorDescreption = new String[] {
+        errorDescription = new String[] {
                 "",
                 "Not Login",
                 "No Data Found",
@@ -40,9 +46,15 @@ public class ErrorManager {
                 "Invalid Phone Number",
                 "Login Failed",
                 "Inner Data Error",
-                "Unhandled Method"
+                "Unhandled Method",
+                "No Such Investment Portfolio",
+                "No Such Order",
+                "Payment Failed",
+                "User Info Not Set",
+                "Invalid User Preference",
+                "Nothing To Redeem"
         };
-        errorDescreptionCH = new String[] {
+        errorDescriptionCH = new String[] {
                 "",
                 "未登录",
                 "未找到相关数据",
@@ -55,14 +67,20 @@ public class ErrorManager {
                 "无效的手机号",
                 "登录失败",
                 "内部数据错误",
-                "未处理的提交方式"
+                "未处理的提交方式",
+                "该投资组合不存在",
+                "不存在的订单",
+                "交易失败",
+                "用户信息不完整",
+                "无效的用户偏好信息",
+                "没有可赎回的产品"
         };
     }
 
     static private String getDescription(int i) {
-        return errorDescreption[i];
+        return errorDescription[i];
     }
-    static private String getDescriptionCH(int i) { return errorDescreptionCH[i]; }
+    static private String getDescriptionCH(int i) { return errorDescriptionCH[i]; }
 
     static public void setError(BaseVO baseVO, int error) {
         baseVO.setError(error);

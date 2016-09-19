@@ -4,27 +4,27 @@
 
 <html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
 <head>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+	String url = request.getScheme() + "://" + request.getServerName() + request.getRequestURI() + "?"
+			+ request.getQueryString();
+	request.setAttribute("basePath", basePath);
+%>
+<base href="<%=basePath%>">
     <meta charset="UTF-8">
     <title>订单付款</title>
-    <link href="../css/order.css" rel="stylesheet">
+    <link href="${basePath}css/order.css" rel="stylesheet">
+    <link href="${basePath}css/common.css" rel="stylesheet">
 </head>
-<body>
-
-<body>
+<s:form action="orderpay" method="post" id="orderpay">
 <s:include value="header.jsp"></s:include>
-
 
 <div class="main">
     <div class="container">
         <div class="top-bar white-bg">
-            <a href="./" class="select-section current">
-                <div class="circle">1</div>
-                <span class="title">确认订单信息</span>
-            </a>
-            <div class="line"></div>
             <a href="./" class="select-section">
-                <div class="circle">2
-                </div>
                 <span class="title">完成支付</span>
             </a>
         </div>
@@ -35,72 +35,27 @@
                 <h2>订单信息</h2>
                 <div class="total">
                     <span class="total-title">合计:</span>
-                    <span class="total-sum">￥1200</span>
+                    <span class="total-sum" style="margin-right:100px">￥<%=request.getAttribute("total") %></span>
                 </div>
                 <div class="clear"></div>
-                <table>
+                  <table>
                     <tr>
-                        <th class="product-section">产品名称</th>
-                        <th class="product-price">单价</th>
-                        <th class="product-quantity">数量</th>
-                        <th>小计</th>
+                        <th>产品名称</th>
+                        <th>购买金额</th>
                     </tr>
-                    <tr class="current">
-                        <td>
-                            <div class="product-icon icon-manage">理</div>
+                    <s:iterator value="#request.tradeInfoList">
+                    <tr>
+                        <td style="width:300px">
                             <div class="product-title">
-                                <span class="main-title">稳赚利38天</span>
+                                <span class="main-title"><s:property value="name" /></span>
                                 </br>
-                                <span class="sub-title">银行理财-小分类</span>
+                                <span class="sub-title"><s:property value="amount" /></span>
                             </div>
                             <div class="clear"></div>
                         </td>
-                        <td>￥300</td>
-                        <td>1</td>
-                        <td class="product-sum">￥300</td>
+                        <td style="text-align:center;">￥<s:property value="amount" /></td>
                     </tr>
-                    <tr>
-                        <td>
-                            <div class="product-icon icon-fund">基</div>
-                            <div class="product-title">
-                                <span class="main-title">稳赚利38天</span>
-                                </br>
-                                <span class="sub-title">银行理财-小分类</span>
-                            </div>
-                            <div class="clear"></div>
-                        </td>
-                        <td>￥300</td>
-                        <td>1</td>
-                        <td class="product-sum">￥300</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="product-icon icon-insurance">保</div>
-                            <div class="product-title">
-                                <span class="main-title">稳赚利38天</span>
-                                </br>
-                                <span class="sub-title">银行理财-小分类</span>
-                            </div>
-                            <div class="clear"></div>
-                        </td>
-                        <td>￥300</td>
-                        <td>1</td>
-                        <td class="product-sum">￥300</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div class="product-icon icon-bond">债</div>
-                            <div class="product-title">
-                                <span class="main-title">稳赚利38天</span>
-                                </br>
-                                <span class="sub-title">银行理财-小分类</span>
-                            </div>
-                            <div class="clear"></div>
-                        </td>
-                        <td>￥300</td>
-                        <td>1</td>
-                        <td class="product-sum">￥300</td>
-                    </tr>
+                    </s:iterator>
                 </table>
             </div>
             <div class="clear"></div>
@@ -125,17 +80,14 @@
                         <label for="radio1"><span><span></span></span>支付方式3</label>
                     </div>
                 </form>
-                <button class="block-button">确认支付 ￥1200</button>
+                <button class="block-button" onclick="document.getElementById('orderpay').submit()">确认支付 ￥<%=request.getAttribute("total") %></button>
             </div>
             <div class="clear"></div>
         </div>
     </div>
 </div>
-
 <s:include value="footer.jsp"></s:include>
+</s:form>
 
-</div>
-</body>
 
-</body>
 </html>

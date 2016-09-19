@@ -3,7 +3,7 @@ package edu.nju.model;
 import javax.persistence.*;
 
 /**
- * Created by Sun YuHao on 2016/8/31.
+ * Created by Sun YuHao on 2016/9/12.
  */
 @Entity
 @Table(name = "name_to_id", schema = "citi", catalog = "")
@@ -11,7 +11,7 @@ public class NameToId {
     private String name;
     private int id;
 
-    @Id
+    @Basic
     @Column(name = "name")
     public String getName() {
         return name;
@@ -21,7 +21,7 @@ public class NameToId {
         this.name = name;
     }
 
-    @Basic
+    @Id
     @Column(name = "id")
     public int getId() {
         return id;

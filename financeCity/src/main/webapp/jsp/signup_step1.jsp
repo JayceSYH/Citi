@@ -15,12 +15,14 @@
 %>
 <title>InvestGO</title>
 <base href="<%=basePath%>">
-<link href="${basePath}css/order.css" rel="stylesheet">
-<link href="${basePath}css/mycss.css" rel="stylesheet">
+	<link href="${basePath}css/common.css" rel="stylesheet">
+	<%--<link href="${basePath}css/order.css" rel="stylesheet">--%>
+	<link href="${basePath}css/mycss.css" rel="stylesheet">
 </head>
 <body>
-	<s:include value="header.jsp"></s:include>
-	<div style="height: 480px">
+	<jsp:include page="header.jsp" flush="true"/>
+
+	<div class="main" style="height: 480px">
 		<div class="container"
 			style="margin-top: 30px; background-color: white;">
 			<br />

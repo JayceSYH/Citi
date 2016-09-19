@@ -1,0 +1,127 @@
+body{
+    padding:0;
+    margin:0;
+    background-color: #fff;
+    overflow-x: hidden;
+}
+h1{
+    color:#fff;
+    font-size: 24px;
+    margin-top:10px;
+    letter-spacing: 3px;
+    font-weight: lighter;
+}
+#homepage_bg{
+    width:100vw;
+    height:80vh;
+    background: url('../img/homepage_bg.png');
+    background-size:cover;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    tranform:translate(0,-60px);
+}
+#slogan_wrapper{
+    display: flex;
+    margin-top:250px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+button#startVoyage{
+    margin-top: 230px;
+    padding: 8px 30px;
+    border: none;
+    outline: 0;
+    cursor: pointer;
+    color: #fff;
+    background-color: #11b7f3;
+    font-size: 24px;
+    box-shadow: 0 3px 3px 0 #0e8bb8;
+}
+#aim_outer,#content_outer{
+    width:100vw;
+    padding-top:40px;
+    margin-bottom:30px;
+}
+#aim_wrapper,#content_wrapper{
+    width:960px;
+    margin:0 auto 0 auto;
+}
+#content_outer {
+    margin-bottom: 250px;
+}
+h2{
+    font-size:30px;
+    color:#11b7f3;
+    font-weight: bold;
+}
+.title_line{
+    margin-top:-5px;
+    margin-left:0;
+    margin-bottom:40px;
+    width:50px;
+    border:none;
+    border-top:4px #11b7f3 solid;
+}
+.aim{
+    margin:10px 0 20px 0;
+    display: flex;
+    align-items: center;
+}
+.aim_description{
+    margin-left:20px;
+    margin-right:20px;
+}
+#aim_1{
+    /*margin-left:10px;*/
+}
+#aim_2{
+    margin-left:300px;
+}
+#aim_3{
+    margin-left: 600px;
+}
+.icon_next{
+    transform:translate(10px,20px);
+}
+#aim_wrapper p{
+    min-width:190px;
+    font-size: 16px;
+}
+.content_items{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.content_item{
+    height:200px;
+    /*padding:10px;*/
+    margin-bottom:10px;
+    box-sizing: border-box;
+    /*border:2px rgb(255,0,0) solid;*/
+    position: relative;
+}
+.content_first{
+    width:32%;
+}
+.content_second{
+    width:49%;
+}
+#content_wrapper img{
+    width:100%;
+}
+#content_wrapper p{
+    line-height:30px;
+    /*height:30px;*/
+    font-size:16px;
+    margin:0;
+    width:100%;
+    color:#fff;
+    background-color: #aaa;
+    text-align:center ;
+    vertical-align: middle;
+    transform: translate(0,-100%);
+}

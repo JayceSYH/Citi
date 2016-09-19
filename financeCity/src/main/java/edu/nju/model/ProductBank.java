@@ -5,7 +5,7 @@ import java.math.BigDecimal;
 import java.sql.Date;
 
 /**
- * Created by Sun YuHao on 2016/9/3.
+ * Created by Sun YuHao on 2016/9/12.
  */
 @Entity
 @Table(name = "product_bank", schema = "citi", catalog = "")
@@ -22,10 +22,9 @@ public class ProductBank {
     private String salesRegion;
     private String productCode;
     private String registerCode;
-    private Byte currency;
+    private String currency;
     private String investField;
     private String investRatio;
-    private Byte state;
     private Byte riskLevel;
     private String session;
     private String custodian;
@@ -42,6 +41,8 @@ public class ProductBank {
     private Byte incomeType;
     private Byte ifNavType;
     private Byte ifClose;
+    private Byte state;
+    private Byte type;
 
     @Id
     @Column(name = "id")
@@ -165,11 +166,11 @@ public class ProductBank {
 
     @Basic
     @Column(name = "currency")
-    public Byte getCurrency() {
+    public String getCurrency() {
         return currency;
     }
 
-    public void setCurrency(Byte currency) {
+    public void setCurrency(String currency) {
         this.currency = currency;
     }
 
@@ -191,16 +192,6 @@ public class ProductBank {
 
     public void setInvestRatio(String investRatio) {
         this.investRatio = investRatio;
-    }
-
-    @Basic
-    @Column(name = "state")
-    public Byte getState() {
-        return state;
-    }
-
-    public void setState(Byte state) {
-        this.state = state;
     }
 
     @Basic
@@ -363,6 +354,26 @@ public class ProductBank {
         this.ifClose = ifClose;
     }
 
+    @Basic
+    @Column(name = "state")
+    public Byte getState() {
+        return state;
+    }
+
+    public void setState(Byte state) {
+        this.state = state;
+    }
+
+    @Basic
+    @Column(name = "type")
+    public Byte getType() {
+        return type;
+    }
+
+    public void setType(Byte type) {
+        this.type = type;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -390,7 +401,6 @@ public class ProductBank {
         if (currency != null ? !currency.equals(that.currency) : that.currency != null) return false;
         if (investField != null ? !investField.equals(that.investField) : that.investField != null) return false;
         if (investRatio != null ? !investRatio.equals(that.investRatio) : that.investRatio != null) return false;
-        if (state != null ? !state.equals(that.state) : that.state != null) return false;
         if (riskLevel != null ? !riskLevel.equals(that.riskLevel) : that.riskLevel != null) return false;
         if (session != null ? !session.equals(that.session) : that.session != null) return false;
         if (custodian != null ? !custodian.equals(that.custodian) : that.custodian != null) return false;
@@ -411,6 +421,8 @@ public class ProductBank {
         if (incomeType != null ? !incomeType.equals(that.incomeType) : that.incomeType != null) return false;
         if (ifNavType != null ? !ifNavType.equals(that.ifNavType) : that.ifNavType != null) return false;
         if (ifClose != null ? !ifClose.equals(that.ifClose) : that.ifClose != null) return false;
+        if (state != null ? !state.equals(that.state) : that.state != null) return false;
+        if (type != null ? !type.equals(that.type) : that.type != null) return false;
 
         return true;
     }
@@ -432,7 +444,6 @@ public class ProductBank {
         result = 31 * result + (currency != null ? currency.hashCode() : 0);
         result = 31 * result + (investField != null ? investField.hashCode() : 0);
         result = 31 * result + (investRatio != null ? investRatio.hashCode() : 0);
-        result = 31 * result + (state != null ? state.hashCode() : 0);
         result = 31 * result + (riskLevel != null ? riskLevel.hashCode() : 0);
         result = 31 * result + (session != null ? session.hashCode() : 0);
         result = 31 * result + (custodian != null ? custodian.hashCode() : 0);
@@ -449,6 +460,8 @@ public class ProductBank {
         result = 31 * result + (incomeType != null ? incomeType.hashCode() : 0);
         result = 31 * result + (ifNavType != null ? ifNavType.hashCode() : 0);
         result = 31 * result + (ifClose != null ? ifClose.hashCode() : 0);
+        result = 31 * result + (state != null ? state.hashCode() : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
         return result;
     }
 }

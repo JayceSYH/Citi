@@ -2,32 +2,28 @@ package edu.nju.action;
 
 import edu.nju.model.UserTemperPrefer;
 import edu.nju.service.ExceptionsAndError.*;
-import edu.nju.service.ServiceManagerImpl;
 import edu.nju.service.Sessions.FinanceCityUser;
 import edu.nju.service.UserService.UserService;
-import edu.nju.service.Utils.JsonUtil;
-import edu.nju.vo.BaseVO;
 import edu.nju.vo.UserVO;
-import net.sf.json.JSONObject;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Date;
-import java.util.Map;
 
 /**
  * Created by Sun YuHao on 2016/9/2.
  */
 @Controller
 public class UserAction extends BaseAction {
-    private final String default_after_login = "/jsp/search-result.jsp";
-    private BaseVO message;
+    //private final String default_after_login = "/jsp/asset.jsp";
+    private final String default_after_login = "";
+    private final String server = "http://localhost:8080";
+    private final String DEFAULT = "default";
 
-    public BaseVO getMessage() {
-        return message;
-    }
+    @Autowired
+    UserService userService;
 
     @SuppressWarnings("unchecked")
     public String register() {
@@ -38,7 +34,6 @@ public class UserAction extends BaseAction {
         if (mobile == null || password == null || username == null) {
             return ERROR;
         }
-        UserService userService = ServiceManagerImpl.getInstance().getUserService();
         try {
             FinanceCityUser financeCityUser = userService.register(mobile, password, username);
             session.put("user", financeCityUser);
@@ -68,27 +63,35 @@ public class UserAction extends BaseAction {
         String password = request.getParameter("password");
 
         if (username == null || password == null) {
-            ErrorManager.setError(request, ErrorManager.errorInvalidParameter);
+            ErrorManager.setError(request, ErrorManager.errorNormal);
             return ERROR;
         }
 
-        UserService userService = ServiceManagerImpl.getInstance().getUserService();
-        FinanceCityUser financeCityUser = userService.login(username, password);
-        if (financeCityUser == null) {
-            ErrorManager.setError(request, ErrorManager.errorLoginFailed);
-            return ERROR;
+        try {
+            FinanceCityUser financeCityUser = userService.login(username, password);
+
+            session.put("user", financeCityUser);
+            //setReferURL(financeCityUser);
+            ErrorManager.setError(request, ErrorManager.errorNormal);
+            //return SUCCESS;
+            return DEFAULT;
+        }
+        catch (UserNotExistException u) {
+            u.printStackTrace();
+            ErrorManager.setError(request, ErrorManager.errorUserNotExist);
+        }
+        catch (InvalidPasswordException i) {
+            i.printStackTrace();
+            ErrorManager.setError(request, ErrorManager.errorInvalidPassword);
         }
 
-        session.put("user", financeCityUser);
-        setReferURL(financeCityUser);
-        ErrorManager.setError(request, ErrorManager.errorNormal);
-        return SUCCESS;
-
+        return ERROR;
     }
+    
+    
 
     @SuppressWarnings("unchecked")
     public String getUserVO() {
-        UserService userService = ServiceManagerImpl.getInstance().getUserService();
 
         FinanceCityUser financeCityUser = (FinanceCityUser) session.get("user");
         if (financeCityUser == null) {
@@ -103,6 +106,7 @@ public class UserAction extends BaseAction {
         return SUCCESS;
     }
 
+    @SuppressWarnings("unchecked")
     public String setUserInfoInStep2() {
         String birthday_y = request.getParameter("year");
         String birthday_m = request.getParameter("month");
@@ -116,23 +120,21 @@ public class UserAction extends BaseAction {
             return ERROR;
         }
 
-        UserService userService = ServiceManagerImpl.getInstance().getUserService();
         try {
-            int income_i = Integer.valueOf(income);
-            int expense_i = Integer.valueOf(expense);
-            boolean isUrben_b = from.equals("city");
-
             FinanceCityUser financeCityUser = (FinanceCityUser)session.get("user");
             if (financeCityUser == null) {
                 throw new NotLoginException();
             }
+
+            int income_i = Integer.valueOf(income);
+            int expense_i = Integer.valueOf(expense);
+            boolean isUrben_b = from.equals("city");
 
             userService.modifyUserInfo(toDateFormat(birthday_y, birthday_m, birthday_d), income_i, isUrben_b, expense_i, financeCityUser);
             ErrorManager.setError(request, ErrorManager.errorNormal);
             return SUCCESS;
         }
         catch (NotLoginException n) {
-            n.printStackTrace();
             session.put("refer_url", getRefererURL(request));
             ErrorManager.setError(request, ErrorManager.errorNotLogin);
             return LOGIN;
@@ -149,6 +151,7 @@ public class UserAction extends BaseAction {
         return SUCCESS;
     }
 
+    @SuppressWarnings("unchecked")
     public String setTemperPrefer() {
         String amount = request.getParameter("amount"); //投资金额
         String year = request.getParameter("year"); //投资期限
@@ -173,13 +176,18 @@ public class UserAction extends BaseAction {
         }
 
         try {
+            FinanceCityUser financeCityUser = (FinanceCityUser)session.get("user");
+            if (financeCityUser == null) {
+                throw new NotLoginException();
+            }
+
             int amount_i = Integer.valueOf(amount);
             String data = toDateFormat(year, month, day);
             boolean ifPrepare_b = Integer.valueOf(ifPrepare) == 1;
             boolean ifBifPre_b = false;
             byte type_b = 0;
             int backAmount_i = 0;
-            String back_date = "";
+            String back_date = null;
             int insurance_amount = 0;
             int[] risks = new int[2];
             String[] risks_s = risk.split(";");
@@ -223,10 +231,10 @@ public class UserAction extends BaseAction {
             UserTemperPrefer userTemperPrefer = new UserTemperPrefer();
             userTemperPrefer.setExpectedCapital(new BigDecimal(amount_i));
             userTemperPrefer.setEndTime(Date.valueOf(data));
-            userTemperPrefer.setIfBigExpense(ifPrepare_b ? (byte)1 : 0);
+            userTemperPrefer.setIfPrepedBigExpense(ifPrepare_b ? (byte)1 : 0);
             userTemperPrefer.setIfConfigBigExpense(ifBifPre_b ? (byte)1 : 0);
             userTemperPrefer.setExpenseType(type_b);
-            userTemperPrefer.setRedeemTime(Date.valueOf(back_date));
+            userTemperPrefer.setRedeemTime(back_date == null ? null : Date.valueOf(back_date));
             userTemperPrefer.setMayRedeemAmount(new BigDecimal(backAmount_i));
             userTemperPrefer.setInsuranceAmount(new BigDecimal(insurance_amount));
             userTemperPrefer.setRiskToleranceMin(new BigDecimal(risks[0]));
@@ -235,14 +243,12 @@ public class UserAction extends BaseAction {
             userTemperPrefer.setExpectedProfitMax(new BigDecimal(income_rate[1]));
             userTemperPrefer.setChosenProducts(preferType_En);
 
-            UserService userService = ServiceManagerImpl.getInstance().getUserService();
-            userService.setUserTemperPrefer(userTemperPrefer, (FinanceCityUser)session.get("user"));
+            userService.setUserTemperPrefer(userTemperPrefer, financeCityUser);
 
             ErrorManager.setError(request, ErrorManager.errorNormal);
             return SUCCESS;
         }
         catch (NotLoginException n) {
-            n.printStackTrace();
             session.put("refer_url", getRefererURL(request));
             ErrorManager.setError(request, ErrorManager.errorNotLogin);
             return LOGIN;
@@ -273,6 +279,9 @@ public class UserAction extends BaseAction {
         if ((!session.containsKey("refer_url")) || ((String)session.get("refer_url")).contains("signup")) {
             session.put("refer_url", default_after_login);
         }
+
+        //Default
+        session.put("refer_url", default_after_login);
     }
 
     
@@ -289,6 +298,6 @@ public class UserAction extends BaseAction {
         if (url == null) {
             return null;
         }
-        return url.replace("http://localhost:8080", "");
+        return url.replace(server, "");
     }
 }

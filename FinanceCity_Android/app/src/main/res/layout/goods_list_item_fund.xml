@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="61dp" android:padding="8dp" android:minHeight="61dp" android:id="@+id/mainPane">
+
+	<TextView
+			android:layout_width="45dp"
+			android:layout_height="45dp"
+			android:text="基"
+			android:id="@+id/txtSimpleType" android:background="@drawable/fund_background" android:gravity="center"
+			android:textColor="#ffffff" android:textSize="24sp"/>
+	<TextView
+			android:layout_width="200dp"
+			android:layout_height="wrap_content"
+			android:text="某某某基金"
+			android:id="@+id/txtGoodName" android:layout_alignParentTop="true"
+			android:layout_toRightOf="@+id/txtSimpleType" android:layout_toEndOf="@+id/txtSimpleType"
+			android:paddingLeft="8dp" android:textSize="16sp"/>
+	<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="主分类-二级分类"
+			android:id="@+id/txtCategories"
+			android:paddingLeft="8dp" android:textColor="@color/darkGrey" android:textSize="14sp"
+			android:layout_alignParentBottom="true" android:layout_alignLeft="@+id/txtGoodName"
+			android:layout_alignStart="@+id/txtGoodName"/>
+	<EditText
+			android:layout_width="80dp"
+			android:layout_height="wrap_content"
+			android:inputType="number"
+			android:ems="10"
+			android:id="@+id/txtAmount"
+			android:singleLine="false"
+			android:textSize="16sp" android:text="10000" android:textColor="@color/WordBlack" android:gravity="center"
+			android:layout_alignParentBottom="true"
+			android:layout_alignParentRight="true"
+			android:layout_alignParentEnd="true" android:layout_centerVertical="true"/>
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="￥"
+	          android:id="@+id/textView21"
+	          android:textSize="16sp"
+	          android:textColor="@color/increasingRed" android:layout_centerVertical="true"
+	          android:layout_toLeftOf="@+id/txtAmount" android:layout_toStartOf="@+id/txtAmount"/>
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+	          android:textAppearance="?android:attr/textAppearanceSmall" android:text="￥1000起购"
+	          android:id="@+id/txtInitialAmount" android:textSize="10sp"
+	          android:layout_alignParentBottom="true" android:layout_toLeftOf="@+id/textView21"
+	          android:layout_toStartOf="@+id/textView21" android:layout_marginRight="12dp"/>
+</RelativeLayout>

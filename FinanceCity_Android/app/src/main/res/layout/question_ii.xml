@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+<TextView
+		android:id="@+id/txtSum"
+		android:layout_width="24dp"
+		android:layout_height="24dp"
+		android:layout_alignParentTop="true"
+		android:layout_marginEnd="38dp"
+		android:layout_marginRight="38dp"
+		android:layout_marginTop="20dp"
+		android:layout_toLeftOf="@+id/textView25"
+		android:layout_toStartOf="@+id/textView25"
+		android:background="@drawable/unselected_label"
+		android:gravity="center"
+		android:text="1"
+		android:textColor="#ffffff"
+		android:textIsSelectable="false"
+		android:textSize="18sp" />
+
+<TextView
+		android:id="@+id/textView25"
+		android:layout_width="24dp"
+		android:layout_height="24dp"
+		android:layout_alignTop="@+id/txtSum"
+		android:layout_centerHorizontal="true"
+		android:background="@drawable/selected_label"
+		android:gravity="center"
+		android:text="2"
+		android:textColor="#ffffff"
+		android:textIsSelectable="false"
+		android:textSize="18sp" />
+
+<TextView
+		android:id="@+id/textView26"
+		android:layout_width="24dp"
+		android:layout_height="24dp"
+		android:layout_alignTop="@+id/textView25"
+		android:layout_marginLeft="40dp"
+		android:layout_marginStart="40dp"
+		android:layout_toEndOf="@+id/textView25"
+		android:layout_toRightOf="@+id/textView25"
+		android:background="@drawable/unselected_label"
+		android:gravity="center"
+		android:text="3"
+		android:textColor="#ffffff"
+		android:textIsSelectable="false"
+		android:textSize="18sp" />
+
+<TextView
+		android:id="@+id/textView27"
+		android:layout_width="10dp"
+		android:layout_height="25dp"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentStart="true"
+		android:layout_below="@+id/txtSum"
+		android:layout_marginTop="20dp"
+		android:background="@color/validBlue"
+		android:textAppearance="?android:attr/textAppearanceLarge"
+		android:textColor="@color/validBlue" />
+
+<TextView
+		android:id="@+id/textView28"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignBottom="@+id/textView27"
+		android:layout_toEndOf="@+id/textView27"
+		android:layout_toRightOf="@+id/textView27"
+		android:gravity="center"
+		android:paddingLeft="12dp"
+		android:text="风险承受情况"
+		android:textColor="@color/validBlue"
+		android:textSize="20sp" />
+
+	<TextView
+			android:id="@+id/textView36"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_alignParentEnd="true"
+			android:layout_alignParentRight="true"
+			android:layout_marginRight="8dp"
+			android:layout_marginTop="20dp"
+			android:paddingLeft="12dp"
+			android:text="风险承受能力:"
+			android:textColor="@color/WordBlack"
+			android:textSize="18sp" android:layout_below="@+id/textView28" android:layout_toRightOf="@+id/textView27"
+			android:layout_toEndOf="@+id/textView27"/>
+
+<LinearLayout
+		android:id="@+id/sB1"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignLeft="@+id/textView36"
+		android:layout_alignRight="@+id/textView36"
+		android:layout_below="@+id/textView36"
+		android:layout_marginTop="15dp"
+		android:orientation="horizontal">
+
+	<TextView
+			android:id="@+id/seekBatText"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:gravity="center"
+			android:paddingLeft="12dp"
+			android:text="最低承受损失："
+			android:textColor="@color/WordBlack"
+			android:textSize="16sp" />
+
+	<SeekBar
+			android:id="@+id/sb1"
+			android:layout_width="150dp"
+			android:layout_height="match_parent"
+			android:layout_below="@+id/textView36"
+			android:max="100" android:indeterminate="false"/>
+	<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:text="0"
+			android:id="@+id/txtValue1" android:gravity="center" android:textColor="#019587"/>
+
+</LinearLayout>
+
+<LinearLayout
+		android:id="@+id/sB2"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignLeft="@+id/sB1"
+		android:layout_alignRight="@+id/sB1"
+		android:layout_below="@+id/sB1"
+		android:layout_marginTop="15dp"
+		android:orientation="horizontal">
+
+	<TextView
+			android:id="@+id/seekBatText2"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:gravity="center"
+			android:paddingLeft="12dp"
+			android:text="最高承受损失："
+			android:textColor="@color/WordBlack"
+			android:textSize="16sp" />
+
+	<SeekBar
+			android:id="@+id/sb2"
+			android:layout_width="150dp"
+			android:layout_height="match_parent"
+			android:layout_below="@+id/textView36"
+			android:layout_weight="0.00" android:max="100" android:indeterminate="false"/>
+	<TextView android:layout_width="wrap_content" android:layout_height="match_parent" android:text="0"
+	          android:id="@+id/txtValue2" android:gravity="center" android:textColor="#019587"/>
+
+</LinearLayout>
+
+<TextView
+		android:id="@+id/textView4"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignLeft="@+id/sB2"
+		android:layout_alignStart="@+id/sB2"
+		android:layout_below="@+id/sB2"
+		android:layout_marginRight="8dp"
+		android:layout_marginTop="20dp"
+		android:paddingLeft="12dp"
+		android:text="预期收益率："
+		android:textColor="@color/WordBlack"
+		android:textSize="18sp" />
+
+<LinearLayout
+		android:id="@+id/sB3"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignLeft="@+id/textView4"
+		android:layout_alignRight="@+id/textView4"
+		android:layout_below="@+id/textView4"
+		android:layout_marginTop="15dp"
+		android:orientation="horizontal">
+
+	<TextView
+			android:id="@+id/seekBatText1"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:gravity="center"
+			android:paddingLeft="12dp"
+			android:text="最低收益率："
+			android:textColor="@color/WordBlack"
+			android:textSize="16sp" />
+
+	<SeekBar
+			android:id="@+id/sb3"
+			android:layout_width="150dp"
+			android:layout_height="match_parent"
+			android:layout_below="@+id/textView36"
+			android:max="100" android:indeterminate="false"/>
+	<TextView android:layout_width="wrap_content" android:layout_height="match_parent" android:text="0"
+	          android:id="@+id/txtValue3" android:gravity="center" android:textColor="#019587"/>
+
+</LinearLayout>
+
+<LinearLayout
+		android:id="@+id/sB4"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignLeft="@+id/sB3"
+		android:layout_alignRight="@+id/sB3"
+		android:layout_below="@+id/sB3"
+		android:layout_marginTop="15dp"
+		android:orientation="horizontal">
+
+	<TextView
+			android:id="@+id/seekBatText3"
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:gravity="center"
+			android:paddingLeft="12dp"
+			android:text="最高收益率："
+			android:textColor="@color/WordBlack"
+			android:textSize="16sp" />
+
+	<SeekBar
+			android:id="@+id/sb4"
+			android:layout_width="150dp"
+			android:layout_height="match_parent"
+			android:layout_below="@+id/textView36"
+			android:max="100" android:indeterminate="false"/>
+	<TextView android:layout_width="wrap_content" android:layout_height="match_parent" android:text="0"
+	          android:id="@+id/txtValue4" android:gravity="center" android:textColor="#019587"/>
+
+</LinearLayout>
+
+<!--<SeekBar-->
+<!--android:id="@+id/seekBar2"-->
+<!--android:layout_width="wrap_content"-->
+<!--android:layout_height="wrap_content"-->
+<!--android:layout_alignEnd="@+id/seekBar"-->
+<!--android:layout_alignLeft="@+id/textView4"-->
+<!--android:layout_alignRight="@+id/seekBar"-->
+<!--android:layout_alignStart="@+id/textView4"-->
+<!--android:layout_below="@+id/textView4"-->
+<!--android:layout_marginTop="30dp" />-->
+
+
+<Button
+		android:id="@+id/btContinue"
+		android:layout_width="150dp"
+		android:layout_height="45dp"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentEnd="true"
+		android:layout_alignParentRight="true"
+		android:layout_marginBottom="16dp"
+		android:layout_marginRight="16dp"
+		android:text="继续"
+		android:textColor="@color/WordBlack"
+		android:textSize="16sp" />
+
+<Button
+		android:id="@+id/btCancel"
+		android:layout_width="150dp"
+		android:layout_height="45dp"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentStart="true"
+		android:layout_marginBottom="16dp"
+		android:layout_marginLeft="16dp"
+		android:text="返回"
+		android:textColor="@color/WordBlack"
+		android:textSize="16sp" />
+	<TextView android:layout_width="10dp" android:layout_height="25dp"
+	          android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/textView57"
+	          android:background="@color/darkGrey" android:textColor="@color/validBlue"
+	          android:layout_alignTop="@+id/textView36" android:layout_alignParentLeft="true"
+	          android:layout_alignParentStart="true" android:layout_alignBottom="@+id/textView36"/>
+	<TextView android:layout_width="10dp" android:layout_height="25dp"
+	          android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/textView58"
+	          android:background="@color/darkGrey" android:textColor="@color/validBlue"
+	          android:layout_alignTop="@+id/textView4" android:layout_alignParentLeft="true"
+	          android:layout_alignParentStart="true" android:layout_alignBottom="@+id/textView4"/>
+</RelativeLayout>

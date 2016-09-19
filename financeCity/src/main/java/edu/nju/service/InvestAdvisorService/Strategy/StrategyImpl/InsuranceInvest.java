@@ -3,10 +3,12 @@ package edu.nju.service.InvestAdvisorService.Strategy.StrategyImpl;
 import edu.nju.model.ProductInsurance;
 import edu.nju.model.UserTemperPrefer;
 import edu.nju.service.CategoryAndProduct.Product;
+import edu.nju.service.POJO.AssetCategoryAllocation;
 import edu.nju.service.POJO.InvestResult;
 import edu.nju.service.SearchService.SearchService;
 import edu.nju.service.TradeService.TradeItem;
 import edu.nju.service.Utils.TimeTransformation;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -20,16 +22,15 @@ public class InsuranceInvest implements CategoryInvest {
     public static final String categoryName = "Insurance";
 
     @Override
-    public InvestResult invest(UserTemperPrefer userInfo, SearchService searchService)  {
+    public InvestResult invest(UserTemperPrefer userInfo, SearchService searchService, AssetCategoryAllocation allocation)  {
         double timeLimit;
-        int productAmount;
         double capital;
         InvestResult investResult = new InvestResult();
 
-        capital = userInfo.getExpectedCapital().doubleValue();
-        timeLimit = TimeTransformation.getTimeFromNow(userInfo.getEndDate(), 'y');
+        capital = allocation.getFreeCapital() + allocation.getFlowCapital();
+        timeLimit = TimeTransformation.getTimeFromNow(userInfo.getEndTime(), TimeTransformation.year);
         //TODO:ask if need insurance amount(number)
-        productAmount = userInfo.getInsuranceAmount().intValue();
+        int insurance_amount_;
 
         List<Product> productList = searchService.getProductListByOrder(categoryName, "p.yearRate DESC");
         if (productList == null) {
@@ -73,7 +74,7 @@ public class InsuranceInvest implements CategoryInvest {
 
         investResult.addUnusedCapital(capital, categoryName);
         for (int i = 0; i < 5 && i < productList.size(); ++i) {
-            investResult.addTradItem(new TradeItem(0, categoryName, productList.get(i), null));
+            investResult.addTradItem(new TradeItem(0, productList.get(i), null));
         }
 
         return investResult;
@@ -148,8 +149,8 @@ public class InsuranceInvest implements CategoryInvest {
                 public int compare(Integer o1, Integer o2) {
                     ProductInsurance productInsurance1 = (ProductInsurance)productList.get(o1).getProduct();
                     ProductInsurance productInsurance2 = (ProductInsurance)productList.get(o2).getProduct();
-                    Integer unitCompensation1 = productInsurance1.getIndemnityPerUnit();
-                    Integer unitCompensation2 = productInsurance2.getIndemnityPerUnit();
+                    Double unitCompensation1 = productInsurance1.getIndemnity().doubleValue();
+                    Double unitCompensation2 = productInsurance2.getIndemnity().doubleValue();
                     return unitCompensation2.compareTo(unitCompensation1);
                 }
 

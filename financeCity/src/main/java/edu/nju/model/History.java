@@ -8,14 +8,14 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 /**
- * Created by Sun YuHao on 2016/8/31.
+ * Created by Sun YuHao on 2016/9/12.
  */
 @Entity
 public class History {
     private int commodityId;
     private Timestamp date;
     private BigDecimal price;
-    private int productId;
+    private Integer productId;
 
     @Id
     @Column(name = "commodity_id")
@@ -49,11 +49,11 @@ public class History {
 
     @Basic
     @Column(name = "product_id")
-    public int getProductId() {
+    public Integer getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(Integer productId) {
         this.productId = productId;
     }
 
@@ -65,9 +65,9 @@ public class History {
         History history = (History) o;
 
         if (commodityId != history.commodityId) return false;
-        if (productId != history.productId) return false;
         if (date != null ? !date.equals(history.date) : history.date != null) return false;
         if (price != null ? !price.equals(history.price) : history.price != null) return false;
+        if (productId != null ? !productId.equals(history.productId) : history.productId != null) return false;
 
         return true;
     }
@@ -77,7 +77,7 @@ public class History {
         int result = commodityId;
         result = 31 * result + (date != null ? date.hashCode() : 0);
         result = 31 * result + (price != null ? price.hashCode() : 0);
-        result = 31 * result + productId;
+        result = 31 * result + (productId != null ? productId.hashCode() : 0);
         return result;
     }
 }

@@ -5,16 +5,15 @@ import java.math.BigDecimal;
 import java.sql.Date;
 
 /**
- * Created by Sun YuHao on 2016/9/3.
+ * Created by Sun YuHao on 2016/9/15.
  */
 @Entity
 @Table(name = "user_temper_prefer", schema = "citi", catalog = "")
 public class UserTemperPrefer {
     private int userId;
     private BigDecimal expectedCapital;
-    private Date endDate;
     private BigDecimal expectedProfitMin;
-    private Byte ifBigExpense;
+    private Byte ifPrepedBigExpense;
     private BigDecimal mayRedeemAmount;
     private Date redeemTime;
     private BigDecimal insuranceAmount;
@@ -25,7 +24,6 @@ public class UserTemperPrefer {
     private Date beginTime;
     private Date endTime;
     private String chosenProducts;
-    private BigDecimal bearLoss;
     private Integer id;
     private BigDecimal riskToleranceMax;
     private BigDecimal expectedProfitMax;
@@ -51,16 +49,6 @@ public class UserTemperPrefer {
     }
 
     @Basic
-    @Column(name = "end_date")
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    @Basic
     @Column(name = "expected_profit_min")
     public BigDecimal getExpectedProfitMin() {
         return expectedProfitMin;
@@ -71,13 +59,13 @@ public class UserTemperPrefer {
     }
 
     @Basic
-    @Column(name = "if_big_expense")
-    public Byte getIfBigExpense() {
-        return ifBigExpense;
+    @Column(name = "if_preped_big_expense")
+    public Byte getIfPrepedBigExpense() {
+        return ifPrepedBigExpense;
     }
 
-    public void setIfBigExpense(Byte ifBigExpense) {
-        this.ifBigExpense = ifBigExpense;
+    public void setIfPrepedBigExpense(Byte ifPrepedBigExpense) {
+        this.ifPrepedBigExpense = ifPrepedBigExpense;
     }
 
     @Basic
@@ -181,16 +169,6 @@ public class UserTemperPrefer {
     }
 
     @Basic
-    @Column(name = "bear_loss")
-    public BigDecimal getBearLoss() {
-        return bearLoss;
-    }
-
-    public void setBearLoss(BigDecimal bearLoss) {
-        this.bearLoss = bearLoss;
-    }
-
-    @Basic
     @Column(name = "id")
     public Integer getId() {
         return id;
@@ -230,10 +208,10 @@ public class UserTemperPrefer {
         if (userId != that.userId) return false;
         if (expectedCapital != null ? !expectedCapital.equals(that.expectedCapital) : that.expectedCapital != null)
             return false;
-        if (endDate != null ? !endDate.equals(that.endDate) : that.endDate != null) return false;
         if (expectedProfitMin != null ? !expectedProfitMin.equals(that.expectedProfitMin) : that.expectedProfitMin != null)
             return false;
-        if (ifBigExpense != null ? !ifBigExpense.equals(that.ifBigExpense) : that.ifBigExpense != null) return false;
+        if (ifPrepedBigExpense != null ? !ifPrepedBigExpense.equals(that.ifPrepedBigExpense) : that.ifPrepedBigExpense != null)
+            return false;
         if (mayRedeemAmount != null ? !mayRedeemAmount.equals(that.mayRedeemAmount) : that.mayRedeemAmount != null)
             return false;
         if (redeemTime != null ? !redeemTime.equals(that.redeemTime) : that.redeemTime != null) return false;
@@ -250,7 +228,6 @@ public class UserTemperPrefer {
         if (endTime != null ? !endTime.equals(that.endTime) : that.endTime != null) return false;
         if (chosenProducts != null ? !chosenProducts.equals(that.chosenProducts) : that.chosenProducts != null)
             return false;
-        if (bearLoss != null ? !bearLoss.equals(that.bearLoss) : that.bearLoss != null) return false;
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (riskToleranceMax != null ? !riskToleranceMax.equals(that.riskToleranceMax) : that.riskToleranceMax != null)
             return false;
@@ -264,9 +241,8 @@ public class UserTemperPrefer {
     public int hashCode() {
         int result = userId;
         result = 31 * result + (expectedCapital != null ? expectedCapital.hashCode() : 0);
-        result = 31 * result + (endDate != null ? endDate.hashCode() : 0);
         result = 31 * result + (expectedProfitMin != null ? expectedProfitMin.hashCode() : 0);
-        result = 31 * result + (ifBigExpense != null ? ifBigExpense.hashCode() : 0);
+        result = 31 * result + (ifPrepedBigExpense != null ? ifPrepedBigExpense.hashCode() : 0);
         result = 31 * result + (mayRedeemAmount != null ? mayRedeemAmount.hashCode() : 0);
         result = 31 * result + (redeemTime != null ? redeemTime.hashCode() : 0);
         result = 31 * result + (insuranceAmount != null ? insuranceAmount.hashCode() : 0);
@@ -277,7 +253,6 @@ public class UserTemperPrefer {
         result = 31 * result + (beginTime != null ? beginTime.hashCode() : 0);
         result = 31 * result + (endTime != null ? endTime.hashCode() : 0);
         result = 31 * result + (chosenProducts != null ? chosenProducts.hashCode() : 0);
-        result = 31 * result + (bearLoss != null ? bearLoss.hashCode() : 0);
         result = 31 * result + (id != null ? id.hashCode() : 0);
         result = 31 * result + (riskToleranceMax != null ? riskToleranceMax.hashCode() : 0);
         result = 31 * result + (expectedProfitMax != null ? expectedProfitMax.hashCode() : 0);

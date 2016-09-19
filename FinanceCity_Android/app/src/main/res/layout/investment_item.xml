@@ -2,71 +2,78 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:orientation="vertical"
                 android:layout_width="match_parent"
-                android:layout_height="68dp" android:paddingTop="3dp" android:paddingLeft="8dp"
-                android:paddingRight="8dp" android:paddingBottom="3dp" android:touchscreenBlocksFocus="false"
+                android:layout_height="wrap_content" android:paddingTop="6dp" android:paddingLeft="8dp"
+                android:paddingRight="8dp" android:paddingBottom="6dp" android:touchscreenBlocksFocus="false"
                 android:minHeight="68dp"
->
+                android:id="@+id/itemPane">
 
 	<TextView
-			android:layout_width="243dp"
+			android:layout_width="230dp"
 			android:layout_height="wrap_content"
 			android:textAppearance="?android:attr/textAppearanceLarge"
-			android:text="这是一个投资产品名字"
+			android:text="这是一个很长很长很长很长很长很长很长很长很长很长很长很长很长很长的投资产品名字"
 			android:id="@+id/txtPdtName" android:textStyle="bold"
+			android:textSize="16sp"
+			android:textColor="@color/secondary_text_default_material_light"
+			android:gravity="center_vertical"
 			android:layout_alignParentTop="true" android:layout_alignParentLeft="true"
 			android:layout_alignParentStart="true"
-			android:textSize="20sp"
-			android:layout_toStartOf="@+id/txtIncRate"
-			android:textColor="@color/secondary_text_default_material_light" android:layout_toLeftOf="@+id/txtIncRate"
-			android:height="25dp"/>
+			android:layout_marginBottom="20dp"/>
 	<TextView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:text="+25.0%"
 			android:id="@+id/txtIncRate"
-			android:textSize="28sp"
+			android:textSize="12sp"
 			android:textColor="@color/increasingRed"
 			android:gravity="center"
-			android:layout_alignParentTop="true" android:layout_alignParentRight="true"
-			android:layout_alignParentEnd="true"
-			android:height="44dp"/>
-	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(￥5.0)"
-	          android:id="@+id/txtCurrPrice" android:textSize="15sp"
-	          android:gravity="center_vertical"
-	          android:layout_alignTop="@+id/txtAvlblTime" android:layout_alignRight="@+id/txtIncRate"
-	          android:layout_alignEnd="@+id/txtIncRate"/>
-	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="2016-01-01"
-	          android:id="@+id/txtExpiration" android:textSize="15sp"
-	          android:layout_alignTop="@+id/textView2" android:layout_toRightOf="@+id/textView2"
-	          android:layout_toEndOf="@+id/textView2"/>
-	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="买入："
-	          android:id="@+id/textView" android:textSize="15sp"
-	          android:layout_below="@+id/txtPdtName" android:layout_alignParentLeft="true"
-	          android:layout_alignParentStart="true"/>
-	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="到期："
-	          android:id="@+id/textView2" android:textSize="15sp"
-	          android:layout_below="@+id/textView" android:layout_alignParentLeft="true"
+			android:layout_alignBottom="@id/txtPdtName" android:layout_alignRight="@+id/btSell"
+			android:layout_alignEnd="@+id/btSell"/>
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="买入"
+	          android:id="@+id/textView" android:textSize="12sp"
+	          android:textIsSelectable="false"
+	          android:background="@drawable/property_background" android:padding="1dp" android:textColor="#ffffff"
+	          android:layout_alignParentBottom="true" android:layout_alignParentLeft="true"
 	          android:layout_alignParentStart="true"/>
 	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="￥4.0"
-	          android:id="@+id/txtBuyPrice" android:textSize="15sp"
-	          android:layout_alignTop="@+id/textView4" android:layout_toRightOf="@+id/textView3"
-	          android:layout_toEndOf="@+id/textView3"/>
-	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="2016-01-01"
-	          android:id="@+id/txtAvlblTime" android:textSize="15sp"
-	          android:layout_below="@+id/txtBuyPrice" android:layout_toRightOf="@+id/textView3"
-	          android:layout_toEndOf="@+id/textView3"/>
-	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="可取："
-	          android:id="@+id/textView3" android:textSize="15sp"
-	          android:layout_below="@+id/textView4" android:layout_alignLeft="@+id/textView4"
-	          android:layout_alignStart="@+id/textView4"/>
-	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="买价："
-	          android:id="@+id/textView4" android:textSize="15sp"
-	          android:layout_marginLeft="22dp"
-	          android:layout_marginStart="22dp"
-	          android:layout_alignTop="@+id/txtBuyTime" android:layout_toRightOf="@+id/txtBuyTime"
-	          android:layout_toEndOf="@+id/txtBuyTime"/>
+	          android:id="@+id/txtBuyPrice" android:textSize="12sp"
+	          android:textIsSelectable="false"
+	          android:paddingLeft="5dp" android:gravity="center" android:layout_below="@id/txtPdtName"
+	          android:layout_alignTop="@+id/textView4" android:layout_toRightOf="@+id/textView4"
+	          android:layout_toEndOf="@+id/textView4" android:layout_alignParentBottom="true"/>
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="买价"
+	          android:id="@+id/textView4" android:textSize="12sp"
+	          android:layout_marginLeft="110dp"
+	          android:textIsSelectable="false"
+	          android:background="@drawable/property_background" android:padding="1dp" android:textColor="#ffffff"
+	          android:layout_alignParentBottom="true"
+	          android:layout_alignParentLeft="true"/>
 	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="2015-01-01"
-	          android:id="@+id/txtBuyTime" android:textSize="15sp"
-	          android:layout_alignTop="@+id/textView" android:layout_toRightOf="@+id/textView"
-	          android:layout_toEndOf="@+id/textView"/>
+	          android:id="@+id/txtBuyTime" android:textSize="12sp"
+	          android:textIsSelectable="false" android:paddingLeft="5dp"
+	          android:gravity="center" android:layout_alignParentBottom="true" android:layout_toRightOf="@+id/textView"
+	          android:layout_toEndOf="@+id/textView" android:layout_alignTop="@+id/txtCurrPrice"/>
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="本息"
+	          android:id="@+id/textView3" android:textSize="12sp"
+	          android:textIsSelectable="false"
+	          android:background="@drawable/property_background"
+	          android:padding="1dp" android:textColor="#ffffff"
+	          android:layout_marginLeft="190dp"
+	          android:layout_alignParentBottom="true"
+	          android:layout_alignParentLeft="true"/>
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="￥4.0"
+	          android:id="@+id/txtCurrPrice" android:textSize="12sp" android:textIsSelectable="false"
+	          android:paddingLeft="5dp"
+	          android:gravity="center"
+	          android:layout_alignParentBottom="true" android:layout_toRightOf="@+id/textView3"
+	          android:layout_toEndOf="@+id/textView3"/>
+	<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="match_parent"
+			android:text="卖出"
+			android:id="@+id/btSell"
+			android:gravity="center" android:textColor="@color/lightBlue"
+			android:layout_alignTop="@id/txtPdtName"
+			android:layout_alignParentRight="true"
+			android:layout_above="@id/txtIncRate"/>
 </RelativeLayout>

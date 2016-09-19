@@ -16,13 +16,13 @@
 			android:layout_width="match_parent"
 			android:layout_height="150dp" android:layout_alignParentTop="true"
 			android:layout_alignParentLeft="true" android:layout_alignParentStart="true" android:padding="16dp"
-			android:id="@+id/relativeLayout">
+			android:id="@+id/relativeLayout" android:layout_marginTop="40dp">
 		<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="理财产品名称"
+				android:text="--"
 				android:id="@+id/txtPdtName"
-				android:textSize="22dp" android:textStyle="bold"
+				android:textSize="16sp" android:textStyle="bold"
 				android:padding="3dp"
 				android:layout_alignParentTop="true" android:layout_toRightOf="@+id/linearLayout"
 				android:layout_toEndOf="@+id/linearLayout" android:layout_marginLeft="16dp"
@@ -30,12 +30,12 @@
 		<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
-				android:text="100000"
-				android:id="@+id/txtNewestNetValue"
+				android:text="--"
+				android:id="@+id/txtGAge"
 				android:textColor="@color/propertyValue"
 				android:paddingTop="3dp" android:paddingBottom="3dp"
-				android:layout_below="@+id/txtPdtName" android:layout_toRightOf="@+id/textView9"
-				android:layout_toEndOf="@+id/textView9"/>
+				android:textSize="12sp" android:layout_alignTop="@+id/textView9"
+				android:layout_toRightOf="@+id/textView9" android:layout_toEndOf="@+id/textView9"/>
 		<LinearLayout
 				android:orientation="vertical"
 				android:layout_width="120dp"
@@ -46,7 +46,7 @@
 			<TextView
 					android:layout_width="match_parent"
 					android:layout_height="wrap_content"
-					android:text="20%"
+					android:text="--"
 					android:id="@+id/txtInterestRate" android:layout_gravity="center_horizontal" android:gravity="center"
 					android:textSize="35sp" android:textStyle="bold" android:textColor="#ffffff"/>
 			<TextView android:layout_width="80dp" android:layout_height="2dp"
@@ -63,33 +63,32 @@
 		          android:id="@+id/textView6"
 		          android:paddingTop="3dp" android:paddingBottom="3dp"
 		          android:paddingLeft="3dp"
-		          android:layout_below="@+id/txtPdtName" android:layout_alignLeft="@+id/txtPdtName"
-		          android:layout_alignStart="@+id/txtPdtName"/>
-		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="状态"
+		          android:textSize="12sp" android:layout_above="@+id/textView5"
+		          android:layout_alignLeft="@+id/txtPdtName" android:layout_alignStart="@+id/txtPdtName"/>
+		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="基金状态"
 		          android:id="@+id/textView5" android:paddingTop="3dp" android:paddingBottom="8dp"
 		          android:paddingLeft="3dp"
-		          android:layout_alignTop="@+id/txtState" android:layout_toLeftOf="@+id/txtState"
-		          android:layout_toStartOf="@+id/txtState"/>
-		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="认购中"
-		          android:id="@+id/txtState" android:textColor="@color/propertyValue"
+		          android:textSize="12sp" android:layout_above="@+id/btPruchase"
+		          android:layout_toLeftOf="@+id/txtLength" android:layout_toStartOf="@+id/txtLength"/>
+		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="--"
+		          android:id="@+id/txtLength" android:textColor="@color/propertyValue"
 		          android:paddingTop="3dp" android:paddingBottom="8dp"
 		          android:paddingLeft="8dp"
-		          android:layout_below="@+id/txtNewestNetValue" android:layout_toRightOf="@+id/textView6"
-		          android:layout_toEndOf="@+id/textView6"/>
+		          android:textSize="12sp" android:layout_above="@+id/btPruchase"
+		          android:layout_toRightOf="@+id/textView6" android:layout_toEndOf="@+id/textView6"/>
 		<Button
-				android:layout_width="50dp"
-				android:layout_height="150dp"
+				android:layout_width="100dp"
+				android:layout_height="25dp"
 				android:text="购 买"
 				android:id="@+id/btPruchase"
 				android:background="#3283fd" android:textColor="#ffffff"
-				android:textSize="20sp"
+				android:textSize="15sp"
 				android:layout_alignParentBottom="true"
-				android:layout_below="@+id/textView5"
-				android:layout_alignRight="@+id/txtNewestNetValue" android:layout_alignEnd="@+id/txtNewestNetValue"
 				android:layout_alignLeft="@+id/textView6" android:layout_alignStart="@+id/textView6"/>
 		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="￥"
 		          android:id="@+id/textView9" android:paddingTop="3dp" android:paddingBottom="3dp"
-		          android:paddingLeft="8dp" android:layout_below="@+id/txtPdtName"
+		          android:paddingLeft="8dp"
+		          android:textSize="12sp" android:layout_alignTop="@+id/textView6"
 		          android:layout_toRightOf="@+id/textView6" android:layout_toEndOf="@+id/textView6"/>
 	</RelativeLayout>
 	<LinearLayout
@@ -103,11 +102,18 @@
 			android:fadingEdge="vertical" android:weightSum="1" android:id="@+id/panelAttrs">
 		<lecho.lib.hellocharts.view.LineChartView
 				android:layout_width="wrap_content"
-				android:layout_height="150dp" android:id="@+id/view"/>
+				android:layout_height="150dp"
+				android:visibility="gone" android:id="@+id/linechart"/>
 		<ListView
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
 				android:id="@+id/listProperties" android:choiceMode="none" android:headerDividersEnabled="false"
-				android:dividerHeight="0dp" android:divider="@drawable/abc_btn_borderless_material"/>
+				android:dividerHeight="0dp" android:divider="@drawable/abc_btn_borderless_material"
+				android:paddingLeft="8dp" android:paddingRight="8dp" android:paddingBottom="8dp"/>
 	</LinearLayout>
+	<nju.financecity_android.controller.widget.Banner
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content" android:id="@+id/banner" android:layout_alignParentTop="true"
+			android:layout_alignParentLeft="true" android:layout_alignParentStart="true"
+			/>
 </RelativeLayout>

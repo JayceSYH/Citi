@@ -841,14 +841,14 @@
 * (.button-primary, .button-secondary, etc.)
 */
 .button-3d.button-primary {
-  -webkit-box-shadow: 0 7px 0 #0880d7, 0 8px 3px rgba(0, 0, 0, 0.3);
-          box-shadow: 0 7px 0 #0880d7, 0 8px 3px rgba(0, 0, 0, 0.3); }
+  -webkit-box-shadow: 0 5px 0 #0880d7, 0 6px 3px rgba(0, 0, 0, 0.3);
+          box-shadow: 0 5px 0 #0880d7, 0 6px 3px rgba(0, 0, 0, 0.3); }
   .button-3d.button-primary:hover, .button-3d.button-primary:focus {
-    -webkit-box-shadow: 0 7px 0 #077ace, 0 8px 3px rgba(0, 0, 0, 0.3);
-            box-shadow: 0 7px 0 #077ace, 0 8px 3px rgba(0, 0, 0, 0.3); }
+    -webkit-box-shadow: 0 5px 0 #077ace, 0 6px 3px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 5px 0 #077ace, 0 6px 3px rgba(0, 0, 0, 0.3); }
   .button-3d.button-primary:active, .button-3d.button-primary.active, .button-3d.button-primary.is-active {
-    -webkit-box-shadow: 0 2px 0 #0662a6, 0 3px 3px rgba(0, 0, 0, 0.2);
-            box-shadow: 0 2px 0 #0662a6, 0 3px 3px rgba(0, 0, 0, 0.2); }
+    -webkit-box-shadow: 0 0px 0 #0662a6, 0 1px 3px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 0px 0 #0662a6, 0 1px 3px rgba(0, 0, 0, 0.2); }
 .button-3d.button-plain {
   -webkit-box-shadow: 0 7px 0 #e6e6e6, 0 8px 3px rgba(0, 0, 0, 0.3);
           box-shadow: 0 7px 0 #e6e6e6, 0 8px 3px rgba(0, 0, 0, 0.3); }

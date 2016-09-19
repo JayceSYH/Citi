@@ -4,14 +4,14 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
-	<FrameLayout
+	<lecho.lib.hellocharts.view.PieChartView
 			android:layout_width="match_parent"
 			android:layout_height="200dp" android:layout_alignParentTop="true"
-			android:layout_alignParentLeft="true" android:layout_alignParentStart="true" android:id="@+id/panePieChart">
-	</FrameLayout>
+			android:layout_alignParentLeft="true" android:layout_alignParentStart="true" android:id="@+id/pieChart">
+	</lecho.lib.hellocharts.view.PieChartView>
 	<ListView
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
-			android:id="@+id/listInvstProducts" android:layout_below="@+id/panePieChart" android:layout_alignParentLeft="true"
+			android:id="@+id/listInvstProducts" android:layout_below="@+id/pieChart" android:layout_alignParentLeft="true"
 			android:layout_alignParentStart="true"/>
 </RelativeLayout>

@@ -38,19 +38,36 @@ public class Product {
     }
 
     public String getName() {
-        if (category.equals(ProductCategoryManager.categoryBank)) {
+        if (category.belongTo(ProductCategoryManager.categoryBank)) {
             return ((ProductBank)product).getName();
         }
-        else if (category.equals(ProductCategoryManager.categoryBond)) {
-            return ((ProductBond)product).getTitle();
+        else if (category.belongTo(ProductCategoryManager.categoryBond)) {
+            return ((ProductBond)product).getName();
         }
-        else if (category.equals(ProductCategoryManager.categoryInsurance)) {
+        else if (category.belongTo(ProductCategoryManager.categoryInsurance)) {
             return ((ProductInsurance)product).getName();
         }
-        else if (category.equals((ProductCategoryManager.categoryFund))) {
+        else if (category.belongTo((ProductCategoryManager.categoryFund))) {
             return ((ProductFund)product).getName();
         }
 
         return null;
+    }
+
+    public double getRTR() {
+        if (category.belongTo(ProductCategoryManager.categoryBank)) {
+            return ((ProductBank)product).getExpectedRate().doubleValue() / 100;
+        }
+        else if (category.belongTo(ProductCategoryManager.categoryBond)) {
+            return ((ProductBond)product).getCoupon().doubleValue() / 100;
+        }
+        else if (category.belongTo(ProductCategoryManager.categoryInsurance)) {
+            return ((ProductInsurance)product).getExpectedRate().doubleValue() / 100;
+        }
+        else if (category.belongTo((ProductCategoryManager.categoryFund))) {
+            return ((ProductFund)product).getYearlyRtnRate().doubleValue() / 100;
+        }
+
+        return 0;
     }
 }

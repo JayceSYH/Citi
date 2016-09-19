@@ -9,11 +9,21 @@
 	<color name="plainText">#232323</color>
 	<color name="bank">#f9d540</color>
 	<color name="bond">#f99c52</color>
-	<color name="validBlue">#1b72ff</color>
+	<color name="validBlue">#11b7f3</color>
 	<color name="fund">#fd3278</color>
 	<color name="insurance">#c601f8</color>
 	<color name="propertyName">#383838</color>
 	<color name="propertyValue">#878787</color>
 	<color name="lightBlue">#11b7f3</color>
-	<color name="grey">#bbbab0</color>
+	<color name="lightGreyPlus">#f9f9f9</color>
+	<color name="lightGrey">#dcdcdc</color>
+	<color name="darkGrey">#979797</color>
+	<color name="WordBlack">#7a7a7a</color>
+	<color name="vivid1">#c601f8</color>
+	<color name="vivid2">#fd3278</color>
+	<color name="vivid3">#11b7f3</color>
+	<color name="vivid4">#56b354</color>
+	<color name="vivid5">#f9d540</color>
+	<color name="vivid6">#ffb01d</color>
+	<color name="vivid7">#3d70fc</color>
 </resources>

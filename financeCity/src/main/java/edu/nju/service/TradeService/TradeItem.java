@@ -10,7 +10,6 @@ import org.springframework.util.DigestUtils;
 public class TradeItem {
     private int amount;
     private double tradingVolume;
-    private String type;
     private Product product;
     private String metaInfo;
 
@@ -30,14 +29,6 @@ public class TradeItem {
         this.tradingVolume = tradingVolume;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public Product getProduct() {
         return product;
     }
@@ -54,15 +45,9 @@ public class TradeItem {
         this.metaInfo = metaInfo;
     }
 
-    public TradeItem(double tradingVolume, String type, Product product, String metaInfo) {
+    public TradeItem(double tradingVolume, Product product, String metaInfo) {
         this.tradingVolume = tradingVolume;
-        this.type = type;
         this.product = product;
         this.metaInfo = metaInfo;
-    }
-
-    public String generateMD5(int id, String timestamp) {
-        return DigestUtils.md5DigestAsHex((timestamp + id +
-                getProduct().getID() + getAmount()).getBytes());
     }
 }

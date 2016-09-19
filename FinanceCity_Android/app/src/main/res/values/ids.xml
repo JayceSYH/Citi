@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="all_year" type="id"/>
+    <item name="all_limit" type="id"/>
+    <item name="all_close_name" type="id"/>
+    <item name="all_close_switch" type="id"/>
+    <item name="year1" type="id"/>
+    <item name="start" type="id"/>
+    <item name="limit1" type="id"/>
+    <item name="advisement" type="id"/>
+    <item name="incometype" type="id"/>
+    <item name="close1" type="id"/>
+    <item name="year2" type="id"/>
+    <item name="limit2" type="id"/>
+    <item name="end1" type="id"/>
+    <item name="state" type="id"/>
+    <item name="advisement1" type="id"/>
+    <item name="state1" type="id"/>
+    <item name="latest" type="id"/>
+    <item name="close2" type="id"/>
+    <item name="sort" type="id"/>
+    <item name="year3" type="id"/>
+    <item name="broadcast" type="id"/>
+    <item name="company" type="id"/>
+    <item name="value" type="id"/>
+
+</resources>

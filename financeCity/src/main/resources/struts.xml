@@ -4,27 +4,39 @@
 	"http://struts.apache.org/dtds/struts-2.3.dtd">
 
 <struts>
-
-	<package name="struts2" extends="struts-default">
+	<package name="struts2" extends="struts-default" namespace="">
 		<action name="test" class="TestAction">
-		<result name="success">/new.jsp</result>
+			<result name="success">/new.jsp</result>
 		</action>
 		
 		<action name="register" class="edu.nju.action.UserAction" method="register">
 			<result name="success">/jsp/signup_step2.jsp</result>
 			<result name="error">/jsp/signup_step1.jsp</result>
 		</action>
-		
+
+		<action name="search" class="edu.nju.action.SearchAction" method="getInstitutionList">
+			<result name="success">/jsp/searchFilter.jsp</result>
+		</action>
+
+		<action name="searchFilter" class="edu.nju.action.SearchFilterAction_" method="filter">
+			<result name="success">/jsp/result.jsp</result>
+		</action>
+
 		<action name="login" class="edu.nju.action.UserAction" method="login">
 			<result name="success">${refer_url}</result> <!-- 跳转到登录前页面 -->
+			<result name="default" type="redirectAction">investment</result>
 			<result name="error">/jsp/login.jsp</result>
 		</action>
 		
 		<action name="loginURL" class="edu.nju.action.UserAction" method="loginURL">
-			<result name="success">/jsp/login.jsp</result> <!-- 跳转到登录前页面 -->
+			<result name="success">/jsp/login.jsp</result> 
+		</action>
+
+		<action name="institutionList" class="edu.nju.action.SearchAction" method="getInstitutionList">
+			<result name="success"></result>
 		</action>
 		
-		<action name="signup2" class="userAction" method="setUserInfoInStep2">
+		<action name="signup2" class="edu.nju.action.UserAction" method="setUserInfoInStep2">
 			<result name="success">/jsp/signup_step3.jsp</result>
 			<result name="error">/jsp/signup_step2.jsp</result>
 			<result name="login">/jsp/login.jsp</result>
@@ -37,13 +49,55 @@
 		</action>
 		
 		<action name="signup4" class="edu.nju.action.UserAction" method="setTemperPrefer">
-			<result name="success">/jsp/search-result.jsp</result>
+			<result name="success" type="redirectAction">search</result>
 			<result name="error">/jsp/signup_step4.jsp</result>
 			<result name="login">/jsp/login.jsp</result>
 		</action>
+		
+		<action name="buyCombine" class="edu.nju.action.OrderAction" method="buyCombine">
+			<result name="success">/jsp/order-pay.jsp</result>
+			<result name="login">/jsp/login.jsp</result>
+		</action>
+
+		<action name="orderpay" class="edu.nju.action.OrderAction" method="pay">
+			<result name="success" type="redirectAction">investment</result>
+			<result name="login">/jsp/login.jsp</result>
+		</action>
+		
+		<action name="assets" class="edu.nju.action.Assets" method="">
+			<result name="success">/jsp/asset.jsp</result>
+			<result name="error">/jsp/login.jsp</result>
+		</action>
+		
+		<action name="recommend" class="edu.nju.action.Assets" method="getRecommend">
+			<result name="success">/jsp/recommendation.jsp</result>
+			<result name="login">/jsp/login.jsp</result>
+		</action>
+
+		<action name="investment" class="edu.nju.action.Assets" method="getCurrentInvestment">
+			<result name="success">/jsp/asset.jsp</result>
+			<result name="login">/jsp/login.jsp</result>
+		</action>
+		
+		<action name="product" class="edu.nju.action.Assets" method="getProduct">
+			<result name="success">/jsp/searchFilter.jsp</result>
+			<result name="login">/jsp/login.jsp</result>
+		</action>
+		
+		<action name="purchaseOne" class="edu.nju.action.PurchaseAction" method="buy">
+			<result name="success">/jsp/product_pay.jsp</result>
+		</action>
+		
+		<action name="buyOne" class="edu.nju.action.PurchaseAction" method="buyAction">
+			<result name="success">/jsp/asset.jsp</result>
+		</action>
+		
+        <action name="sold" class="edu.nju.action.PurchaseAction" method="soldAction">
+			<result name="success" type="redirectAction">investment</result>
+		</action>
 	</package>
 	
-	<package name="android" extends="json-default">
+	<package name="androidBase" extends="json-default" namespace="/api">
 		<action name="user" class="edu.nju.action.AndroidUserAction" method="api_User">
 			<result name="success" type="json">
 				<param name="root">result</param>
@@ -58,35 +112,7 @@
 			</result>
 		</action>
 
-		<action name="product/infos" class="edu.nju.action.AndroidSearchAction" method="getProductsByIds">
-			<result name="success" type="json">
-				<param name="root">result</param>
-				<param name="ignoreHierarchy">false</param>
-			</result>
-		</action>
-
-		<action name="product/info" class="edu.nju.action.AndroidSearchAction" method="findProductById">
-			<result name="success" type="json">
-				<param name="root">result</param>
-				<param name="ignoreHierarchy">false</param>
-			</result>
-		</action>
-
-		<action name="product/s" class="edu.nju.action.AndroidSearchAction" method="searchProducts">
-			<result name="success" type="json">
-				<param name="root">result</param>
-				<param name="ignoreHierarchy">false</param>
-			</result>
-		</action>
-
-		<action name="payment/mode" class="edu.nju.action.AndroidPayAction" method="payMode">
-			<result name="success" type="json">
-				<param name="root">result</param>
-				<param name="ignoreHierarchy">false</param>
-			</result>
-		</action>
-
-		<action name="asset/history" class="edu.nju.action.AndroidAssetAction" method="getHistoryVO">
+		<action name="prefer" class="edu.nju.action.AndroidUserAction" method="setTemperPrefer">
 			<result name="success" type="json">
 				<param name="root">result</param>
 				<param name="ignoreHierarchy">false</param>
@@ -99,9 +125,104 @@
 				<param name="ignoreHierarchy">false</param>
 			</result>
 		</action>
+
+		<action name="institution" class="edu.nju.action.AndroidSearchAction" method="getInstitutionList">
+			<result name="success" type="json">
+				<param name="root">result</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+
+		<action name="order" class="edu.nju.action.AndroidBuyAction" method="order">
+			<result name="success" type="json">
+				<param name="root">result</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+
+		<action name="redeem" class="edu.nju.action.AndroidBuyAction" method="redeem">
+			<result name="success" type="json">
+				<param name="root">result</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
 	</package>
 
-	<constant name="struts.action.extension" value="action" />
+	<package name="androidProduct" extends="json-default" namespace="/api/product">
+		<action name="infos" class="edu.nju.action.AndroidSearchAction" method="getProductsByIds">
+			<result name="success" type="json">
+				<param name="root">result</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+
+		<action name="info" class="edu.nju.action.AndroidSearchAction" method="findProductById">
+			<result name="success" type="json">
+				<param name="root">result</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+
+		<action name="s" class="edu.nju.action.AndroidSearchAction" method="searchProducts">
+			<result name="success" type="json">
+				<param name="root">result</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+
+		<action name="history" class="edu.nju.action.AndroidSearchAction" method="getFundValueHistory">
+			<result name="success" type="json">
+				<param name="root">result</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	</package>
+
+	<package name="androidPay" extends="json-default" namespace="/api/payment">
+		<action name="mode" class="edu.nju.action.AndroidPayAction" method="payMode">
+			<result name="success" type="json">
+				<param name="root">result</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+
+		<action name="pay" class="edu.nju.action.AndroidPayAction" method="pay">
+			<result name="success" type="json">
+				<param name="root">result</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	</package>
+
+	<package name="androidAsset" extends="json-default" namespace="/api/asset">
+		<action name="history" class="edu.nju.action.AndroidAssetAction" method="getHistoryVO">
+			<result name="success" type="json">
+				<param name="root">result</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+
+		<action name="value" class="edu.nju.action.AndroidAssetAction" method="getAssetHistoryVO">
+			<result name="success" type="json">
+				<param name="root">result</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+
+		<action name="recommend" class="edu.nju.action.AndroidAssetAction" method="getRecommendPortfolio">
+			<result name="success" type="json">
+				<param name="root">result</param>
+				<param name="ignoreHierarchy">false</param>
+			</result>
+		</action>
+	</package>
+
+	<package name="DayAjax" extends="json-default" namespace="">
+		<action name="dayTJ" class="edu.nju.action.PurchaseAction" method="getHistory">
+			<result type="json"></result>
+		</action>
+	</package>
+	<constant name="struts.action.extension" value="," />
 
 </struts>
 

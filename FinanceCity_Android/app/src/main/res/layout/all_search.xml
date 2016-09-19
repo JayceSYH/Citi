@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:nju="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/product_search_filter_all_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <nju.financecity_android.controller.widget.Bar
+        android:id="@+id/year"
+        nju:bar_name="年化收益率"
+        nju:bar_start="0"
+        nju:bar_end="15"
+        nju:bar_interval="0.0001"
+        nju:bar_unit="%"
+        nju:putin1_text="0"
+        nju:putin2_text="15"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <nju.financecity_android.controller.widget.Bar
+        android:id="@+id/limit"
+        nju:bar_name="期限"
+        nju:bar_start="0"
+        nju:bar_end="1800"
+        nju:bar_interval="1"
+        nju:bar_unit="天"
+        nju:putin1_text="0"
+        nju:putin2_text="1800"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/year"/>
+    <TextView
+        android:id="@+id/close_name"
+        android:text="封闭"
+        android:textSize="18dp"
+        android:textColor="@color/WordBlack"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:layout_below="@id/limit"
+        android:layout_alignParentLeft="true"/>
+
+    <Switch
+        android:id="@+id/close_switch"
+        android:textColorHighlight="@color/lightBlue"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:checked="false"
+        android:layout_toRightOf="@id/close_name"
+        android:layout_marginLeft="18dp"
+        android:layout_below="@id/limit"/>
+</merge>
+

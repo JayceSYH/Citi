@@ -6,29 +6,27 @@
 	android:layout_width="match_parent"
 	android:layout_height="match_parent">
 
-	<ImageView
+<!--	<ImageView
 		android:src="@mipmap/side_sign"
-		android:layout_width="10dp"
-		android:layout_height="30dp"
-		android:layout_marginLeft="10dp"
+		android:layout_width="8dp"
+		android:layout_height="24dp"
 		android:layout_marginTop="10dp"
-		android:gravity="left" />
+		android:gravity="left" />-->
 
 	<TextView
 		android:id="@+id/key_text"
 		android:text="关键字"
-		android:textColor="@color/lightBlue"
-		android:textSize="24sp"
+		android:textColor="@color/WordBlack"
+		android:textSize="15sp"
 		android:layout_width="wrap_content"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="5dp"/>
+		android:layout_height="wrap_content"/>
 
 	<EditText
 		android:id="@+id/key_putin"
-		android:layout_width="wrap_content"
+		android:textColorLink="@color/lightBlue"
+		android:layout_width="0dp"
 		android:layout_height="wrap_content"
-		android:layout_weight="1"
-		android:layout_marginTop="10dp" />
+		android:layout_weight="1" />
 
 </LinearLayout>
 

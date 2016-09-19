@@ -8,8 +8,6 @@ public class TradeHistoryVO extends BaseVO {
     private double TradingVolume;
     /**交易单位*/
     private String Unit;
-    /**交易量*/
-    private int Amount;
     /**产品名*/
     private String ProductName;
     /**产品ID*/
@@ -35,13 +33,6 @@ public class TradeHistoryVO extends BaseVO {
         Unit = unit;
     }
 
-    public int getAmount() {
-        return Amount;
-    }
-
-    public void setAmount(int amount) {
-        Amount = amount;
-    }
 
     public String getProductName() {
         return ProductName;

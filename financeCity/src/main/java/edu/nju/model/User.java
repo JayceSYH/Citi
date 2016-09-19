@@ -8,7 +8,7 @@ import java.sql.Date;
 import java.sql.Timestamp;
 
 /**
- * Created by Sun YuHao on 2016/9/3.
+ * Created by Sun YuHao on 2016/9/12.
  */
 @Entity
 public class User {

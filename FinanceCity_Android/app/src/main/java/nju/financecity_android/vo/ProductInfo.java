@@ -8,7 +8,8 @@ import java.util.Date;
 public class ProductInfo {
 
     public ProductInfo() { }
-    public ProductInfo(String productName, Date buy, Date expiration, Date available, double buyPrice, double currPrice) {
+    public ProductInfo(String id, String productName, String buy, String expiration, String available, float buyPrice, float currPrice) {
+        this.productId = id;
         this.productName = productName;
         this.buy = buy;
         this.expiration = expiration;
@@ -17,7 +18,9 @@ public class ProductInfo {
         this.currPrice = currPrice;
     }
 
+    public String type;
+    public String productId;
     public String productName;
-    public Date buy, expiration, available;
-    public double buyPrice, currPrice;
+    public String buy, expiration, available;
+    public float buyPrice, currPrice;
 }

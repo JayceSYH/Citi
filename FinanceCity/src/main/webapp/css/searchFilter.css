@@ -1,4 +1,5 @@
 .filter-container {
+    /*height: 230px;*/
     margin: 0px auto auto auto;
     padding-bottom: 20px;
     background-color: white;
@@ -39,11 +40,11 @@
     padding-top: 28px;
 }
 
-#search_input {
+.search-input {
     /*margin: 0 10px 0 15px;*/
 }
 
-#search_button, #filter_button {
+.search-button, .filter-button {
     width: 100px;
     height: 32px;
     margin-left: 10px;
@@ -65,6 +66,7 @@ select {
 
 input[type="text"] {
     margin: auto;
+    padding-left: 5px;
     height: 32px;
 }
 
@@ -82,9 +84,14 @@ input[type="text"] {
     display: flex;
 }
 
-.income-wrapper label{
-    font-size: 13px;
-    padding-top: 5px;
+.income-wrapper .tag{
+    font-size: 16px;
+    /*padding-top: 5px;*/
+    min-width: 32px;
+    margin: auto 0;
+    font-weight: lighter;
+    text-align: center;
+    /*padding: auto;*/
     box-sizing: border-box;
 }
 
@@ -95,8 +102,10 @@ input[type="text"] {
 
 .slider-wrapper {
     margin-left: 10px;
+    padding: auto 0;
     position: relative;
     font-size: 4px;
+    /*display: flex;*/
 }
 
 .slider-start {
@@ -112,10 +121,48 @@ input[type="text"] {
     left: 190px;
 }
 
+.u1of3 {
+    flex: 0 0 31.11%;
+}
+
 .u1of4 {
     flex: 0 0 25%;
 }
 
+.u1of20 {
+    flex: 0 0 5%;
+}
+
 .income-wrapper select {
     margin: 0 0 0 10px;
+}
+
+.toggle-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.toggle-wrapper select {
+    width: 150px;
+}
+
+.btn-info {
+    background-color: rgb(0, 182, 247);
+}
+
+#fund_sort_type {
+    color: rgb(0, 182, 247);
+}
+
+#fund_sort_type:hover {
+    color: rgb(0, 132, 197);
+    cursor: pointer;
+}
+
+/*input[type="text"].form_datetime {*/
+    /*height: 32px;*/
+    /*outline: none;*/
+/*}*/
+#insurance_distributor {
+    width: 100%;
 }

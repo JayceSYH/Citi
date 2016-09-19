@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="master_destination">
+        <item>所有投资标的</item>
+        <item>银行理财</item>
+        <item>债券</item>
+        <item>基金</item>
+        <item>保险</item>
+    </string-array>
+    <string-array name="slavery_all">
+        <item>所有</item>
+    </string-array>
+    <string-array name="slavery_bank">
+        <item>所有</item>
+    </string-array>
+    <string-array name="slavery_bond">
+        <item>所有</item>
+        <item>记账式</item>
+        <item>储蓄式</item>
+    </string-array>
+    <string-array name="slavery_fund">
+        <item>所有</item>
+        <item>股票型</item>
+        <item>股指型</item>
+        <item>混合型</item>
+        <item>债券型</item>
+        <item>QDII</item>
+        <item>LOF</item>
+        <item>ETF</item>
+        <item>封闭型</item>
+    </string-array>
+    <string-array name="slavery_insurance">
+        <item>所有</item>
+        <item>两全万能险</item>
+    </string-array>
+
+    <string-array name="insurance_year">
+        <item>5</item>
+        <item>10</item>
+        <item>15</item>
+        <item>20</item>
+        <item>25</item>
+        <item>30</item>
+        <item>终身</item>
+    </string-array>
+
+    <string-array name="bank_incometype">
+        <item>所有</item>
+        <item>保证收益型</item>
+        <item>保本浮动收益型</item>
+        <item>非保本浮动收益型</item>
+    </string-array>
+
+    <string-array name="bond_state">
+        <item>所有</item>
+        <item>发行中</item>
+        <item>已售罄</item>
+        <item>未发行</item>
+    </string-array>
+
+    <string-array name="fund_state">
+        <item>所有</item>
+        <item>申购中</item>
+        <item>认购中</item>
+        <item>已关闭</item>
+    </string-array>
+
+    <string-array name="sort_type">
+        <item>不排序</item>
+        <item>升序</item>
+        <item>降序</item>
+    </string-array>
+
+    <string-array name="master_none">
+        <item>——</item>
+    </string-array>
+
+    <string-array name="slavery_none">
+        <item>——</item>
+    </string-array>
+
+
+</resources>

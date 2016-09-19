@@ -1,52 +1,131 @@
 package edu.nju.action;
 
+import edu.nju.service.ExceptionsAndError.*;
+import edu.nju.service.POJO.SimpleTradeInfo;
 import edu.nju.service.SearchService.SearchService;
-import edu.nju.service.ServiceManagerImpl;
+import edu.nju.service.Sessions.FinanceCityUser;
+import edu.nju.service.TradeService.TradeService;
+import edu.nju.vo.BaseVO;
+import edu.nju.vo.OrderResultVO;
+import org.aspectj.weaver.ast.Not;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 /**
  * Created by Sun YuHao on 2016/9/3.
  */
+@Controller
 public class AndroidBuyAction extends AndroidAction {
-    public String getOrderPrice() {
-        Map map = getRequestMap();
+    @Autowired
+    SearchService searchService;
+    @Autowired
+    TradeService tradeService;
 
-        SearchService searchService = ServiceManagerImpl.getInstance().getSearchService();
+    @SuppressWarnings("unchecked")
+    public String order() {
+        Map map = getRequestMap();
+        OrderResultVO orderResultVO = new OrderResultVO();
 
         try {
+            FinanceCityUser financeCityUser = getUser();
+            if (financeCityUser == null) {
+                throw new NotLoginException();
+            }
+
             List<Map> productList = (List<Map>)map.get("product_list");
-            if (productList.size() == 0) {
-                setTextResult("Error:产品列表为空");
+            if (productList == null || productList.size() == 0) {
+                throw new InvalidParametersException("product_list");
             }
 
-            double count;
-            int id[] = new int[productList.size()];
-            int amount[] = new int[productList.size()];
+            List<SimpleTradeInfo> simpleTradeInfoList = new ArrayList<>();
+            for (Map tradeMap : productList) {
+                int pid = (Integer)tradeMap.get("pid");
+                double amount = getDouble(tradeMap.get("amount"));
 
-            for (int i = 0; i < productList.size(); ++i) {
-                Map productMap = productList.get(i);
-                String id_s = (String)productMap.get("pid");
-                String amount_s = (String)productMap.get("amount");
+                SimpleTradeInfo simpleTradeInfo = new SimpleTradeInfo();
+                simpleTradeInfo.setAmount(amount);
+                simpleTradeInfo.setProductId(pid);
 
-                id[i] = Integer.valueOf(id_s);
-                amount[i] = Integer.valueOf(amount_s);
+                simpleTradeInfoList.add(simpleTradeInfo);
             }
 
-            count = searchService.getCost(id, amount);
-            if (count < 0) {
-                setTextResult("Error:参数错误");
-            }
-            else {
-                setTextResult(String.valueOf(count));
-            }
+            orderResultVO = tradeService.buyProduct(simpleTradeInfoList, financeCityUser);
+            ErrorManager.setError(orderResultVO, ErrorManager.errorNormal);
+        }
+        catch (NotLoginException n) {
+            n.printStackTrace();
+            ErrorManager.setError(orderResultVO, ErrorManager.errorNotLogin);
+        }
+        catch (NoSuchProductException n) {
+            n.printStackTrace();
+            ErrorManager.setError(orderResultVO, ErrorManager.errorNoSuchProduct);
         }
         catch (Exception e) {
             e.printStackTrace();
-            setTextResult("Error:计算总价时发生异常");
+            ErrorManager.setError(orderResultVO, ErrorManager.errorInvalidParameter);
         }
 
+        setResult(orderResultVO);
+
         return SUCCESS;
+    }
+
+    public String redeem() {
+        Map map = getRequestMap();
+        BaseVO baseVO = new BaseVO();
+
+        try {
+            FinanceCityUser financeCityUser = getUser();
+            if (financeCityUser == null) {
+                throw new NotLoginException();
+            }
+
+            String checkCode = (String)map.get("checkCode");
+            Integer pid = (Integer)map.get("pid");
+            if (checkCode == null || pid == null) {
+                throw new InvalidParametersException("checkCode | pid");
+            }
+
+            if (tradeService.redeemProduct(checkCode, pid, financeCityUser)) {
+                ErrorManager.setError(baseVO, ErrorManager.errorNormal);
+            }
+            else {
+                ErrorManager.setError(baseVO, ErrorManager.errorInnerDataError);
+            }
+        }
+        catch (NotLoginException n) {
+            n.printStackTrace();
+            ErrorManager.setError(baseVO, ErrorManager.errorNotLogin);
+        }
+        catch (InvalidParametersException i) {
+            i.printStackTrace();
+            ErrorManager.setError(baseVO, ErrorManager.errorInvalidParameter);
+        }
+        catch (NothingToRedeemException n) {
+            n.printStackTrace();
+            ErrorManager.setError(baseVO, ErrorManager.errorNothingToRedeem);
+        }
+
+        setResult(baseVO);
+        return SUCCESS;
+    }
+
+    private Double getDouble(Object object) {
+        if (object == null) {
+            return null;
+        }
+
+        if (object instanceof Integer) {
+            return Double.valueOf((Integer)object);
+        }
+        else if (object instanceof Double) {
+            return (Double)object;
+        }
+
+        return null;
     }
 }

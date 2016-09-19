@@ -7,32 +7,35 @@ import java.sql.Timestamp;
  * Created by Sun YuHao on 2016/8/28.
  */
 public class TimeTransformation {
-    static private final int seconde = 1000;
-    static private final int minute = seconde * 60;
-    static private final int hour = minute * 60;
-    static private final int day = hour * 24;
-    static private final int month = day * 30;
-    static private final int year = day * 365;
+    static public final long microSecond = 1;
+    static public final long second = 1000;
+    static public final long minute = second * 60;
+    static public final long hour = minute * 60;
+    static public final long day = hour * 24;
+    static public final long month = day * 30;
+    static public final long year = day * 365;
 
-    static public double getTimeFromNow(Timestamp timestamp, char type) {
-        int castType;
-        switch (type) {
-            case 's':case 'S':castType = seconde; break;
-            case 'm':castType = minute; break;
-            case 'h':case 'H':castType = hour; break;
-            case 'd':case 'D':castType = day; break;
-            case 'M':castType = month; break;
-            case 'y':case 'Y': castType = year; break;
-            default:castType = day;
-        }
+    static public double getTimeFromNow(Timestamp timestamp, long type) {
 
-        return ((double)timestamp.getTime() - System.currentTimeMillis()) / castType;
+        return ((double)timestamp.getTime() - System.currentTimeMillis()) / type;
     }
 
-    static public double getTimeFromNow(Date date, char type) {
+    static public double getTimeFromNow(Date date, long type) {
         String time = date.toString() + " 00:00:00";
         Timestamp timestamp = Timestamp.valueOf(time);
 
         return getTimeFromNow(timestamp, type);
+    }
+
+    static public double getTimeFromDate(Date start, Date end, long type) {
+        return getTimeFromNow(end, type) - getTimeFromNow(start, type);
+    }
+
+    static public double getTimeAfter(Timestamp timestamp, double length, long lengthType, long resultType) {
+        return (timestamp.getTime() + length * lengthType) / resultType;
+    }
+
+    static public double getTimeAfter(Date date, double length, long lengthType, long resultType) {
+        return (date.getTime() + length * lengthType) / resultType;
     }
 }

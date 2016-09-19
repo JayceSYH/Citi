@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="61dp" android:padding="8dp" android:minHeight="61dp" android:id="@+id/mainPane">
+
+	<TextView
+			android:layout_width="45dp"
+			android:layout_height="45dp"
+			android:text="保"
+			android:id="@+id/txtSimpleType" android:background="@drawable/insurance_background" android:gravity="center"
+			android:textColor="#ffffff" android:textSize="24sp"/>
+	<TextView
+			android:layout_width="200dp"
+			android:layout_height="wrap_content"
+			android:text="某某某理财产品"
+			android:id="@+id/txtGoodName" android:layout_alignParentTop="true"
+			android:layout_toRightOf="@+id/txtSimpleType" android:layout_toEndOf="@+id/txtSimpleType"
+			android:paddingLeft="8dp" android:textSize="16sp"/>
+	<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="主分类-二级分类"
+			android:id="@+id/txtCategories"
+			android:paddingLeft="8dp" android:textColor="@color/darkGrey" android:textSize="14sp"
+			android:layout_alignParentBottom="true" android:layout_toRightOf="@+id/txtSimpleType"
+			android:layout_toEndOf="@+id/txtSimpleType"/>
+	<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="￥"
+			android:textSize="16dp" android:textColor="@color/increasingRed"
+			android:layout_centerVertical="true" android:layout_toLeftOf="@+id/txtPrice"
+	/>
+	<EditText
+			android:layout_width="45dp"
+			android:layout_height="wrap_content"
+			android:inputType="number"
+			android:ems="10"
+			android:id="@+id/txtAmount"
+			android:layout_toLeftOf="@+id/btAdd"
+			android:layout_toStartOf="@+id/btAdd" android:layout_centerVertical="true" android:singleLine="false"
+			android:textSize="16sp" android:text="1" android:textColor="@color/WordBlack" android:gravity="center"/>
+	<TextView
+			android:layout_width="23dp"
+			android:layout_height="23dp"
+			android:text="-"
+			android:id="@+id/btMinus"
+			android:textSize="16sp" android:gravity="center"
+			android:layout_toLeftOf="@+id/txtAmount"
+			android:layout_toStartOf="@+id/txtAmount" android:layout_centerVertical="true" android:autoText="false"
+			android:background="@color/lightGrey" android:textColor="@color/WordBlack"/>
+	<TextView android:layout_width="23dp" android:layout_height="23dp" android:text="+" android:id="@+id/btAdd"
+	          android:textSize="16sp" android:gravity="center"
+	          android:layout_alignParentRight="true"
+	          android:layout_alignParentEnd="true" android:layout_centerVertical="true"
+	          android:background="@color/lightGrey" android:textColor="@color/WordBlack"/>
+	<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textAppearance="?android:attr/textAppearanceSmall"
+			android:text="￥1000起购"
+			android:id="@+id/txtInitialAmount"
+			android:textSize="10sp"
+			android:layout_alignParentBottom="true" android:layout_alignRight="@+id/txtPrice"
+			android:layout_alignEnd="@+id/txtPrice"/>
+	<EditText android:layout_width="45dp" android:layout_height="wrap_content" android:inputType="number"
+	          android:ems="10" android:id="@+id/txtPrice"
+	          android:singleLine="false"
+	          android:textSize="16sp" android:text="1" android:textColor="@color/WordBlack" android:gravity="center"
+	          android:layout_centerVertical="true" android:layout_toRightOf="@+id/txtCategories"
+	          android:layout_toLeftOf="@+id/btMinus" android:layout_toStartOf="@+id/btMinus"
+	          android:layout_marginRight="12dp"/>
+</RelativeLayout>

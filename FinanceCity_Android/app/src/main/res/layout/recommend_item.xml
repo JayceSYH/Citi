@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:minHeight="65dp" android:padding="5dp">
+
+	<TextView
+			android:layout_width="55dp"
+			android:layout_height="55dp"
+			android:text="理"
+			android:id="@+id/txtSimpleType" android:layout_alignParentTop="true" android:layout_alignParentLeft="true"
+			android:layout_alignParentStart="true" android:gravity="center"
+			android:background="@drawable/bank_background" android:textSize="25dp" android:textColor="#ffffff"/>
+	<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长很长的产品名称"
+			android:id="@+id/txtProductName" android:layout_alignParentTop="true" android:layout_toRightOf="@+id/txtSimpleType"
+			android:layout_toEndOf="@+id/txtSimpleType" android:textSize="18sp" android:paddingLeft="12dp"/>
+	<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:textAppearance="?android:attr/textAppearanceSmall"
+			android:text="￥10000"
+			android:layout_below="@id/txtProductName"
+			android:id="@+id/txtAmount" android:layout_alignParentBottom="true"
+			android:layout_toRightOf="@+id/txtSimpleType" android:layout_toEndOf="@+id/txtSimpleType"
+			android:paddingLeft="12dp" android:textColor="@color/increasingRed"/>
+	<lecho.lib.hellocharts.view.PieChartView
+			android:layout_width="55dp"
+			android:layout_height="55dp" android:id="@+id/piechart"
+			android:layout_below="@id/txtProductName"
+			android:layout_alignParentRight="true" android:layout_alignParentEnd="true"
+			android:layout_alignParentBottom="true"/>
+</RelativeLayout>

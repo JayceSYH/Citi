@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:nju="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/product_search_filter_fund_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/agent_name"
+        android:text="管理机构"
+        android:textColor="@color/WordBlack"
+        android:textSize="18sp"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:gravity="center"/>
+    <Spinner
+        android:id="@+id/agent_spinner"
+        android:textSize="18sp"
+        android:textColor="@color/WordBlack"
+        android:spinnerMode="dropdown"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@id/agent_name"
+        android:layout_marginLeft="5dp"
+        android:layout_alignParentRight="true"/>
+    <TextView
+        android:id="@+id/state_name"
+        android:text="状态"
+        android:textColor="@color/WordBlack"
+        android:textSize="18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/agent_name"
+        android:layout_alignRight="@id/agent_name"
+        android:gravity="center_vertical"/>
+
+    <Spinner
+        android:id="@+id/state_spinner"
+        android:textSize="18dp"
+        android:textColor="@color/WordBlack"
+        android:spinnerMode="dropdown"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@id/state_name"
+        android:layout_below="@id/agent_spinner"
+        android:layout_marginLeft="5dp"
+        android:layout_alignParentRight="true"/>
+
+    <nju.financecity_android.controller.widget.Bar
+        android:id="@+id/latest"
+        nju:bar_name="最新净值"
+        nju:bar_start="0"
+        nju:bar_end="10"
+        nju:bar_interval="0.0001"
+        nju:bar_unit=""
+        nju:putin1_text="0"
+        nju:putin2_text="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/state_name"/>
+
+    <TextView
+        android:id="@+id/close_name"
+        android:text="封闭"
+        android:textSize="18dp"
+        android:textColor="@color/WordBlack"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:layout_below="@id/latest"
+        android:layout_alignParentLeft="true"/>
+
+    <Switch
+        android:id="@+id/close_switch"
+        android:textColorHighlight="@color/lightBlue"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:checked="false"
+        android:layout_toRightOf="@id/close_name"
+        android:layout_alignLeft="@id/state_spinner"
+        android:layout_marginLeft="18dp"
+        android:layout_below="@id/latest"/>
+
+    <TextView
+        android:id="@+id/sort_name"
+        android:text="按6个月收益率排序"
+        android:textSize="18dp"
+        android:textColor="@color/WordBlack"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:gravity="center_vertical"
+        android:layout_below="@id/close_name"
+        android:layout_alignParentLeft="true" />
+
+    <Spinner
+        android:id="@+id/sort_type"
+        android:textSize="18dp"
+        android:textColor="@color/WordBlack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@id/sort_name"
+        android:layout_below="@id/close_name" />
+
+    <!--<EditText
+    android:id="@+id/sort_text"
+    android:textSize="18dp"
+    android:textColor="@color/WordBlack"
+    android:inputType="number"
+    android:layout_width="50dp"
+    android:layout_height="40dp"
+    android:layout_below="@id/sort_type"
+    android:layout_marginLeft="5dp"
+    android:layout_toRightOf="@id/sort_name"/>-->
+</RelativeLayout>

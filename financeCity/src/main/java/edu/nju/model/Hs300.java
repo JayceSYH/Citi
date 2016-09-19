@@ -5,14 +5,16 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.math.BigDecimal;
+import java.sql.Date;
 
 /**
- * Created by Sun YuHao on 2016/9/2.
+ * Created by Sun YuHao on 2016/9/12.
  */
 @Entity
 public class Hs300 {
     private int id;
     private BigDecimal hs300Return;
+    private Date date;
 
     @Id
     @Column(name = "id")
@@ -34,6 +36,16 @@ public class Hs300 {
         this.hs300Return = hs300Return;
     }
 
+    @Basic
+    @Column(name = "date")
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -43,6 +55,7 @@ public class Hs300 {
 
         if (id != hs300.id) return false;
         if (hs300Return != null ? !hs300Return.equals(hs300.hs300Return) : hs300.hs300Return != null) return false;
+        if (date != null ? !date.equals(hs300.date) : hs300.date != null) return false;
 
         return true;
     }
@@ -51,6 +64,7 @@ public class Hs300 {
     public int hashCode() {
         int result = id;
         result = 31 * result + (hs300Return != null ? hs300Return.hashCode() : 0);
+        result = 31 * result + (date != null ? date.hashCode() : 0);
         return result;
     }
 }

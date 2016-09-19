@@ -4,13 +4,13 @@ package edu.nju.vo;
  * Created by Sun YuHao on 2016/8/31.
  */
 public class ProductsDetailVO extends BaseVO {
-    private Object[] data;
+    private ProductDetailVO[] data;
 
-    public Object[] getData() {
+    public ProductDetailVO[] getData() {
         return data;
     }
 
-    public void setData(Object[] data) {
+    public void setData(ProductDetailVO[] data) {
         this.data = data;
     }
 }

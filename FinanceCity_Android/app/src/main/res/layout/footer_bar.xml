@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
+		android:id="@+id/footer_bar"
 		android:orientation="horizontal"
 		android:layout_width="match_parent"
 		android:layout_height="match_parent" android:layout_alignParentBottom="true"
 		android:layout_alignParentLeft="true" android:layout_alignParentStart="true"
-		xmlns:android="http://schemas.android.com/apk/res/android" android:background="@color/colorPrimary"
+		xmlns:android="http://schemas.android.com/apk/res/android" android:background="@color/lightGreyPlus"
 		android:paddingLeft="8dp" android:paddingRight="8dp" android:paddingTop="3dp" android:paddingBottom="3dp">
 	<LinearLayout
 			android:orientation="vertical"
@@ -14,46 +15,35 @@
 				android:layout_width="wrap_content"
 				android:layout_height="@android:dimen/app_icon_size"
 				android:id="@+id/imgProduct" android:layout_weight="3" android:layout_gravity="center"
-				android:src="@mipmap/products_unselected" android:scaleType="fitCenter"/>
+				android:src="@mipmap/home_line" android:scaleType="fitCenter" android:padding="5dp"/>
 		<TextView
 				android:layout_width="wrap_content"
 				android:layout_height="wrap_content"
 				android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
 				android:text="产品"
 				android:id="@+id/lblProduct" android:layout_weight="1" android:gravity="center_vertical|center_horizontal"
-				android:layout_gravity="center" android:textColor="@color/white" android:textSize="12sp"/>
-	</LinearLayout>
-	<LinearLayout android:orientation="vertical" android:layout_width="wrap_content"
-	              android:layout_height="match_parent" android:layout_weight="1" android:id="@+id/itmInvestment">
-		<ImageView android:layout_width="wrap_content" android:layout_height="@android:dimen/app_icon_size"
-		           android:id="@+id/imgInvestment" android:layout_weight="3" android:layout_gravity="center"
-		           android:src="@mipmap/investment_unselected" android:scaleType="fitCenter"/>
-		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-		          android:textAppearance="?android:attr/textAppearanceSmall" android:text="投资"
-		          android:id="@+id/lblInvestment" android:layout_weight="1"
-		          android:gravity="center_vertical|center_horizontal" android:layout_gravity="center"
-		          android:textColor="@color/white" android:textSize="12sp"/>
+				android:layout_gravity="center" android:textColor="@color/WordBlack" android:textSize="12sp"/>
 	</LinearLayout>
 	<LinearLayout android:orientation="vertical" android:layout_width="wrap_content"
 	              android:layout_height="match_parent" android:layout_weight="1" android:id="@+id/itmAsset">
 		<ImageView android:layout_width="wrap_content" android:layout_height="@android:dimen/app_icon_size"
 		           android:id="@+id/imgAsset" android:layout_weight="3" android:layout_gravity="center"
-		           android:src="@mipmap/asset_unselected" android:scaleType="fitCenter"/>
+		           android:src="@mipmap/journey_line" android:scaleType="fitCenter" android:padding="5dp"/>
 		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
 		          android:textAppearance="?android:attr/textAppearanceSmall" android:text="资产"
 		          android:id="@+id/lblAsset" android:layout_weight="1"
 		          android:gravity="center_vertical|center_horizontal" android:layout_gravity="center"
-		          android:textColor="@color/white" android:textSize="12sp"/>
+		          android:textColor="@color/WordBlack" android:textSize="12sp"/>
 	</LinearLayout>
 	<LinearLayout android:orientation="vertical" android:layout_width="wrap_content"
 	              android:layout_height="match_parent" android:layout_weight="1" android:id="@+id/itmPersonalInfo">
 		<ImageView android:layout_width="wrap_content" android:layout_height="@android:dimen/app_icon_size"
 		           android:id="@+id/imgPersonalInfo" android:layout_weight="3" android:layout_gravity="center"
-		           android:src="@mipmap/personal_unselected" android:scaleType="fitCenter"/>
+		           android:src="@mipmap/my_line" android:scaleType="fitCenter" android:padding="5dp"/>
 		<TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
 		          android:textAppearance="?android:attr/textAppearanceSmall" android:text="个人"
 		          android:id="@+id/lblPersonalInfo" android:layout_weight="1"
 		          android:gravity="center_vertical|center_horizontal" android:layout_gravity="center"
-		          android:textColor="@color/white" android:textSize="12sp"/>
+		          android:textColor="@color/WordBlack" android:textSize="12sp"/>
 	</LinearLayout>
 </LinearLayout>

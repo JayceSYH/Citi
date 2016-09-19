@@ -24,7 +24,7 @@ public class BaseAction extends ActionSupport implements SessionAware,
     public HttpServletResponse  response;  
     public ServletContext context;
     @SuppressWarnings("unchecked")  
-    public Map session;  
+    public Map session;
   
     public void setSession(Map session) {  
         this.session = session;  

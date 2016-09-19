@@ -4,9 +4,7 @@ html, body, h1, h2, h3, h4, h5, h6, li, ul, p, a, img {
     margin: 0;
     padding: 0;
     border: 0;
-    /*color: rgba(0,0,0,0.6);*/
     font-size: 14px;
-    font-family: "MicrosoftYaHeiLight","Hiragino Sans GB","Microsoft YaHei",STHeiti,"WenQuanYi Micro Hei",Helvetica,Arial,sans-serif;
     font-weight: 100;
     text-decoration: none;
     list-style: none;
@@ -35,47 +33,6 @@ p {
     box-shadow: 0 0 1px 0 rgba(0, 0, 0, 0.2);
 }
 
-/* header */
-.header {
-    width: 100%;
-    height: 60px;
-    background-color: #fff;
-
-}
-.header-square {
-    float: left;
-    margin-top: 7px;
-    width: 46px;
-    height: 46px;
-    background-color: #11b7f3;
-}
-.header-title {
-    float: left;
-    margin-left: 10px;
-    line-height: 60px;
-    font-family: "Microsoft YaHei";
-    font-size: 24px;
-    color: #11b7f3;
-}
-.header-button {
-    float: right;
-}
-.button-style {
-    line-height: 60px;
-    border: none;
-    cursor: pointer;
-    background-color: transparent;
-    font-size: 14px;
-    color: #434343;
-    outline: 0;
-}
-
-/* main */
-
-.main {
-    width: 100%;
-    /*height: 600px;*/
-}
 /* top bar */
 .top-bar {
     margin-top: 30px;
@@ -90,6 +47,7 @@ p {
     width: 49%;
     height: 100%;
     color: #898989;
+    cursor: pointer;
 }
 .top-bar .circle {
     float: left;
@@ -175,6 +133,19 @@ table button {
     border-radius: 3px;
 }
 
+table input[type=text]{
+    width: 40px;
+    height: 20px;
+    padding: 2px;
+    color: #707070;
+    font-size: 0.75rem;
+    font-family: "Microsoft YaHei";
+    outline: none;
+    border: 1px solid #b0b0b0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
 .order-info-confirm tr .product-section {
     width: 40%;
 }
@@ -226,7 +197,6 @@ table button {
     font-size: 12px;
     color: #a0a0a0;
 }
-
 
 /* order-info-pay */
 .order-info-pay .total {
@@ -316,7 +286,7 @@ input[type=radio]:not(old) + label > span {
     margin: 1px 8px 1px 1px;
     border: .5px solid #959595;
     border-radius: 8px;
-    vertical-align: bottom;
+    vertical-align: middle;
 
 }
 input[type=radio]:not(old):checked +  label {
@@ -332,14 +302,3 @@ input[type=radio]:not(old):checked +  label > span > span {
     background: #959595;
 }
 
-/* footer */
-.footer {
-    width: 100%;
-    height: 160px;
-    background-color: #fff;
-}
-
-.footer-text {
-    font-size: 14px;
-    color: #434343;
-}

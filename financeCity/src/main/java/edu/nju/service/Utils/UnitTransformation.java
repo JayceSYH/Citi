@@ -28,7 +28,7 @@ public class UnitTransformation {
         }//ProductBank
         if (product.getCategory().equals(ProductCategoryManager.categoryBond)) {
             ProductBond productBond = (ProductBond)product.getProduct();
-            double price = productBond.getDenomination().doubleValue();
+            double price = productBond.getPar().doubleValue();
             amount = (int)(capital / price);
             left = capital - amount * price;
         }//productBond

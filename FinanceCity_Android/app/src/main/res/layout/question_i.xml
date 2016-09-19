@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+	<TextView
+			android:layout_width="24dp"
+			android:layout_height="24dp"
+			android:text="1"
+			android:id="@+id/txtSum"
+			android:layout_marginTop="20dp" android:gravity="center" android:textSize="18sp"
+			android:layout_alignParentTop="true" android:layout_toLeftOf="@+id/textView25"
+			android:layout_toStartOf="@+id/textView25" android:layout_marginRight="38dp"
+			android:layout_marginEnd="38dp" android:textIsSelectable="false" android:textColor="#ffffff"
+			android:background="@drawable/selected_label"/>
+	<TextView android:layout_width="24dp" android:layout_height="24dp" android:text="2"
+	          android:id="@+id/textView25"
+	          android:gravity="center" android:textSize="18sp"
+	          android:layout_alignTop="@+id/txtSum" android:layout_centerHorizontal="true"
+	          android:textIsSelectable="false" android:textColor="#ffffff"
+	          android:background="@drawable/unselected_label"/>
+	<TextView android:layout_width="24dp" android:layout_height="24dp" android:text="3"
+	          android:id="@+id/textView26"
+	          android:layout_marginLeft="40dp" android:layout_marginStart="40dp"
+	          android:gravity="center" android:textSize="18sp" android:layout_alignTop="@+id/textView25"
+	          android:layout_toRightOf="@+id/textView25" android:layout_toEndOf="@+id/textView25"
+	          android:textIsSelectable="false" android:textColor="#ffffff"
+	          android:background="@drawable/unselected_label"/>
+	<TextView android:layout_width="10dp" android:layout_height="25dp"
+	          android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/textView27"
+	          android:layout_marginTop="20dp"
+	          android:background="@color/validBlue" android:textColor="@color/validBlue"
+	          android:layout_below="@+id/txtSum" android:layout_alignParentLeft="true"
+	          android:layout_alignParentStart="true"/>
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="基本投资信息"
+	          android:id="@+id/textView28" android:gravity="center" android:textSize="20sp"
+	          android:textColor="@color/validBlue"
+	          android:paddingLeft="12dp" android:layout_alignBottom="@+id/textView27"
+	          android:layout_toRightOf="@+id/textView27" android:layout_toEndOf="@+id/textView27"/>
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="能够进行投资的金额："
+	          android:id="@+id/textView29" android:gravity="center" android:textSize="16sp"
+	          android:textColor="@color/WordBlack"
+	          android:layout_marginTop="12dp" android:layout_below="@+id/textView28"
+	          android:layout_toRightOf="@+id/textView27" android:layout_toEndOf="@+id/textView27"
+	          android:paddingLeft="12dp"/>
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="￥"
+	          android:id="@+id/textView30" android:gravity="center" android:textSize="16sp"
+	          android:textColor="@color/WordBlack" android:layout_marginTop="15dp"
+	          android:paddingLeft="12dp" android:layout_below="@+id/textView29"
+	          android:layout_alignLeft="@+id/textView29" android:layout_alignStart="@+id/textView29"/>
+	<EditText
+			android:layout_width="150dp"
+			android:layout_height="wrap_content"
+			android:inputType="number"
+			android:ems="10"
+			android:id="@+id/txtInvestmentAmount"
+			android:layout_below="@+id/textView29" android:layout_toRightOf="@+id/textView30"
+			android:layout_marginTop="6dp" android:textSize="16sp"/>
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="投资期限："
+	          android:id="@+id/textView31" android:gravity="center" android:textSize="16sp"
+	          android:textColor="@color/WordBlack" android:layout_marginTop="12dp"
+	          android:paddingLeft="12dp" android:layout_below="@+id/txtInvestmentAmount" android:layout_alignLeft="@+id/textView30"
+	          android:layout_alignStart="@+id/textView30"/>
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="*"
+	          android:id="@+id/textView32" android:gravity="center" android:textSize="20sp"
+	          android:textColor="@color/increasingRed"
+	          android:paddingLeft="12dp"
+	          android:layout_alignTop="@+id/textView29" android:layout_toRightOf="@+id/textView29"
+	          android:layout_toEndOf="@+id/textView29"/>
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="*"
+	          android:id="@+id/textView33" android:gravity="center" android:textSize="20sp"
+	          android:textColor="@color/increasingRed" android:paddingLeft="12dp"
+	          android:layout_alignTop="@+id/textView31" android:layout_toRightOf="@+id/textView31"
+	          android:layout_toEndOf="@+id/textView31"/>
+	<EditText
+			android:layout_width="130dp"
+			android:layout_height="wrap_content"
+			android:inputType="date"
+			android:ems="10"
+			android:id="@+id/txtExpiration"
+			android:textSize="16sp" android:layout_below="@+id/textView31" android:layout_alignLeft="@+id/textView31"
+			android:layout_alignStart="@+id/textView31" android:layout_marginLeft="8dp" android:text="2015-01-01"/>
+	<EditText android:layout_width="130dp" android:layout_height="wrap_content" android:inputType="date"
+	          android:ems="10" android:id="@+id/txtFetchBack"
+	          android:textSize="16sp"
+	          android:layout_below="@+id/textView3" android:layout_alignLeft="@+id/txtExpiration"
+	          android:layout_alignStart="@+id/txtExpiration" android:text="2016-01-01"/>
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="是否做好投资期间大额支出的准备："
+	          android:id="@+id/textView36" android:textSize="16sp"
+	          android:textColor="@color/WordBlack" android:paddingLeft="12dp"
+	          android:layout_marginTop="12dp"
+	          android:layout_below="@+id/txtFetchBack" android:layout_alignLeft="@+id/textView"
+	          android:layout_alignStart="@+id/textView"/>
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="(大额支出包括 学费、医疗费用、购买大家电 等支出)&apos;"
+	          android:id="@+id/textView37" android:textSize="12sp" android:textColor="@color/WordBlack"
+	          android:paddingLeft="12dp"
+	          android:layout_below="@+id/textView36" android:layout_alignLeft="@+id/textView36"
+	          android:layout_alignStart="@+id/textView36"/>
+	<RadioGroup
+			android:layout_width="match_parent"
+			android:layout_height="30dp" android:layout_below="@+id/textView37"
+			android:layout_alignLeft="@+id/textView37" android:layout_alignStart="@+id/textView37"
+			android:layout_alignRight="@+id/textView36" android:layout_alignEnd="@+id/textView36"
+			android:layout_marginTop="8dp" android:id="@+id/radioGroup2">
+		<LinearLayout
+				android:orientation="horizontal"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content" android:paddingLeft="8dp">
+			<RadioButton
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:text="是  "
+					android:id="@+id/rbOutcomeYes" android:checked="false" android:layout_weight="1"
+					android:textColor="@color/WordBlack" android:textSize="16sp"/>
+			<RadioButton android:layout_width="wrap_content" android:layout_height="wrap_content"
+			             android:text="否" android:id="@+id/rbOutcomeNo" android:checked="true"
+			             android:layout_weight="1" android:textColor="@color/WordBlack" android:textSize="16sp"/>
+		</LinearLayout>
+	</RadioGroup>
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="预计赎回期限:"
+	          android:id="@+id/textView" android:gravity="center" android:textSize="16sp"
+	          android:textColor="@color/WordBlack" android:paddingLeft="12dp"
+	          android:layout_below="@+id/txtExpiration"
+	          android:layout_alignLeft="@+id/textView31" android:layout_marginTop="12dp"/>
+	<TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="*"
+	          android:id="@+id/textView3" android:gravity="center" android:textSize="20sp"
+	          android:textColor="@color/increasingRed" android:paddingLeft="12dp"
+	          android:layout_alignTop="@+id/textView" android:layout_toRightOf="@+id/textView"
+	          android:layout_toEndOf="@+id/textView"/>
+	<Button
+			android:layout_width="150dp"
+			android:layout_height="45dp"
+			android:text="继续 "
+			android:id="@+id/btContinue"
+			android:textSize="16sp"
+			android:textColor="@color/WordBlack" android:layout_alignParentBottom="true"
+			android:layout_alignParentRight="true" android:layout_alignParentEnd="true"
+			android:layout_marginBottom="16dp" android:layout_marginRight="16dp"/>
+	<Button android:layout_width="150dp" android:layout_height="45dp" android:id="@+id/btCancel"
+	        android:textSize="16sp" android:textColor="@color/WordBlack"
+	        android:layout_alignParentBottom="true" android:layout_alignParentLeft="true"
+	        android:layout_alignParentStart="true" android:layout_marginLeft="16dp" android:layout_marginBottom="16dp"
+	        android:text="取消"/>
+	<TextView android:layout_width="10dp" android:layout_height="25dp"
+	          android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/textView51"
+	          android:background="@color/darkGrey" android:textColor="@color/validBlue"
+	          android:layout_alignTop="@+id/textView29" android:layout_alignParentLeft="true"
+	          android:layout_alignParentStart="true" android:layout_above="@+id/textView30"/>
+	<TextView android:layout_width="10dp" android:layout_height="25dp"
+	          android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/textView52"
+	          android:background="@color/darkGrey" android:textColor="@color/validBlue"
+	          android:layout_alignTop="@+id/textView31" android:layout_alignParentLeft="true"
+	          android:layout_alignParentStart="true" android:layout_alignBottom="@+id/textView31"/>
+	<TextView android:layout_width="10dp" android:layout_height="25dp"
+	          android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/textView53"
+	          android:background="@color/darkGrey" android:textColor="@color/validBlue"
+	          android:layout_alignTop="@+id/textView" android:layout_alignParentLeft="true"
+	          android:layout_alignParentStart="true" android:layout_alignBottom="@+id/textView"/>
+	<TextView android:layout_width="10dp" android:layout_height="25dp"
+	          android:textAppearance="?android:attr/textAppearanceLarge" android:id="@+id/textView54"
+	          android:background="@color/darkGrey" android:textColor="@color/validBlue"
+	          android:layout_alignTop="@+id/textView36" android:layout_alignParentLeft="true"
+	          android:layout_alignParentStart="true" android:layout_above="@+id/textView37"/>
+</RelativeLayout>

@@ -7,34 +7,45 @@
 	android:layout_height="match_parent">
 
 
-	<ImageView
-		android:src="@mipmap/side_sign"
-		android:layout_width="10dp"
-		android:layout_height="30dp"
-		android:layout_marginLeft="10dp"
-		android:layout_marginTop="10dp"
-		android:gravity="left"/>
+	<!--<ImageView-->
+		<!--android:src="@mipmap/side_sign"-->
+		<!--android:layout_width="8dp"-->
+		<!--android:layout_height="24dp"-->
+		<!--android:gravity="left"/>-->
 	<TextView
 		android:id="@+id/choose_text"
 		android:text="筛 选"
-		android:textColor="@color/lightBlue"
-		android:textSize="24sp"
+		android:textColor="@color/darkGrey"
+		android:textSize="15sp"
 		android:layout_width="wrap_content"
 		android:layout_height="wrap_content"
-		android:layout_marginTop="5dp"/>
+		android:layout_gravity="top"
+		android:layout_marginTop="10dp"/>
 
-	<Spinner
-		android:id="@+id/choose_spinner1"
+	<ScrollView
+		android:id="@+id/choose_scrollview"
 		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="0dp"
-		android:spinnerMode="dialog" />
+		android:layout_height="wrap_content">
+		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			android:textSize="15dp"
+			android:orientation="vertical"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginLeft="10dp">
 
-	<Spinner
-		android:id="@+id/choose_spinner2"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:layout_marginTop="0dp"
-		android:spinnerMode="dialog" />
+			<Spinner
+				android:id="@+id/choose_spinner1"
+				android:textSize="15dp"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:spinnerMode="dialog" />
+
+			<Spinner
+				android:id="@+id/choose_spinner2"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:spinnerMode="dialog" />
+			</LinearLayout>
+	</ScrollView>
 </LinearLayout>
 

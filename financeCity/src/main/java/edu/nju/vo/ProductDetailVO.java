@@ -1,5 +1,7 @@
 package edu.nju.vo;
 
+import edu.nju.service.POJO.NAVHistory;
+
 /**
  * @author lsy
  * 产品详情
@@ -7,6 +9,7 @@ package edu.nju.vo;
 public class ProductDetailVO extends BaseVO {
 	private String type;
 	private Object data;
+	private NAVHistory[] history;
 
 	public String getType() {
 		return type;
@@ -22,5 +25,13 @@ public class ProductDetailVO extends BaseVO {
 
 	public void setData(Object data) {
 		this.data = data;
+	}
+
+	public NAVHistory[] getHistory() {
+		return history;
+	}
+
+	public void setHistory(NAVHistory[] history) {
+		this.history = history;
 	}
 }

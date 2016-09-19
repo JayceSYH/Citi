@@ -1,9 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <declare-styleable name="Banner">
+        <attr name="display_text" format="string"/>
+        <attr name="show_search_button" format="boolean"/>
+    </declare-styleable>
     <declare-styleable name="Bar">
-        <attr name="start" format="float"/>
-        <attr name="end" format="float"/>
-        <attr name="interval" format="float"/>
-        <attr name="unit" format="String"/>
+        <attr name="bar_name" format="string"/>
+        <attr name="bar_start" format="float"/>
+        <attr name="bar_end" format="float"/>
+        <attr name="bar_interval" format="float"/>
+        <attr name="bar_unit" format="string"/>
+        <attr name="putin1_text" format="float"/>
+        <attr name="putin2_text" format="float"/>
+    </declare-styleable>
+    <declare-styleable name="Choose">
+        <attr name="choose_name" format="string"/>
+        <attr name="spinner2_visible" format="boolean"/>
+    </declare-styleable>
+    <declare-styleable name="Key">
+        <attr name="key_name" format="string"/>
+        <attr name="key_word" format="string"/>
+    </declare-styleable>
+    <declare-styleable name="Onoff">
+        <attr name="onoff_checked" format="string"/>
     </declare-styleable>
 </resources>

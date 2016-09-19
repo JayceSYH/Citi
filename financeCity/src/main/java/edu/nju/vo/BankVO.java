@@ -1,18 +1,49 @@
 package edu.nju.vo;
 
+import edu.nju.model.ProductBank;
+import edu.nju.service.POJO.NAVHistory;
+
 /**
  * Created by Sun YuHao on 2016/8/31.
  */
 public class BankVO {
+    private String productType;
     private Integer pid;
     private String name;
-    private Double yearly_income_rate;
+    private Double year_rate;
     private String product_type;
-    private String income_type;
+    private NAVHistory[] history;
+
+    public NAVHistory[] getHistory() {
+		return history;
+	}
+
+	public void setHistory(NAVHistory[] history) {
+		this.history = history;
+	}
+
+	public ProductBank getProductBank() {
+		return productBank;
+	}
+
+	public void setProductBank(ProductBank productBank) {
+		this.productBank = productBank;
+	}
+
+	private String income_type;
     private Integer initial_money;
     private String open_date;
     private String distributor_bank;
     private String distributor_institution;
+    private ProductBank productBank;
+
+    public String getProductType() {
+        return productType;
+    }
+
+    public void setProductType(String productType) {
+        this.productType = productType;
+    }
 
     public Integer getPid() {
         return pid;
@@ -30,12 +61,12 @@ public class BankVO {
         this.name = name;
     }
 
-    public Double getYearly_income_rate() {
-        return yearly_income_rate;
+    public Double getYear_rate() {
+        return year_rate;
     }
 
-    public void setYearly_income_rate(Double yearly_income_rate) {
-        this.yearly_income_rate = yearly_income_rate;
+    public void setYear_rate(Double year_rate) {
+        this.year_rate = year_rate;
     }
 
     public String getProduct_type() {

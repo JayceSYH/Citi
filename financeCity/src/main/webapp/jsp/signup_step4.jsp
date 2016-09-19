@@ -20,7 +20,7 @@
     <link type="text/css" rel="stylesheet" href="${basePath}plugins/ion.rangeSlider-master/css/ion.rangeSlider.css"/>
     <link type="text/css" rel="stylesheet" href="${basePath}plugins/ion.rangeSlider-master/css/ion.rangeSlider.skinFlat.css"/>
     <link type="text/css" rel="stylesheet" href="${basePath}css/order.css"/>
-  <link type="text/css" rel="stylesheet" href="${basePath}css/mycss.css"/>
+    <link type="text/css" rel="stylesheet" href="${basePath}css/common.css"/>
     <script type="text/javascript" rel="script" src="js/jquery.min.js"></script>
     <script type="text/javascript" rel="script" src="plugins/bootstrap-toggle-master/js/bootstrap-toggle.min.js"></script>
     <script type="text/javascript" rel="script" src="plugins/ion.rangeSlider-master/js/ion.rangeSlider.min.js"></script>
@@ -95,7 +95,7 @@
 </head>
 <body>
 <s:include value="header.jsp"></s:include>
-	<div style="">
+	<div class="main" style="">
 		<div class="container"
 			style="margin-top: 30px; background-color: white;height: 1100px;margin-bottom:30px">
 			<br />

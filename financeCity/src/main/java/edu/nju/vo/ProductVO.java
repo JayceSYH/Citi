@@ -1,10 +1,16 @@
 package edu.nju.vo;
 
+import edu.nju.service.POJO.NAVHistory;
+
 /**
  * @author lsy
  * 投资产品
  */
 public class ProductVO extends BaseVO{
+	/**
+	 * 产品id
+	 */
+	private Integer Id;
 	/**
 	 * 产品名称
 	 */
@@ -33,6 +39,14 @@ public class ProductVO extends BaseVO{
 	 * 可取时间
 	 */
 	private String CanRedeemDate;
+
+	public Integer getId() {
+		return Id;
+	}
+
+	public void setId(Integer id) {
+		Id = id;
+	}
 
 	public String getCanRedeemDate() {
 		return CanRedeemDate;

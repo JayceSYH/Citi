@@ -7,4 +7,7 @@ import java.util.List;
  */
 public interface CommonDao {
     List find(String queryString);
+    List find(String queryString, int days);
+    List sql_find(String sql, Class cls);
+    List sql_find(String sql, Class cls, int max_size);
 }

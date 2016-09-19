@@ -3,9 +3,7 @@ package edu.nju.dao.impl;
 import java.util.List;
 
 import edu.nju.dao.UserDao;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -56,7 +54,7 @@ public class BaseDaoImpl implements BaseDao, CommonDao, UserDao {
 	/** * 获取总数量 * * @param c * @return */
 
 	public Long getTotalCount(Class c) {
-		Session session = getNewSession();
+		Session session = getSession();
 		String hql = "select count(*) from " + c.getName();
 		Long count = (Long) session.createQuery(hql).uniqueResult();
 		session.close();
@@ -66,13 +64,12 @@ public class BaseDaoImpl implements BaseDao, CommonDao, UserDao {
 	/** * 保存 * * @param bean * */
 	public void save(Object bean) {
 		try {
-			Session session = getNewSession();
+			Session session = getSession();
 			Transaction tx = session.beginTransaction();
 			session.save(bean);
 			session.flush();
 			session.clear();
 			tx.commit();
-			session.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -80,21 +77,19 @@ public class BaseDaoImpl implements BaseDao, CommonDao, UserDao {
 
 	/** * 更新 * * @param bean * */
 	public void update(Object bean) {
-		Session session = getNewSession();
+		Session session = getSession();
 		session.update(bean);
 		session.flush();
 		session.clear();
-		session.close();
 	}
 
 	/** * 删除 * * @param bean * */
 	public void delete(Object bean) {
 
-		Session session = getNewSession();
+		Session session = getSession();
 		session.delete(bean);
 		session.flush();
 		session.clear();
-		session.close();
 	}
 
 	@Override
@@ -103,13 +98,12 @@ public class BaseDaoImpl implements BaseDao, CommonDao, UserDao {
 		session.saveOrUpdate(bean);
 		session.flush();
 		session.clear();
-		session.close();
 	}
 
 	/** * 根据ID删除 * * @param c 类 * * @param id ID * */
 	@SuppressWarnings({ "rawtypes" })
 	public void delete(Class c, int id) {
-		Session session = getNewSession();
+		Session session = getSession();
 		Transaction tx = session.beginTransaction();
 		Object obj = session.get(c, id);
 		session.delete(obj);
@@ -132,9 +126,33 @@ public class BaseDaoImpl implements BaseDao, CommonDao, UserDao {
 	// 根据HQL语句进行查询
 	@SuppressWarnings("unchecked")
 	public List find(String queryString) {
-		Session session = getNewSession();
+		Session session = getSession();
 		return session.createQuery(queryString).list();
+	}
 
+	@Override
+	public List find(String queryString, int maxResult) {
+		Session session = getSession();
+		Query query = session.createQuery(queryString);
+		query.setMaxResults(maxResult);
+		return query.list();
+	}
+
+	@Override
+	public List sql_find(String sql, Class cls) {
+		Session session = getSession();
+		SQLQuery query = session.createSQLQuery(sql);
+		query.addEntity(cls);
+		return query.list();
+	}
+
+	@Override
+	public List sql_find(String sql, Class cls, int maxResult) {
+		Session session = getSession();
+		SQLQuery query = session.createSQLQuery(sql);
+		query.addEntity(cls);
+		query.setMaxResults(maxResult);
+		return query.list();
 	}
 
 	public SessionFactory getSessionFactory() {
@@ -147,7 +165,7 @@ public class BaseDaoImpl implements BaseDao, CommonDao, UserDao {
 
 	// 根据HQL语句进行查询
 	public List login(String queryString,String uname,String pass) {
-		Session session = getNewSession();
+		Session session = getSession();
 		return session.createQuery(queryString).setParameter(0, uname).setParameter(1, pass).list();
 	}
 

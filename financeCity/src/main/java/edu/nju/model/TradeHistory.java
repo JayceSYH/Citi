@@ -5,58 +5,49 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 /**
- * Created by Sun YuHao on 2016/8/31.
+ * Created by Sun YuHao on 2016/9/16.
  */
 @Entity
 @Table(name = "trade_history", schema = "citi", catalog = "")
 public class TradeHistory {
-    private int userId;
-    private int productId;
-    private String tradingUnit;
-    private int amount;
+    private int id;
+    private Integer userId;
+    private Integer productId;
     private String checkCode;
     private Timestamp tradeAt;
     private String tradeType;
     private BigDecimal tradingVolume;
+    private BigDecimal buyingPrice;
+    private BigDecimal nav;
 
     @Id
+    @Column(name = "id")
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Basic
     @Column(name = "user_id")
-    public int getUserId() {
+    public Integer getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(Integer userId) {
         this.userId = userId;
     }
 
     @Basic
     @Column(name = "product_id")
-    public int getProductId() {
+    public Integer getProductId() {
         return productId;
     }
 
-    public void setProductId(int productId) {
+    public void setProductId(Integer productId) {
         this.productId = productId;
-    }
-
-    @Basic
-    @Column(name = "trading_unit")
-    public String getTradingUnit() {
-        return tradingUnit;
-    }
-
-    public void setTradingUnit(String tradingUnit) {
-        this.tradingUnit = tradingUnit;
-    }
-
-    @Basic
-    @Column(name = "amount")
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
     }
 
     @Basic
@@ -99,6 +90,26 @@ public class TradeHistory {
         this.tradingVolume = tradingVolume;
     }
 
+    @Basic
+    @Column(name = "buying_price")
+    public BigDecimal getBuyingPrice() {
+        return buyingPrice;
+    }
+
+    public void setBuyingPrice(BigDecimal buyingPrice) {
+        this.buyingPrice = buyingPrice;
+    }
+
+    @Basic
+    @Column(name = "NAV")
+    public BigDecimal getNav() {
+        return nav;
+    }
+
+    public void setNav(BigDecimal nav) {
+        this.nav = nav;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -106,29 +117,31 @@ public class TradeHistory {
 
         TradeHistory that = (TradeHistory) o;
 
-        if (userId != that.userId) return false;
-        if (productId != that.productId) return false;
-        if (amount != that.amount) return false;
-        if (tradingUnit != null ? !tradingUnit.equals(that.tradingUnit) : that.tradingUnit != null) return false;
+        if (id != that.id) return false;
+        if (userId != null ? !userId.equals(that.userId) : that.userId != null) return false;
+        if (productId != null ? !productId.equals(that.productId) : that.productId != null) return false;
         if (checkCode != null ? !checkCode.equals(that.checkCode) : that.checkCode != null) return false;
         if (tradeAt != null ? !tradeAt.equals(that.tradeAt) : that.tradeAt != null) return false;
         if (tradeType != null ? !tradeType.equals(that.tradeType) : that.tradeType != null) return false;
         if (tradingVolume != null ? !tradingVolume.equals(that.tradingVolume) : that.tradingVolume != null)
             return false;
+        if (buyingPrice != null ? !buyingPrice.equals(that.buyingPrice) : that.buyingPrice != null) return false;
+        if (nav != null ? !nav.equals(that.nav) : that.nav != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = userId;
-        result = 31 * result + productId;
-        result = 31 * result + (tradingUnit != null ? tradingUnit.hashCode() : 0);
-        result = 31 * result + amount;
+        int result = id;
+        result = 31 * result + (userId != null ? userId.hashCode() : 0);
+        result = 31 * result + (productId != null ? productId.hashCode() : 0);
         result = 31 * result + (checkCode != null ? checkCode.hashCode() : 0);
         result = 31 * result + (tradeAt != null ? tradeAt.hashCode() : 0);
         result = 31 * result + (tradeType != null ? tradeType.hashCode() : 0);
         result = 31 * result + (tradingVolume != null ? tradingVolume.hashCode() : 0);
+        result = 31 * result + (buyingPrice != null ? buyingPrice.hashCode() : 0);
+        result = 31 * result + (nav != null ? nav.hashCode() : 0);
         return result;
     }
 }

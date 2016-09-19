@@ -1,9 +1,12 @@
 package edu.nju.vo;
 
+import edu.nju.model.ProductInsurance;
+
 /**
  * Created by Sun YuHao on 2016/8/31.
  */
 public class InsuranceVO {
+    private String productType;
     private Integer pid;
     private String name;
     private String insurance_lift;
@@ -11,6 +14,32 @@ public class InsuranceVO {
     private int[] amount_in_force;
     private String way_of_charge;
     private String distributor;
+    private Double year_rate;
+
+    public Double getYear_rate() {
+        return year_rate;
+    }
+
+    public void setYear_rate(Double year_rate) {
+        this.year_rate = year_rate;
+    }
+    private ProductInsurance productInsurance;
+
+    public ProductInsurance getProductInsurance() {
+		return productInsurance;
+    }
+
+    public void setProductInsurance(ProductInsurance productInsurance) {
+	this.productInsurance = productInsurance;
+    }
+
+    public String getProductType() {
+        return productType;
+    }
+
+    public void setProductType(String productType) {
+        this.productType = productType;
+    }
 
     public Integer getPid() {
         return pid;

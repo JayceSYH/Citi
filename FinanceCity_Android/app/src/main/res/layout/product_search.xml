@@ -1,77 +1,105 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--产品搜索主页面-->
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/product_search_layout"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/product_search_layout"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="12dp">
 
-    <!--产品搜索筛选器-->
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/product_search_filter_layout"
-        android:orientation="vertical"
+<!--    <RelativeLayout
+        android:id="@+id/header"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="4">
-
-        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/abc_edit_text_inset_top_material"
-            android:layout_marginLeft="@dimen/abc_edit_text_inset_horizontal_material"
-            android:layout_marginRight="@dimen/abc_edit_text_inset_horizontal_material">
-
-            <ImageView
-                android:src="@mipmap/side_sign"
-                android:layout_width="10dp"
-                android:layout_height="30dp"
-                android:layout_gravity="left"/>
-
-            <TextView
-                android:text="搜 索"
-                android:textColor="@color/lightBlue"
-                android:textSize="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:includeFontPadding="false"/>
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"/>
-            <Button
-                android:id="@+id/product_search_filter_button"
-                android:text="搜索"
-                android:textSize="20dp"
+        android:layout_height="wrap_content"
+        android:background="@color/lightGreyPlus"
+        android:layout_marginBottom="5dp">-->
+    <Button
+            android:id="@+id/pick"
+            android:text="筛选▼"
+            android:textSize="18dp"
+            android:textColor="@color/WordBlack"
+            android:background="@color/lightGreyPlus"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_alignTop="@+id/search" android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"/>
+        <Button
+                android:id="@+id/search"
+                android:textSize="18dp"
                 android:textColor="@color/white"
-                android:background="@drawable/button"
-                android:layout_width="wrap_content"
+                android:background="@color/lightBlue"
+                android:layout_width="60dp"
                 android:layout_height="30dp"
-                android:layout_gravity="right"/>
-        </LinearLayout>
-        <!--产品搜索筛选器列表-->
-        <ListView
-            android:id="@+id/product_search_filter_listview"
+                android:layout_alignParentTop="true"
+                android:layout_toLeftOf="@id/pick"
+                android:layout_marginRight="5dp" android:text="Go"/>
+        <EditText
+            android:id="@+id/key"
+            android:hint="输入关键字搜索"
+            android:textSize="18dp"
+            android:textColor="@color/WordBlack"
+            android:textColorLink="@color/lightGrey"
+            android:textColorHighlight="@color/darkGrey"
+            android:textColorHint="@color/lightGrey"
+            android:layout_width="fill_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_toLeftOf="@id/search"
+            android:layout_marginTop="-10dp"
+            android:layout_marginBottom="-10dp"/>
+
+        <!--<TextView
+            android:id="@+id/placeholder"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_centerHorizontal="true" />-->
+        <Spinner
+                android:id="@+id/slavery_spinner"
+                android:textSize="18dp"
+                android:layout_width="120dp"
+                android:layout_height="40dp"
+                android:layout_below="@id/key"
+                android:layout_alignParentRight="true"
+                android:spinnerMode="dialog" android:layout_marginTop="6dp" android:layout_marginBottom="6dp"/>
+        <TextView
+            android:id="@+id/spinner_name"
+            android:text="投资标的"
+            android:textSize="18dp"
+            android:textColor="@color/WordBlack"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignBottom="@id/slavery_spinner"
+            android:layout_alignTop="@id/slavery_spinner"
+            android:gravity="center"
+        />
+        <Spinner
+                android:id="@+id/master_spinner"
+                android:textSize="18dp"
+                android:layout_width="fill_parent"
+                android:layout_height="40dp"
+                android:layout_toRightOf="@id/spinner_name"
+                android:layout_toLeftOf="@id/slavery_spinner"
+                android:layout_marginLeft="5dp"
+                android:spinnerMode="dialog" android:layout_below="@+id/key" android:layout_marginTop="6dp"
+                android:layout_marginBottom="6dp"/>
+
+
+    <!--</RelativeLayout>-->
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/product_search_result_scroll"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/slavery_spinner" android:fillViewport="false">
+        <RelativeLayout
+            android:id="@+id/product_search_body"
+            android:background="@color/white"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp">
 
-    </LinearLayout>
+        </RelativeLayout>
+    </ScrollView>
 
-    <!--产品搜索结果-->
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/product_search_result_layout"
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
 
-        <!--产品搜索结果列表-->
-        <ListView
-            android:id="@+id/product_search_result_listview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>

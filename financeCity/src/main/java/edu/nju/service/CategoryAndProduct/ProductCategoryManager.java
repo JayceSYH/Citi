@@ -4,22 +4,24 @@ import edu.nju.model.ProductBank;
 import edu.nju.model.ProductBond;
 import edu.nju.model.ProductFund;
 import edu.nju.model.ProductInsurance;
-import org.python.antlr.ast.Str;
+import edu.nju.service.ExceptionsAndError.InvalidParametersException;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * Created by Sun YuHao on 2016/8/14.
- */
-@Service
-public class ProductCategoryManager {
+            */
+    @Service
+    public class ProductCategoryManager {
     static public final String categoryFund = "Fund";
     static public final String categoryBond = "Bond";
     static public final String categoryInsurance = "Insurance";
     static public final String categoryBank = "Bank";
+    static private int fundBase = 4;
     static public final int categoryNum = 13;
     static private List<Category> categoryList;
     static private final int serialNumberSize = 10000000;
@@ -30,7 +32,7 @@ public class ProductCategoryManager {
             "金融债",
             "企业债",
             "其他债"
-    };
+    };//TODO：国债都放到电子式国债
     static private final String[] fundTypEn = {
             "stock",
             "bond",
@@ -38,10 +40,8 @@ public class ProductCategoryManager {
             "blend",
             "etf",
             "lof",
-            "fof",
             "QDll",
-            "index",
-            "guaranteed"
+            "index"
     };
     static private final String[] fundTypeCH = {
             "股票型",
@@ -50,13 +50,23 @@ public class ProductCategoryManager {
             "混合型",
             "ETF",
             "LOF",
-            "FOF",
             "QDll",
             "指数型",
-            "保本型"
     };
     static private final String[] bondInterestType = {
-        "附息债", "零息债", "贴现债"
+        "零息债", "附息债", "贴现债"
+    };//TODO：固定利率和附息债
+
+    static private final String[] bondStateType = {
+        "发行中", "已售罄", "未发行"
+    };
+
+    static private final String[] fundStateType = {
+        "申购中", "认购中", "已关闭"
+    };
+
+    static private final String[] bankYieldType = {
+        "保证收益型", "保本浮动收益型", "非保本浮动收益型"
     };
 
     static {
@@ -73,6 +83,10 @@ public class ProductCategoryManager {
 
     static public List<Category> getCategoryList() {
         return categoryList;
+    }
+
+    static public List<String> getBankYieldType() {
+        return Arrays.asList(bankYieldType);
     }
 
     static public Category getCategoryByID(Integer ID) {
@@ -108,12 +122,14 @@ public class ProductCategoryManager {
         return null;
     }
 
-   static public Integer generateProductID(Object product, String category) {
+    static public Integer generateProductID(Object product) {
+       Category category = getProductCategory(product);
+
         try {
-            Class cls = Class.forName("Product" + category);
-            Field field = cls.getField("id");
-            int id = field.getInt(product);
-            return generateProductID(id, category);
+            Class cls = product.getClass();
+            Method method = cls.getMethod("getId");
+            int id = (Integer)method.invoke(product);
+            return generateProductID(id, category.getCategoryName());
         }
         catch (Exception e) {
             e.printStackTrace();
@@ -122,7 +138,7 @@ public class ProductCategoryManager {
     }
 
     static public String getBondType(Product product) {
-        if (!product.getCategory().getBiggerCategory().equals("Bond")) {
+        if (!product.getCategory().belongTo(categoryBond)) {
             return null;
         }
 
@@ -130,14 +146,24 @@ public class ProductCategoryManager {
         return bondTypes[productBond.getType()];
     }
 
+    public static List<String> getBondStateType() {
+        return Arrays.asList(bondStateType);
+    }
+
     static public String getBondInterestType(Product product) {
-        if (!product.getCategory().getBiggerCategory().equals("Bond")) {
+        if (!product.getCategory().belongTo(categoryBond)) {
             return null;
         }
 
         ProductBond productBond = (ProductBond) product.getProduct();
         return bondInterestType[productBond.getCouponType()];
     }
+
+    static public List<String> getBondInterestTypeList() {
+        return Arrays.asList(bondInterestType);
+    }
+
+
 
     static public String getBondType(ProductBond productBond) {
         return bondTypes[productBond.getType()];
@@ -165,6 +191,9 @@ public class ProductCategoryManager {
     }
 
     static public String getBankIncomeTypeInChinese(ProductBank bank) {
+        if (bank.getIncomeType() == null) {
+            return null;
+        }
         switch (bank.getIncomeType()) {
             case 0:
                 return "保本收益型";
@@ -178,24 +207,77 @@ public class ProductCategoryManager {
     }
 
     static public String getBankType(ProductBank bank) {
+        if (bank.getIfClose() == null) {
+            return null;
+        }
         return (ifClosedBankProduct(bank) ? "封闭式" : "开放式") + (ifNetBankProduct(bank) ? "净值型" : "非净值型");
     }
 
     static public boolean ifNetBankProduct(ProductBank bank) {
+        if (bank.getIfNavType() == null) {
+            return false;
+        }
         return bank.getIfNavType() == 1;
     }
 
     static public boolean ifClosedBankProduct(ProductBank bank) {
+        if (bank.getIfClose() == null) {
+            return false;
+        }
         return bank.getIfClose() == 1;
     }
 
-    static private String getFundType(Product product) {
-        if (!product.getCategory().getBiggerCategory().equals(categoryFund)) {
+    static public boolean ifCloseFundProduct(ProductFund fund) {
+        if (fund.getOperationMode() == null) {
+            return false;
+        }
+        return fund.getOperationMode() == 1;
+    }
+
+    static public String getProductRedeemDate(Product product) {
+        if (product.getCategory().belongTo(ProductCategoryManager.categoryBond)){
+            return "可以赎回";
+        }
+        else if (product.getCategory().belongTo(ProductCategoryManager.categoryBank)) {
+            if (ifClosedBankProduct((ProductBank)product.getProduct())) {
+                return "不能赎回";
+            }
+            else {
+                return "可以赎回";
+            }
+        }
+        else if (product.getCategory().belongTo(ProductCategoryManager.categoryFund)) {
+            if (ifCloseFundProduct((ProductFund)product.getProduct())) {
+                return "不能赎回";
+            }
+            else {
+                return "可以赎回";
+            }
+        }
+        else if (product.getCategory().belongTo(ProductCategoryManager.categoryInsurance)) {
+            return "不能赎回";
+        }
+        else {
             return null;
         }
+    }
 
-        ProductFund productFund = (ProductFund)product.getProduct();
-        return categoryFund + fundTypEn[productFund.getCategory()];
+    static public Category getFundCategory(Byte fund_index) {
+        try {
+            if (fund_index == null) {
+                fund_index = -1;
+            }
+
+            return getCategoryList().get(fundBase + fund_index);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static List<String> getFundStateType() {
+        return Arrays.asList(fundStateType);
     }
 
     static public Integer getFundTypeIndex(String category) {
@@ -208,7 +290,46 @@ public class ProductCategoryManager {
         return null;
     }
 
+    public static List<String> getFundTypeCH() {
+        return Arrays.asList(fundTypeCH);
+    }
+
+    static public Category getProductCategory(Object product) {
+        Category category;
+
+        try {
+            if (product instanceof ProductFund) {
+                ProductFund productFund = (ProductFund)product;
+
+                Byte fund_index = productFund.getCategory();
+                if (fund_index == null) {
+                    fund_index = -1;
+                }
+
+                category = getCategoryList().get(fundBase + fund_index);
+            } else if (product instanceof ProductBank) {
+                category = getCategoryByName(ProductCategoryManager.categoryBank);
+            } else if (product instanceof ProductBond) {
+                category = getCategoryByName(ProductCategoryManager.categoryBond);
+            } else if (product instanceof ProductInsurance) {
+                category = getCategoryByName(ProductCategoryManager.categoryInsurance);
+            } else {
+                throw new InvalidParametersException("generateProductID");
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            category = null;
+        }
+
+        return category;
+    }
+
     static public String getFundState(ProductFund productFund) {
+        if (productFund.getState() == null) {
+            return null;
+        }
+
         switch (productFund.getState()) {
             case 0:
                 return "申购中";
@@ -217,12 +338,17 @@ public class ProductCategoryManager {
             case 2:
                 return "已关闭";
             default:
-                return "";
+                return null;
         }
     }
 
     static public String getInsurancePayType(ProductInsurance productInsurance) {
-        switch (productInsurance.getPayType()) {
+        Byte type = productInsurance.getPayType();
+        if (type == null) {
+            type = 0;
+        }
+
+        switch (type) {
             case 0:
                 return "一次缴清";
             case 1:

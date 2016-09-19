@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:nju="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/product_search_filter_fund_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <nju.financecity_android.controller.widget.Bar
+        android:id="@+id/year"
+        nju:bar_name="年化收益率"
+        nju:bar_start="0"
+        nju:bar_end="10"
+        nju:bar_interval="0.0001"
+        nju:bar_unit="%"
+        nju:putin1_text="0"
+        nju:putin2_text="10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/limit_name"
+        android:text="保障年限"
+        android:textColor="@color/WordBlack"
+        android:textSize="18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/year"
+        android:gravity="center_vertical"/>
+
+    <Spinner
+        android:id="@+id/limit_spinner"
+        android:textSize="18dp"
+        android:textColor="@color/WordBlack"
+        android:spinnerMode="dropdown"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@id/limit_name"
+        android:layout_below="@id/year"
+        android:layout_marginLeft="5dp"
+        android:layout_alignParentRight="true"/>
+    <TextView
+        android:id="@+id/agent_name"
+        android:text="产品发行公司"
+        android:textColor="@color/WordBlack"
+        android:textSize="18dp"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@id/limit_name"
+        android:gravity="center_vertical"/>
+
+    <Spinner
+        android:id="@+id/agent_spinner"
+        android:textSize="18dp"
+        android:textColor="@color/WordBlack"
+        android:spinnerMode="dropdown"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_toRightOf="@id/agent_name"
+        android:layout_below="@id/limit_name"
+        android:layout_marginLeft="5dp"
+        android:layout_alignParentRight="true"/>
+    <nju.financecity_android.controller.widget.Bar
+        android:id="@+id/value"
+        nju:bar_name="保险产品面额"
+        nju:bar_start="0"
+        nju:bar_end="50000"
+        nju:bar_interval="1"
+        nju:bar_unit="元"
+        nju:putin1_text="0"
+        nju:putin2_text="50000"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/agent_spinner"/>
+</RelativeLayout>
+

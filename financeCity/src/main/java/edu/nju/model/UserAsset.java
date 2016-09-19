@@ -2,28 +2,30 @@ package edu.nju.model;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.sql.Date;
 
 /**
- * Created by Sun YuHao on 2016/8/31.
+ * Created by Sun YuHao on 2016/9/13.
  */
 @Entity
 @Table(name = "user_asset", schema = "citi", catalog = "")
 public class UserAsset {
-    private long userId;
+    private int userId;
     private BigDecimal initialPrice;
     private BigDecimal currentPrice;
     private BigDecimal futurePrice;
     private BigDecimal cashAssets;
     private BigDecimal longTermAssets;
     private BigDecimal emergencyAssets;
+    private Date date;
 
     @Id
     @Column(name = "user_id")
-    public long getUserId() {
+    public int getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(int userId) {
         this.userId = userId;
     }
 
@@ -87,6 +89,16 @@ public class UserAsset {
         this.emergencyAssets = emergencyAssets;
     }
 
+    @Basic
+    @Column(name = "date")
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -106,19 +118,21 @@ public class UserAsset {
             return false;
         if (emergencyAssets != null ? !emergencyAssets.equals(userAsset.emergencyAssets) : userAsset.emergencyAssets != null)
             return false;
+        if (date != null ? !date.equals(userAsset.date) : userAsset.date != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = (int) (userId ^ (userId >>> 32));
+        int result = userId;
         result = 31 * result + (initialPrice != null ? initialPrice.hashCode() : 0);
         result = 31 * result + (currentPrice != null ? currentPrice.hashCode() : 0);
         result = 31 * result + (futurePrice != null ? futurePrice.hashCode() : 0);
         result = 31 * result + (cashAssets != null ? cashAssets.hashCode() : 0);
         result = 31 * result + (longTermAssets != null ? longTermAssets.hashCode() : 0);
         result = 31 * result + (emergencyAssets != null ? emergencyAssets.hashCode() : 0);
+        result = 31 * result + (date != null ? date.hashCode() : 0);
         return result;
     }
 }
