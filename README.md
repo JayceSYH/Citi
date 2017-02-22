@@ -1,2 +1,4 @@
-# abcdefg
-2016一个奇怪的web项目
+# 2016 Citi Cup
+2016 Citi Cup Financial Innovation Application Competition
+
+A Intelligent Invest Advisor Project
